@@ -62,6 +62,12 @@ class Game extends Process {
 	/** CDB file changed on disk**/
 	public function onCdbReload() {}
 
+	/**
+	 * Called whenever LDTk file changes on disk
+	 */
+	@:allow(Assets)
+	function onLDtkReload() {}
+
 	/** Window/app resize event **/
 	override function onResize() {
 		super.onResize();
