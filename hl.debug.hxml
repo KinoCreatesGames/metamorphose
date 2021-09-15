@@ -1,2 +1,3 @@
-hl.dx.hxml
+# Change to regular hl as we are on Mac
+hl.sdl.hxml
 -debug

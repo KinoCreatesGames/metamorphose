@@ -1,0 +1,467 @@
+{
+    "sheets": [
+        {
+            "name": "actors",
+            "description": "List of actors in the game",
+            "displayColumn": "id",
+            "guid": "1e7799c0-7e94-4013-91b3-e85ef9e27b10",
+            "columns": [
+                {
+                    "typeStr": "text",
+                    "guid": "9f170cb4-6422-4638-915f-475404533d9f",
+                    "name": "name",
+                    "description": "Name of the actor",
+                    "defaultValue": "Name",
+                    "iconName": "newText",
+                    "configurable": {
+                        "name": "text",
+                        "description": "text",
+                        "defaultValue": "text"
+                    }
+                },
+                {
+                    "typeStr": "int",
+                    "guid": "aa9705e6-9c2e-416f-af85-8939d7fe451f",
+                    "description": "Health of the actor character in game",
+                    "name": "health",
+                    "min": -10000,
+                    "max": 100000,
+                    "defaultValue": 1,
+                    "iconName": "newInt",
+                    "configurable": {
+                        "name": "text",
+                        "description": "text",
+                        "min": "int",
+                        "max": "int",
+                        "defaultValue": "int"
+                    }
+                },
+                {
+                    "typeStr": "int",
+                    "guid": "e8904a91-d6cd-407e-9f82-0c06f6181228",
+                    "description": "Attack power of the actor character",
+                    "name": "atk",
+                    "min": -10000,
+                    "max": 100000,
+                    "defaultValue": 5,
+                    "iconName": "newInt",
+                    "configurable": {
+                        "name": "text",
+                        "description": "text",
+                        "min": "int",
+                        "max": "int",
+                        "defaultValue": "int"
+                    }
+                },
+                {
+                    "typeStr": "int",
+                    "guid": "11b17f55-eb19-4109-b376-959ce05adf60",
+                    "description": "Defense power of the actor",
+                    "name": "def",
+                    "min": -10000,
+                    "max": 100000,
+                    "defaultValue": 1,
+                    "iconName": "newInt",
+                    "configurable": {
+                        "name": "text",
+                        "description": "text",
+                        "min": "int",
+                        "max": "int",
+                        "defaultValue": "int"
+                    }
+                },
+                {
+                    "typeStr": "int",
+                    "guid": "f340dcf8-e5b0-4486-ac87-564c37df8a31",
+                    "description": "Speed of the actor character in game",
+                    "name": "spd",
+                    "min": -10000,
+                    "max": 100000,
+                    "defaultValue": 1,
+                    "iconName": "newInt",
+                    "configurable": {
+                        "name": "text",
+                        "description": "text",
+                        "min": "int",
+                        "max": "int",
+                        "defaultValue": "int"
+                    }
+                },
+                {
+                    "typeStr": "image",
+                    "guid": "105555ce-f52b-4193-9d4a-a34f54c9222b",
+                    "name": "sprite",
+                    "description": "Sprite reference image",
+                    "defaultValue": "",
+                    "iconName": "newImage",
+                    "configurable": {
+                        "name": "text",
+                        "description": "text",
+                        "defaultValue": "text"
+                    }
+                }
+            ],
+            "lines": [
+                {
+                    "guid": "c1157689-db4e-46b2-ab08-1e3c3c6d507e",
+                    "id": "0",
+                    "name": "Name",
+                    "health": 1,
+                    "atk": 5,
+                    "def": 1,
+                    "spd": 1,
+                    "sprite": ""
+                },
+                {
+                    "guid": "ffb824e1-4d3e-40de-8856-0d86400fd392",
+                    "id": "1",
+                    "name": "Second",
+                    "health": 1,
+                    "atk": 5,
+                    "def": 1,
+                    "spd": 1,
+                    "sprite": ""
+                }
+            ],
+            "hidden": false,
+            "isProps": false,
+            "configurable": {
+                "name": "text",
+                "description": "text",
+                "displayColumn": "columnSelect@name",
+                "columnSelect@name@displayColumn": {
+                    "allowedTypes": [
+                        "int",
+                        "float",
+                        "text",
+                        "longtext"
+                    ]
+                }
+            }
+        },
+        {
+            "name": "enemies",
+            "description": "Enemies in the game",
+            "displayColumn": "id",
+            "guid": "cb420ef3-b1b8-4c2b-9878-302e59eb3850",
+            "columns": [
+                {
+                    "typeStr": "text",
+                    "guid": "fe2c1936-65be-469c-88b8-7ada0cd35b88",
+                    "name": "name",
+                    "description": "Name of the enemy",
+                    "defaultValue": "Enemy",
+                    "iconName": "newText",
+                    "configurable": {
+                        "name": "text",
+                        "description": "text",
+                        "defaultValue": "text"
+                    }
+                },
+                {
+                    "typeStr": "int",
+                    "guid": "b32ac2cd-ceae-421d-9d3d-481ff6c54119",
+                    "description": "Health of the enemy in game",
+                    "name": "health",
+                    "min": -10000,
+                    "max": 100000,
+                    "defaultValue": 1,
+                    "iconName": "newInt",
+                    "configurable": {
+                        "name": "text",
+                        "description": "text",
+                        "min": "int",
+                        "max": "int",
+                        "defaultValue": "int"
+                    }
+                },
+                {
+                    "typeStr": "int",
+                    "guid": "bb52c6a8-d547-400a-8e57-ec64c23eec4c",
+                    "description": "Attack power of the enemy in game.",
+                    "name": "atk",
+                    "min": -10000,
+                    "max": 100000,
+                    "defaultValue": 5,
+                    "iconName": "newInt",
+                    "configurable": {
+                        "name": "text",
+                        "description": "text",
+                        "min": "int",
+                        "max": "int",
+                        "defaultValue": "int"
+                    }
+                },
+                {
+                    "typeStr": "int",
+                    "guid": "fa77c317-ed0d-4e53-ad53-9feb9c3add8d",
+                    "description": "Defense of the enemy in game.",
+                    "name": "def",
+                    "min": -10000,
+                    "max": 100000,
+                    "defaultValue": 1,
+                    "iconName": "newInt",
+                    "configurable": {
+                        "name": "text",
+                        "description": "text",
+                        "min": "int",
+                        "max": "int",
+                        "defaultValue": "int"
+                    }
+                },
+                {
+                    "typeStr": "int",
+                    "guid": "47fa7b52-c23f-47f5-ada1-a81bee629ea1",
+                    "description": "Speed of the enemy in game.",
+                    "name": "spd",
+                    "min": -10000,
+                    "max": 100000,
+                    "defaultValue": 1,
+                    "iconName": "newInt",
+                    "configurable": {
+                        "name": "text",
+                        "description": "text",
+                        "min": "int",
+                        "max": "int",
+                        "defaultValue": "int"
+                    }
+                },
+                {
+                    "typeStr": "image",
+                    "guid": "152a51a5-1d69-4838-b4e9-9af8df77793f",
+                    "name": "sprite",
+                    "description": "Enemy sprite reference",
+                    "defaultValue": "",
+                    "iconName": "newImage",
+                    "configurable": {
+                        "name": "text",
+                        "description": "text",
+                        "defaultValue": "text"
+                    }
+                }
+            ],
+            "lines": [
+                {
+                    "guid": "c49a0884-ee5b-4797-b0dd-33a21e5548c3",
+                    "id": "0",
+                    "name": "Enemy",
+                    "health": 1,
+                    "atk": 5,
+                    "def": 1,
+                    "spd": 1,
+                    "sprite": ""
+                }
+            ],
+            "hidden": false,
+            "isProps": false,
+            "configurable": {
+                "name": "text",
+                "description": "text",
+                "displayColumn": "columnSelect@name",
+                "columnSelect@name@displayColumn": {
+                    "allowedTypes": [
+                        "int",
+                        "float",
+                        "text",
+                        "longtext"
+                    ]
+                }
+            }
+        },
+        {
+            "name": "cats",
+            "description": "The list of cats in the game that you can find.",
+            "displayColumn": "id",
+            "guid": "4ea457a8-376e-4f4d-8427-7b5ddf977c8a",
+            "columns": [
+                {
+                    "typeStr": "text",
+                    "guid": "81a80e6f-cf84-437a-84a4-7e0ced41bcc0",
+                    "name": "name",
+                    "description": "The name of the cat in the game.",
+                    "defaultValue": "Name",
+                    "iconName": "newText",
+                    "configurable": {
+                        "name": "text",
+                        "description": "text",
+                        "defaultValue": "text"
+                    }
+                },
+                {
+                    "typeStr": "int",
+                    "guid": "a0437487-a3d9-407c-92c0-658a06c8f011",
+                    "description": "Speed of the character within the game.",
+                    "name": "spd",
+                    "min": -10000,
+                    "max": 100000,
+                    "defaultValue": 40,
+                    "iconName": "newInt",
+                    "configurable": {
+                        "name": "text",
+                        "description": "text",
+                        "min": "int",
+                        "max": "int",
+                        "defaultValue": "int"
+                    }
+                },
+                {
+                    "typeStr": "enum",
+                    "guid": "837b96ea-7772-41eb-8356-b43b4fad4e90",
+                    "name": "cType",
+                    "description": "The type of the cat which dictates their behavior",
+                    "options": "Passive, Aggressive, EscapeArtist, Kind, Glutton",
+                    "defaultValue": "Passive",
+                    "iconName": "newEnum",
+                    "configurable": {
+                        "name": "text",
+                        "description": "text",
+                        "defaultValue": "text",
+                        "options": "text"
+                    }
+                },
+                {
+                    "typeStr": "image",
+                    "guid": "0dd8079f-fa8f-4ca7-a8df-2298a6b6099b",
+                    "name": "sprite",
+                    "description": "The sprite of the cat in the game that they will be using.",
+                    "defaultValue": "",
+                    "iconName": "newImage",
+                    "configurable": {
+                        "name": "text",
+                        "description": "text",
+                        "defaultValue": "text"
+                    }
+                }
+            ],
+            "lines": [
+                {
+                    "guid": "f25127ae-ecc2-4478-952b-46c07eb3cf50",
+                    "id": "0",
+                    "name": "Banjo",
+                    "spd": 40,
+                    "cType": "Passive",
+                    "sprite": ""
+                },
+                {
+                    "guid": "da20a610-8f25-438d-8694-eae78e6c35d1",
+                    "id": "1",
+                    "name": "Meownika",
+                    "spd": 40,
+                    "cType": "Passive",
+                    "sprite": ""
+                },
+                {
+                    "guid": "3cb015ee-accb-45bd-89f9-829d14e03283",
+                    "id": "2",
+                    "name": "Nezumi",
+                    "spd": 40,
+                    "cType": "Aggressive",
+                    "sprite": ""
+                },
+                {
+                    "guid": "b66d09f9-2a9d-4742-bd78-b87c30c0ba05",
+                    "id": "3",
+                    "name": "Purrkin",
+                    "spd": 40,
+                    "cType": "Glutton",
+                    "sprite": ""
+                },
+                {
+                    "guid": "06e891eb-5b4b-4470-873a-04fdf53224bd",
+                    "id": "4",
+                    "name": "Lily",
+                    "spd": 40,
+                    "cType": "Kind",
+                    "sprite": ""
+                },
+                {
+                    "guid": "f66c6ca0-e874-4582-b461-dee2dc9c5695",
+                    "id": "5",
+                    "name": "Leo",
+                    "spd": 40,
+                    "cType": "Aggressive",
+                    "sprite": ""
+                },
+                {
+                    "guid": "e26a0320-3451-4c3c-b720-eccabc7043a0",
+                    "id": "6",
+                    "name": "Jack",
+                    "spd": 40,
+                    "cType": "EscapeArtist",
+                    "sprite": ""
+                },
+                {
+                    "guid": "ca52ddf8-df93-462f-ba10-9d4dd346c012",
+                    "id": "7",
+                    "name": "Kyat",
+                    "spd": 40,
+                    "cType": "EscapeArtist",
+                    "sprite": ""
+                },
+                {
+                    "guid": "0bdba735-e553-4af6-8dc6-dcdb46b8e1f8",
+                    "id": "8",
+                    "name": "Athens",
+                    "spd": 40,
+                    "cType": "Passive",
+                    "sprite": ""
+                },
+                {
+                    "guid": "85d1b2cb-bed9-49f8-b39e-eef5c7dfbd26",
+                    "id": "9",
+                    "name": "Bella",
+                    "spd": 40,
+                    "cType": "Kind",
+                    "sprite": ""
+                },
+                {
+                    "guid": "6504c23e-29e9-4b26-bb7f-2a41b5af288d",
+                    "id": "10",
+                    "name": "Charlie",
+                    "spd": 40,
+                    "cType": "Aggressive",
+                    "sprite": ""
+                },
+                {
+                    "guid": "23f97b04-e3c6-4af5-a989-3d57766ca8dc",
+                    "id": "11",
+                    "name": "NyaNya",
+                    "spd": 40,
+                    "cType": "Glutton",
+                    "sprite": ""
+                },
+                {
+                    "guid": "5ab81fef-d0a0-4918-a458-fdf122406b4e",
+                    "id": "12",
+                    "name": "Maou",
+                    "spd": 40,
+                    "cType": "Aggressive",
+                    "sprite": ""
+                },
+                {
+                    "guid": "85696ef2-8197-4abf-9202-d06a8b8b39be",
+                    "id": "13",
+                    "name": "FluffyKins",
+                    "spd": 40,
+                    "cType": "Glutton",
+                    "sprite": ""
+                }
+            ],
+            "hidden": false,
+            "isProps": false,
+            "configurable": {
+                "name": "text",
+                "description": "text",
+                "displayColumn": "columnSelect@name",
+                "columnSelect@name@displayColumn": {
+                    "allowedTypes": [
+                        "int",
+                        "float",
+                        "text",
+                        "longtext"
+                    ]
+                }
+            }
+        }
+    ]
+}

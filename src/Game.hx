@@ -1,27 +1,29 @@
+import depot.DepotData;
+import ui.Modal;
+import ui.MsgWindow;
 import dn.Process;
 import hxd.Key;
 
 class Game extends Process {
-	public static var ME : Game;
+	public static var ME:Game;
 
 	/** Game controller (pad or keyboard) **/
-	public var ca : dn.heaps.Controller.ControllerAccess;
+	public var ca:dn.heaps.Controller.ControllerAccess;
 
 	/** Particles **/
-	public var fx : Fx;
+	public var fx:Fx;
 
 	/** Basic viewport control **/
-	public var camera : Camera;
+	public var camera:Camera;
 
 	/** Container of all visual game objects. Ths wrapper is moved around by Camera. **/
-	public var scroller : h2d.Layers;
+	public var scroller:h2d.Layers;
 
 	/** Level data **/
-	public var level : Level;
+	public var level:Level;
 
 	/** UI **/
-	public var hud : ui.Hud;
-
+	public var hud:ui.Hud;
 
 	public function new() {
 		super(Main.ME);
@@ -42,11 +44,17 @@ class Game extends Process {
 
 		Process.resizeAll();
 		trace(Lang.t._("Game is ready."));
+		var mWin = new MsgWindow();
+		mWin.sendMsg('First message');
+		mWin.sendMsg(DepotData.Cats_Banjo.name);
+		// Send Message Using DeptDatai
+
+		// mWin.sendMsg(DEPOT);
+		new en.Hero(10, 10);
 	}
 
 	/** CDB file changed on disk**/
 	public function onCdbReload() {}
-
 
 	/** Window/app resize event **/
 	override function onResize() {
@@ -54,13 +62,12 @@ class Game extends Process {
 		scroller.setScale(Const.SCALE);
 	}
 
-
 	/** Garbage collect any Entity marked for destruction **/
 	function gc() {
-		if( Entity.GC==null || Entity.GC.length==0 )
+		if (Entity.GC == null || Entity.GC.length == 0)
 			return;
 
-		for(e in Entity.GC)
+		for (e in Entity.GC)
 			e.dispose();
 		Entity.GC = [];
 	}
@@ -70,7 +77,7 @@ class Game extends Process {
 		super.onDispose();
 
 		fx.destroy();
-		for(e in Entity.ALL)
+		for (e in Entity.ALL)
 			e.destroy();
 		gc();
 	}
@@ -79,14 +86,18 @@ class Game extends Process {
 	override function preUpdate() {
 		super.preUpdate();
 
-		for(e in Entity.ALL) if( !e.destroyed ) e.preUpdate();
+		for (e in Entity.ALL)
+			if (!e.destroyed)
+				e.preUpdate();
 	}
 
 	/** Loop that happens at the end of the frame **/
 	override function postUpdate() {
 		super.postUpdate();
 
-		for(e in Entity.ALL) if( !e.destroyed ) e.postUpdate();
+		for (e in Entity.ALL)
+			if (!e.destroyed)
+				e.postUpdate();
 		gc();
 	}
 
@@ -94,29 +105,32 @@ class Game extends Process {
 	override function fixedUpdate() {
 		super.fixedUpdate();
 
-		for(e in Entity.ALL) if( !e.destroyed ) e.fixedUpdate();
+		for (e in Entity.ALL)
+			if (!e.destroyed)
+				e.fixedUpdate();
 	}
 
 	/** Main loop **/
 	override function update() {
 		super.update();
 
-		for(e in Entity.ALL) if( !e.destroyed ) e.update();
+		for (e in Entity.ALL)
+			if (!e.destroyed)
+				e.update();
 
-		if( !ui.Console.ME.isActive() && !ui.Modal.hasAny() ) {
+		if (!ui.Console.ME.isActive() && !ui.Modal.hasAny()) {
 			#if hl
 			// Exit
-			if( ca.isKeyboardPressed(Key.ESCAPE) )
-				if( !cd.hasSetS("exitWarn",3) )
+			if (ca.isKeyboardPressed(Key.ESCAPE))
+				if (!cd.hasSetS("exitWarn", 3))
 					trace(Lang.t._("Press ESCAPE again to exit."));
 				else
 					hxd.System.exit();
 			#end
 
 			// Restart
-			if( ca.selectPressed() )
+			if (ca.selectPressed())
 				Main.ME.startGame();
 		}
 	}
 }
-

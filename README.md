@@ -1,4 +1,17 @@
-# About
+# Metamorphose
+> A game made using the Heaps game engine and the Haxe programming language.
+----------
+## Features
+
+* Visual Novel Cutscenes
+* 2D Platforming
+* GPU based rendering
+* Cute and interesting characters
+
+
+
+-----------
+# About - Base Project
 
 Base structure for my games, using **Heaps** framework (https://heaps.io) and **Haxe** language (https://haxe.org).
 

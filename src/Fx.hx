@@ -2,16 +2,18 @@ import h2d.Sprite;
 import dn.heaps.HParticle;
 import dn.Tweenie;
 
-
 class Fx extends dn.Process {
-	var game(get,never) : Game; inline function get_game() return Game.ME;
+	var game(get, never):Game;
 
-	var pool : ParticlePool;
+	inline function get_game()
+		return Game.ME;
 
-	public var bgAddSb    : h2d.SpriteBatch;
-	public var bgNormalSb    : h2d.SpriteBatch;
-	public var topAddSb       : h2d.SpriteBatch;
-	public var topNormalSb    : h2d.SpriteBatch;
+	var pool:ParticlePool;
+
+	public var bgAddSb:h2d.SpriteBatch;
+	public var bgNormalSb:h2d.SpriteBatch;
+	public var topAddSb:h2d.SpriteBatch;
+	public var topNormalSb:h2d.SpriteBatch;
 
 	public function new() {
 		super(Game.ME);
@@ -53,47 +55,47 @@ class Fx extends dn.Process {
 	}
 
 	/** Create a HParticle instance in the TOP layer, using Additive blendmode **/
-	public inline function allocTopAdd(t:h2d.Tile, x:Float, y:Float) : HParticle {
+	public inline function allocTopAdd(t:h2d.Tile, x:Float, y:Float):HParticle {
 		return pool.alloc(topAddSb, t, x, y);
 	}
 
 	/** Create a HParticle instance in the TOP layer, using default blendmode **/
-	public inline function allocTopNormal(t:h2d.Tile, x:Float, y:Float) : HParticle {
-		return pool.alloc(topNormalSb, t,x,y);
+	public inline function allocTopNormal(t:h2d.Tile, x:Float, y:Float):HParticle {
+		return pool.alloc(topNormalSb, t, x, y);
 	}
 
 	/** Create a HParticle instance in the BG layer, using Additive blendmode **/
-	public inline function allocBgAdd(t:h2d.Tile, x:Float, y:Float) : HParticle {
-		return pool.alloc(bgAddSb, t,x,y);
+	public inline function allocBgAdd(t:h2d.Tile, x:Float, y:Float):HParticle {
+		return pool.alloc(bgAddSb, t, x, y);
 	}
 
 	/** Create a HParticle instance in the BG layer, using default blendmode **/
-	public inline function allocBgNormal(t:h2d.Tile, x:Float, y:Float) : HParticle {
-		return pool.alloc(bgNormalSb, t,x,y);
+	public inline function allocBgNormal(t:h2d.Tile, x:Float, y:Float):HParticle {
+		return pool.alloc(bgNormalSb, t, x, y);
 	}
 
 	/** Gets a random tile variation from the atlas **/
-	public inline function getTile(id:String) : h2d.Tile {
+	public inline function getTile(id:String):h2d.Tile {
 		return Assets.tiles.getTileRandom(id);
 	}
 
-	public function markerEntity(e:Entity, ?c=0xFF00FF, ?short=false) {
+	public function markerEntity(e:Entity, ?c = 0xFF00FF, ?short = false) {
 		#if debug
-		if( e==null )
+		if (e == null)
 			return;
 
-		markerCase(e.cx, e.cy, short?0.03:3, c);
+		markerCase(e.cx, e.cy, short ? 0.03 : 3, c);
 		#end
 	}
 
-	public function markerCase(cx:Int, cy:Int, ?sec=3.0, ?c=0xFF00FF) {
+	public function markerCase(cx:Int, cy:Int, ?sec = 3.0, ?c = 0xFF00FF) {
 		#if debug
-		var p = allocTopAdd(getTile("fxCircle"), (cx+0.5)*Const.GRID, (cy+0.5)*Const.GRID);
+		var p = allocTopAdd(getTile("fxCircle"), (cx + 0.5) * Const.GRID, (cy + 0.5) * Const.GRID);
 		p.setFadeS(1, 0, 0.06);
 		p.colorize(c);
 		p.lifeS = sec;
 
-		var p = allocTopAdd(getTile("pixel"), (cx+0.5)*Const.GRID, (cy+0.5)*Const.GRID);
+		var p = allocTopAdd(getTile("pixel"), (cx + 0.5) * Const.GRID, (cy + 0.5) * Const.GRID);
 		p.setFadeS(1, 0, 0.06);
 		p.colorize(c);
 		p.setScale(2);
@@ -101,10 +103,10 @@ class Fx extends dn.Process {
 		#end
 	}
 
-	public function markerFree(x:Float, y:Float, ?sec=3.0, ?c=0xFF00FF) {
+	public function markerFree(x:Float, y:Float, ?sec = 3.0, ?c = 0xFF00FF) {
 		#if debug
-		var p = allocTopAdd(getTile("fxDot"), x,y);
-		p.setCenterRatio(0.5,0.5);
+		var p = allocTopAdd(getTile("fxDot"), x, y);
+		p.setCenterRatio(0.5, 0.5);
 		p.setFadeS(1, 0, 0.06);
 		p.colorize(c);
 		p.setScale(3);
@@ -112,33 +114,32 @@ class Fx extends dn.Process {
 		#end
 	}
 
-	public function markerText(cx:Int, cy:Int, txt:String, ?t=1.0) {
+	public function markerText(cx:Int, cy:Int, txt:String, ?t = 1.0) {
 		#if debug
 		var tf = new h2d.Text(Assets.fontTiny, topNormalSb);
 		tf.text = txt;
 
-		var p = allocTopAdd(getTile("fxCircle"), (cx+0.5)*Const.GRID, (cy+0.5)*Const.GRID);
+		var p = allocTopAdd(getTile("fxCircle"), (cx + 0.5) * Const.GRID, (cy + 0.5) * Const.GRID);
 		p.colorize(0x0080FF);
 		p.alpha = 0.6;
 		p.lifeS = 0.3;
 		p.fadeOutSpeed = 0.4;
 		p.onKill = tf.remove;
 
-		tf.setPosition(p.x-tf.textWidth*0.5, p.y-tf.textHeight*0.5);
+		tf.setPosition(p.x - tf.textWidth * 0.5, p.y - tf.textHeight * 0.5);
 		#end
 	}
 
-	public function flashBangS(c:UInt, a:Float, ?t=0.1) {
-		var e = new h2d.Bitmap(h2d.Tile.fromColor(c,1,1,a));
+	public function flashBangS(c:UInt, a:Float, ?t = 0.1) {
+		var e = new h2d.Bitmap(h2d.Tile.fromColor(c, 1, 1, a));
 		game.root.add(e, Const.DP_FX_FRONT);
 		e.scaleX = game.w();
 		e.scaleY = game.h();
 		e.blendMode = Add;
-		game.tw.createS(e.alpha, 0, t).end( function() {
+		game.tw.createS(e.alpha, 0, t).end(function() {
 			e.remove();
 		});
 	}
-
 
 	/**
 		A small sample to demonstrate how basic particles work. This example produces a small explosion of yellow dots that will fall and slowly fade to purple.
@@ -146,17 +147,16 @@ class Fx extends dn.Process {
 		USAGE: fx.dotsExplosionExample(50,50, 0xffcc00)
 	**/
 	public function dotsExplosionExample(x:Float, y:Float, color:UInt) {
-		for(i in 0...80) {
-			var p = allocTopAdd( getTile("fxDot"), x+rnd(0,3,true), y+rnd(0,3,true) );
-			p.alpha = rnd(0.4,1);
+		for (i in 0...80) {
+			var p = allocTopAdd(getTile("fxDot"), x + rnd(0, 3, true), y + rnd(0, 3, true));
+			p.alpha = rnd(0.4, 1);
 			p.colorAnimS(color, 0x762087, rnd(0.6, 3)); // fade particle color from parameter color to some purple
-			p.moveAwayFrom(x,y, rnd(1,3)); // move away from source
+			p.moveAwayFrom(x, y, rnd(1, 3)); // move away from source
 			p.frict = rnd(0.8, 0.9); // friction applied to velocities
 			p.gy = rnd(0, 0.02); // gravity Y (added on each frame)
-			p.lifeS = rnd(2,3); // life time in seconds
+			p.lifeS = rnd(2, 3); // life time in seconds
 		}
 	}
-
 
 	override function update() {
 		super.update();
