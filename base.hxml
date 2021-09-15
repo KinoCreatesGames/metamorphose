@@ -1,5 +1,6 @@
 -cp src
-# --macro include('depot', false)
+
+-lib ldtk-haxe-api
 -lib castle
 -lib heaps
 -lib deepnightLibs

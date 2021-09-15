@@ -25,9 +25,15 @@ class Game extends Process {
 	/** UI **/
 	public var hud:ui.Hud;
 
+	/**
+	 * Project file for LDtk in here.
+	 */
+	public var proj:LDTkProj;
+
 	public function new() {
 		super(Main.ME);
 		ME = this;
+		proj = new LDTkProj();
 		ca = Main.ME.controller.createAccess("game");
 		ca.setLeftDeadZone(0.2);
 		ca.setRightDeadZone(0.2);

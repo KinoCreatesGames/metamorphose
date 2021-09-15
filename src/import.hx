@@ -1,4 +1,5 @@
 #if !macro
+import ldtkData.LDTkProj;
 import dn.M;
 import dn.Lib;
 import dn.Color;
