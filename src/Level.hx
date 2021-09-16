@@ -61,15 +61,18 @@ class Level extends dn.Process {
 	function render() {
 		// Placeholder level render
 		root.removeChildren();
-		for (cx in 0...cWid)
-			for (cy in 0...cHei) {
-				var g = new h2d.Graphics(root);
-				if (cx == 0 || cy == 0 || cx == cWid - 1 || cy == cHei - 1)
-					g.beginFill(0xffcc00);
-				else
-					g.beginFill(Color.randomColor(rnd(0, 1), 0.5, 0.4));
-				g.drawRect(cx * Const.GRID, cy * Const.GRID, Const.GRID, Const.GRID);
-			}
+		// Render Auto Layer
+		var tileGroup = data.l_AutoTiles.render();
+		root.addChild(tileGroup);
+		// for (cx in 0...cWid)
+		// 	for (cy in 0...cHei) {
+		// 		var g = new h2d.Graphics(root);
+		// 		if (cx == 0 || cy == 0 || cx == cWid - 1 || cy == cHei - 1)
+		// 			g.beginFill(0xffcc00);
+		// 		else
+		// 			g.beginFill(Color.randomColor(rnd(0, 1), 0.5, 0.4));
+		// 		g.drawRect(cx * Const.GRID, cy * Const.GRID, Const.GRID, Const.GRID);
+		// 	}
 	}
 
 	override function postUpdate() {
