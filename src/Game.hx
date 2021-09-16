@@ -59,6 +59,10 @@ class Game extends Process {
 		new en.Hero(10, 10);
 	}
 
+	public static inline function exists() {
+		return ME != null && !ME.destroyed;
+	}
+
 	/** CDB file changed on disk**/
 	public function onCdbReload() {}
 
@@ -66,7 +70,16 @@ class Game extends Process {
 	 * Called whenever LDTk file changes on disk
 	 */
 	@:allow(Assets)
-	function onLDtkReload() {}
+	function onLDtkReload() {
+		trace('LDTk file reloaded');
+		if (level != null) {
+			if (level.data != null) {
+				startLevel(Assets.projData.getLevel(level.data.uid));
+			}
+		}
+	}
+
+	public function startLevel(level:LDTkProj_Level) {}
 
 	/** Window/app resize event **/
 	override function onResize() {
