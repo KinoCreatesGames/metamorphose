@@ -75,6 +75,19 @@ class Level extends dn.Process {
 		// 	}
 	}
 
+	// Collision detection against the level layout
+
+	/**
+	 * Collision detection between the elements on the level.  
+	 * Level information is available to all entities to check.
+	 * Returns true if the position overlaps a level tile 
+	 * @param x 
+	 * @param y 
+	 */
+	public function hasAnyCollsion(x:Int, y:Int) {
+		return data.l_AutoBase.getInt(x, y) > 0;
+	}
+
 	override function postUpdate() {
 		super.postUpdate();
 

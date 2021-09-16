@@ -59,7 +59,6 @@ class Game extends Process {
 		// Send Message Using DeptDatai
 
 		// mWin.sendMsg(DEPOT);
-		new en.Hero(10, 10);
 	}
 
 	public static inline function exists() {
