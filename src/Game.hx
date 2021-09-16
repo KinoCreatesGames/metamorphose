@@ -1,3 +1,4 @@
+import en.Hero;
 import depot.DepotData;
 import ui.Modal;
 import ui.MsgWindow;
@@ -79,7 +80,20 @@ class Game extends Process {
 		}
 	}
 
-	public function startLevel(level:LDTkProj_Level) {}
+	public function startLevel(ldtkLevel:LDTkProj_Level) {
+		if (level != null) {
+			level.destroy();
+		}
+		fx.clear();
+		for (entity in Entity.ALL) {
+			entity.destroy();
+		}
+		garbageCollectEntities();
+		// Create new level
+		level = new Level(ldtkLevel);
+		// Will be using the looping mechanisms
+		var hero = new Hero(0, 0);
+	}
 
 	/** Window/app resize event **/
 	override function onResize() {
@@ -88,7 +102,7 @@ class Game extends Process {
 	}
 
 	/** Garbage collect any Entity marked for destruction **/
-	function gc() {
+	function garbageCollectEntities() {
 		if (Entity.GC == null || Entity.GC.length == 0)
 			return;
 
@@ -104,7 +118,7 @@ class Game extends Process {
 		fx.destroy();
 		for (e in Entity.ALL)
 			e.destroy();
-		gc();
+		garbageCollectEntities();
 	}
 
 	/** Loop that happens at the beginning of the frame **/
@@ -123,7 +137,7 @@ class Game extends Process {
 		for (e in Entity.ALL)
 			if (!e.destroyed)
 				e.postUpdate();
-		gc();
+		garbageCollectEntities();
 	}
 
 	/** Main loop but limited to 30fps (so it might not be called during some frames) **/
