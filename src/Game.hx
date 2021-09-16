@@ -31,6 +31,8 @@ class Game extends Process {
 	 */
 	public var proj:LDTkProj;
 
+	public var title:Title;
+
 	public function new() {
 		super(Main.ME);
 		ME = this;
@@ -43,9 +45,11 @@ class Game extends Process {
 		scroller = new h2d.Layers();
 		root.add(scroller, Const.DP_BG);
 		scroller.filter = new h2d.filter.ColorMatrix(); // force rendering for pixel perfect
-
 		camera = new Camera();
+		title = new Title();
+	}
 
+	public function startInitialGame() {
 		fx = new Fx();
 		// Render ldtk level
 		startLevel(proj.all_levels.Level_0);
@@ -53,12 +57,6 @@ class Game extends Process {
 
 		Process.resizeAll();
 		trace(Lang.t._("Game is ready."));
-		var mWin = new MsgWindow();
-		mWin.sendMsg('First message');
-		mWin.sendMsg(DepotData.Cats_Banjo.name);
-		// Send Message Using DeptDatai
-
-		// mWin.sendMsg(DEPOT);
 	}
 
 	public static inline function exists() {
