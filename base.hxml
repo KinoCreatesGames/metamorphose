@@ -4,6 +4,7 @@
 -lib castle
 -lib heaps
 -lib deepnightLibs
+-D heaps_enable_hl_mp3  
 
 -main Boot
 -dce full

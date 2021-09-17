@@ -17,6 +17,9 @@ class Title extends dn.Process {
 		complete = false;
 
 		setupTitleWindow();
+
+		// Play music
+		hxd.Res.music.JDSherbert_A_Minor_Distraction.play(true);
 		// Start of the title sequence
 	}
 
