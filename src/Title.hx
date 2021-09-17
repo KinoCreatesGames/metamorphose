@@ -1,3 +1,4 @@
+import h2d.Text.Align;
 import h2d.Flow.FlowAlign;
 
 class Title extends dn.Process {
@@ -40,7 +41,10 @@ class Title extends dn.Process {
 		var newGame = new h2d.Text(Assets.fontMedium, win);
 		newGame.text = Lang.t._('New Game');
 		newGame.textColor = 0xffffff;
+		newGame.center();
 		var ngInt = new h2d.Interactive(win.outerWidth, newGame.textHeight, newGame);
+		// Handles the relocation of the x coordinate thanks to the alignment change
+		ngInt.x = newGame.getSize().xMin;
 		ngInt.onClick = (event) -> {
 			complete = true;
 		}
@@ -54,8 +58,9 @@ class Title extends dn.Process {
 		var credits = new h2d.Text(Assets.fontMedium, win);
 		credits.text = Lang.t._('Credits');
 		credits.textColor = 0xffffff;
-
+		credits.center();
 		var crInt = new h2d.Interactive(win.outerWidth, credits.textHeight, credits);
+		crInt.x = credits.getSize().xMin;
 		crInt.onOver = (event) -> {
 			credits.alpha = 0.5;
 		}
@@ -72,7 +77,9 @@ class Title extends dn.Process {
 		var exit = new h2d.Text(Assets.fontMedium, win);
 		exit.text = 'Exit';
 		exit.textColor = 0xffffff;
+		exit.center();
 		var exitInt = new h2d.Interactive(win.outerWidth, newGame.textHeight, exit);
+		exitInt.x = exit.getSize().xMin;
 		exitInt.onClick = (event) -> {
 			hxd.System.exit();
 		}
@@ -91,5 +98,11 @@ class Title extends dn.Process {
 			Game.ME.startInitialGame();
 			destroy();
 		}
+	}
+
+	override public function onResize() {
+		super.onResize();
+		win.x = (w() / Const.UI_SCALE * 0.5 - win.outerWidth * 1.5);
+		win.y = (h() / Const.UI_SCALE * 0.5 - win.outerHeight * 0.5);
 	}
 }
