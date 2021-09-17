@@ -1,3 +1,4 @@
+import hxd.snd.Channel;
 import h2d.Text.Align;
 import h2d.Flow.FlowAlign;
 
@@ -10,6 +11,7 @@ class Title extends dn.Process {
 
 	public var complete:Bool;
 	public var win:h2d.Flow;
+	public var bgm:Channel;
 
 	public function new() {
 		super(Game.ME);
@@ -19,7 +21,7 @@ class Title extends dn.Process {
 		setupTitleWindow();
 
 		// Play music
-		hxd.Res.music.JDSherbert_A_Minor_Distraction.play(true);
+		bgm = hxd.Res.music.JDSherbert_A_Minor_Distraction.play(true);
 		// Start of the title sequence
 	}
 
@@ -72,6 +74,8 @@ class Title extends dn.Process {
 		}
 		crInt.onClick = (event) -> {
 			// Go to credits scene
+			// Stop music on the start of the next scene
+			bgm.stop();
 			this.destroy();
 			new Credits();
 		}
