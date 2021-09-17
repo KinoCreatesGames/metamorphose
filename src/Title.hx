@@ -1,3 +1,5 @@
+import h2d.Flow.FlowAlign;
+
 class Title extends dn.Process {
 	var game(get, never):Game;
 
@@ -25,13 +27,18 @@ class Title extends dn.Process {
 		win.borderWidth = 6;
 
 		win.layout = Vertical;
+		win.verticalAlign = FlowAlign.Middle;
+
 		win.padding = 24;
+		// Center at the bottom
+		// win.x = ((w() / 2) - win.outerWidth / 2);
 		setupTitleOptions();
+		dn.Process.resizeAll();
 	}
 
 	public function setupTitleOptions() {
 		var newGame = new h2d.Text(Assets.fontMedium, win);
-		newGame.text = 'New Game';
+		newGame.text = Lang.t._('New Game');
 		newGame.textColor = 0xffffff;
 		var ngInt = new h2d.Interactive(win.outerWidth, newGame.textHeight, newGame);
 		ngInt.onClick = (event) -> {
@@ -42,6 +49,23 @@ class Title extends dn.Process {
 		}
 		ngInt.onOut = (event) -> {
 			newGame.alpha = 1;
+		}
+
+		var credits = new h2d.Text(Assets.fontMedium, win);
+		credits.text = Lang.t._('Credits');
+		credits.textColor = 0xffffff;
+
+		var crInt = new h2d.Interactive(win.outerWidth, credits.textHeight, credits);
+		crInt.onOver = (event) -> {
+			credits.alpha = 0.5;
+		}
+		crInt.onOut = (event) -> {
+			credits.alpha = 1;
+		}
+		crInt.onClick = (event) -> {
+			// Go to credits scene
+			this.destroy();
+			new Credits();
 		}
 
 		#if hl
