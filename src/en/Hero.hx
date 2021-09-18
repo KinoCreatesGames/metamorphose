@@ -9,6 +9,7 @@ class Hero extends Entity {
 	public var canJump:Bool;
 	public var jumpCount:Int = 0;
 
+	public var doubleJumpUnlock:Bool;
 	public var canDoubleJump(get, never):Bool;
 
 	inline function get_canDoubleJump() {
@@ -25,6 +26,11 @@ class Hero extends Entity {
 		g.drawRect(0, 0, 16, 16);
 		isOnFloor = false;
 		canJump = false;
+		#if debug
+		doubleJumpUnlock = true;
+		#else
+		doubleJumpUnlock = false;
+		#end
 
 		ct = Main.ME.controller.createAccess('hero');
 	}
@@ -35,7 +41,7 @@ class Hero extends Entity {
 	}
 
 	override function update() {
-		if (ct.upPressed() || ct.isAnyKeyPressed([K.UP, K.W]) && canJump) {
+		if (ct.upPressed() || ct.isAnyKeyPressed([K.UP, K.W]) && (canJump || (canDoubleJump && doubleJumpUnlock))) {
 			jump();
 		}
 		if (ct.leftDown() || ct.isKeyboardDown(K.LEFT)) {
@@ -50,6 +56,7 @@ class Hero extends Entity {
 
 	public function jump() {
 		jumpCount++;
+		dy = 0;
 		dy = (-0.9 * tmod);
 	}
 
