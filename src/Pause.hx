@@ -5,6 +5,7 @@ class Pause extends dn.Process {
 	public var complete:Bool;
 	public var win:h2d.Flow;
 	public var titleText:h2d.Text;
+	public var elapsed:Float = 0.;
 
 	public function new() {
 		super(Game.ME);
@@ -72,6 +73,9 @@ class Pause extends dn.Process {
 
 	override public function update() {
 		super.update();
+		// Update alpha of Pause
+		elapsed += uftime;
+		titleText.alpha = M.fwrap(Math.sin(elapsed), 0.3, 1);
 		if (complete) {
 			if (ca.isKeyboardPressed(K.ESCAPE)) {
 				// Return to the previous scene without creating any
