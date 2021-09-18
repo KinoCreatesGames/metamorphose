@@ -22,6 +22,7 @@ class Title extends dn.Process {
 
 		// Play music
 		bgm = hxd.Res.music.JDSherbert_A_Minor_Distraction.play(true);
+		bgm.stop();
 		// Start of the title sequence
 	}
 
@@ -51,6 +52,8 @@ class Title extends dn.Process {
 		// Handles the relocation of the x coordinate thanks to the alignment change
 		ngInt.x = newGame.getSize().xMin;
 		ngInt.onClick = (event) -> {
+			bgm.stop();
+			// this.destroy();
 			complete = true;
 		}
 		ngInt.onOver = (event) -> {
@@ -88,6 +91,8 @@ class Title extends dn.Process {
 		var exitInt = new h2d.Interactive(win.outerWidth, newGame.textHeight, exit);
 		exitInt.x = exit.getSize().xMin;
 		exitInt.onClick = (event) -> {
+			bgm.stop();
+			this.destroy();
 			hxd.System.exit();
 		}
 		exitInt.onOver = (event) -> {

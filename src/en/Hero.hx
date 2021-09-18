@@ -35,52 +35,71 @@ class Hero extends Entity {
 	}
 
 	override function update() {
-		super.update();
-
 		if (ct.upPressed() || ct.isAnyKeyPressed([K.UP, K.W]) && canJump) {
 			jump();
 		}
 		if (ct.leftDown() || ct.isKeyboardDown(K.LEFT)) {
-			dx -= 0.1 * tmod;
+			dx = -(0.1 * tmod);
 		}
 
 		if (ct.rightDown() || ct.isKeyboardDown(K.RIGHT)) {
-			dx += 0.1 * tmod;
+			dx = 0.1 * tmod;
 		}
+		super.update();
 	}
 
 	public function jump() {
 		jumpCount++;
-		dy -= 1 * tmod;
+		dy = (-0.9 * tmod);
 	}
 
 	override function fixedUpdate() {
-		super.fixedUpdate();
 		if (!isOnFloor) {
 			applyPhysics();
 		}
 		handleCollisions();
+		super.fixedUpdate();
 	}
 
 	public function handleCollisions() {
+		// Left
+		if (level.hasAnyCollision(cx - 1, cy) && xr <= 0.3) {
+			xr = 0.3;
+			dx = 0;
+			// dx = M.fabs(dx);
+		}
+
+		// Right
+		if (level.hasAnyCollision(cx + 1, cy) && xr >= 0.1) {
+			// push back to previous cell
+			xr = 0.1;
+			dx = 0;
+			// dx = (-1 * M.fabs(dx));
+		}
+
 		// Up
+		if (level.hasAnyCollision(cx, cy - 1) || level.hasAnyCollision(cx + M.round(xr), cy - 1)) {
+			dy = M.fabs(dy);
+		}
 
 		// Down
-		if (level.hasAnyCollsion(cx, cy + 1)) {
+
+		if (level.hasAnyCollision(cx, cy + 1) && yr >= 0.1 || level.hasAnyCollision(cx + M.round(xr), cy + 1)) {
 			// Stop vector movement
 			// Slowly move out of the coordinate
 			isOnFloor = true;
 			canJump = true;
 			jumpCount = 0;
 			// dy = 0;
-			dy *= M.fabs(dy);
+
+			// dy = (-1 * M.fabs(dy));
+			dy = 0;
+			// If cy is still in object (yr)
+			yr = 0.1;
 		} else {
 			canJump = false;
 			isOnFloor = false;
 		}
-		// Left
-
-		// Right
 	}
 
 	public function applyPhysics() {

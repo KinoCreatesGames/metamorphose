@@ -84,7 +84,7 @@ class Level extends dn.Process {
 	 * @param x 
 	 * @param y 
 	 */
-	public function hasAnyCollsion(x:Int, y:Int) {
+	public function hasAnyCollision(x:Int, y:Int) {
 		return data.l_AutoBase.getInt(x, y) > 0;
 	}
 
