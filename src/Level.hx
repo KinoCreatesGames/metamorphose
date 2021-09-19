@@ -1,3 +1,6 @@
+import en.collectibles.Heart;
+import en.Hero;
+
 class Level extends dn.Process {
 	var game(get, never):Game;
 
@@ -43,6 +46,19 @@ class Level extends dn.Process {
 		if (level != null) {
 			data = level;
 		}
+		createEntities();
+	}
+
+	public function createEntities() {
+		for (player in data.l_Entities.all_Player) {
+			trace('Created player, ${player.cx}, ${player.cy}');
+			// TODO: Use cx, cy the grid coordinates for player spawning
+			var hero = new Hero(player.cx, player.cy);
+		}
+
+		for (heart in data.l_Entities.all_Heart) {
+			var heart = new Heart(heart.cx, heart.cy);
+		}
 	}
 
 	/** TRUE if given coords are in level bounds **/
@@ -63,6 +79,7 @@ class Level extends dn.Process {
 		root.removeChildren();
 		// Render Auto Layer
 		var tileGroup = data.l_AutoTiles.render();
+
 		root.addChild(tileGroup);
 		// for (cx in 0...cWid)
 		// 	for (cy in 0...cHei) {

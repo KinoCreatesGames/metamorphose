@@ -91,7 +91,6 @@ class Game extends Process {
 		// Create new level
 		level = new Level(ldtkLevel);
 		// Will be using the looping mechanisms
-		var hero = new Hero(0, 0);
 	}
 
 	/** Window/app resize event **/

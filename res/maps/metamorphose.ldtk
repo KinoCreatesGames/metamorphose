@@ -620,17 +620,6 @@
 							"fieldInstances": []
 						},
 						{
-							"__identifier": "Player",
-							"__grid": [0,6],
-							"__pivot": [0,0],
-							"__tile": null,
-							"width": 16,
-							"height": 16,
-							"defUid": 10,
-							"px": [0,96],
-							"fieldInstances": []
-						},
-						{
 							"__identifier": "Save",
 							"__grid": [12,7],
 							"__pivot": [0,0],
@@ -675,6 +664,17 @@
 									} ]
 								}
 							]
+						},
+						{
+							"__identifier": "Player",
+							"__grid": [0,0],
+							"__pivot": [0,0],
+							"__tile": null,
+							"width": 16,
+							"height": 16,
+							"defUid": 10,
+							"px": [0,0],
+							"fieldInstances": []
 						}
 					]
 				},
