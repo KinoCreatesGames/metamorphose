@@ -39,6 +39,6 @@ class Collectible extends Entity {
 	 */
 	public function bounceAnim() {
 		elapsed = (Game.ME.uftime) * (Math.PI / 180);
-		yr = (M.fclamp(Math.abs(Math.sin(elapsed * 0.6)), 0.3, 0.7));
+		yr = (M.fclamp(Math.abs(Math.sin(elapsed * 0.6)), 0.5, 0.9));
 	}
 }
