@@ -1,3 +1,4 @@
+import en.collectibles.Collectible;
 import en.collectibles.Heart;
 import en.Hero;
 
@@ -38,6 +39,8 @@ class Level extends dn.Process {
 
 	public var data:LDTkProj_Level;
 
+	public var collectibleGrp:Array<Collectible>;
+
 	var invalidated = true;
 
 	public function new(?level:LDTkProj_Level) {
@@ -46,7 +49,12 @@ class Level extends dn.Process {
 		if (level != null) {
 			data = level;
 		}
+		createGroups();
 		createEntities();
+	}
+
+	public function createGroups() {
+		collectibleGrp = [];
 	}
 
 	public function createEntities() {
@@ -58,6 +66,7 @@ class Level extends dn.Process {
 
 		for (heart in data.l_Entities.all_Heart) {
 			var heart = new Heart(heart.cx, heart.cy);
+			collectibleGrp.push(heart);
 		}
 	}
 
@@ -103,6 +112,20 @@ class Level extends dn.Process {
 	 */
 	public function hasAnyCollision(x:Int, y:Int) {
 		return data.l_AutoBase.getInt(x, y) > 0;
+	}
+
+	/**
+	 * Return true when the grid coordinate of another element
+	 * overlaps with the grid coordinate of a collectible.
+	 * @param x 
+	 * @param y 
+	 */
+	public function hasAnyCollectibleCollision(x:Int, y:Int) {
+		return collectibleGrp.exists((collectible) -> return collectible.cx == x && collectible.cy == y);
+	}
+
+	public function collidedCollectible(x:Int, y:Int) {
+		return collectibleGrp.filter((collectible) -> return collectible.cx == x && collectible.cy == y).first();
 	}
 
 	override public function update() {

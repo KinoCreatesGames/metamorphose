@@ -14,6 +14,7 @@ class Hero extends Entity {
 	public static inline var DASH_FORCE:Float = 1.2;
 	public static inline var DASH_TIME:Float = 1.5;
 	public static inline var MAX_SPEED:Float = 0.3;
+	public static inline var HEALTH_CAP:Int = 3;
 
 	public var dashDir:Vec2 = new Vec2(0, 0);
 
@@ -114,6 +115,7 @@ class Hero extends Entity {
 		health = M.iclamp(health - value, 0, M.T_INT32_MAX);
 		// Screen Shake
 		Game.ME.camera.shakeS(0.5, 0.5);
+		hxd.Res.sound.hit_sfx.play();
 		if (health == 0) {
 			// Destroy / Kill the Object
 			die();
@@ -133,6 +135,26 @@ class Hero extends Entity {
 	}
 
 	public function handleCollisions() {
+		entityCollisions();
+		levelCollisions();
+	}
+
+	public function entityCollisions() {
+		if (level.hasAnyCollectibleCollision(cx, cy)) {
+			var collectible = level.collidedCollectible(cx, cy);
+			var collectibleType = Type.getClass(collectible);
+			switch (collectibleType) {
+				case en.collectibles.Heart:
+					// Restore player health by 1
+					health = M.iclamp(health + 1, 0, HEALTH_CAP);
+				case _:
+					// do nothing
+			}
+			collectible.destroy();
+		}
+	}
+
+	public function levelCollisions() {
 		// Left
 		if (level.hasAnyCollision(cx - 1, cy) && xr <= 0.3) {
 			xr = 0.3;
