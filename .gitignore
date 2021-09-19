@@ -2,5 +2,6 @@
 redist
 bin
 .vscode/settings.json
+res/music/*
 res/music
 res/sound
