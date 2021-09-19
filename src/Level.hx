@@ -88,6 +88,15 @@ class Level extends dn.Process {
 		return data.l_AutoBase.getInt(x, y) > 0;
 	}
 
+	override public function update() {
+		super.update();
+		// Pause
+		if (Game.ME.ca.isKeyboardPressed(K.ESCAPE)) {
+			pause();
+			new Pause();
+		}
+	}
+
 	override function postUpdate() {
 		super.postUpdate();
 

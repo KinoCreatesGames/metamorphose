@@ -166,10 +166,6 @@ class Game extends Process {
 					hxd.System.exit();
 			#end
 
-			// Pause
-			if (ca.isKeyboardPressed(K.ESCAPE)) {
-				new Pause();
-			}
 			// Restart
 			if (ca.selectPressed())
 				Main.ME.startGame();

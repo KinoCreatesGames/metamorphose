@@ -16,10 +16,10 @@ class Pause extends dn.Process {
 
 		setupPause();
 		dn.Process.resizeAll();
-		pause();
 	}
 
 	public function setupPause() {
+		win.layout = Vertical;
 		setupTitleText();
 		setupOptions();
 	}
@@ -39,7 +39,7 @@ class Pause extends dn.Process {
 				case 0:
 					// To Options
 					optInt.onClick = (event) -> {
-						resume();
+						Game.ME.resume();
 						destroy();
 					}
 				case 1:
@@ -47,7 +47,7 @@ class Pause extends dn.Process {
 				case 2:
 					// To title
 					optInt.onClick = (event) -> {
-						resume();
+						Game.ME.level.destroy();
 						destroy();
 						new Title();
 					}
@@ -68,14 +68,15 @@ class Pause extends dn.Process {
 		interactive.onOver = (event) -> {
 			option.alpha = 0.5;
 		}
+		interactive.x = option.alignCalcX();
 		return interactive;
 	}
 
 	override public function update() {
 		super.update();
 		// Update alpha of Pause
-		elapsed += uftime;
-		titleText.alpha = M.fwrap(Math.sin(elapsed), 0.3, 1);
+		elapsed = (uftime % 180) * (Math.PI / 180);
+		titleText.alpha = M.fclamp(Math.sin(elapsed) + 0.3, 0.3, 1);
 		if (complete) {
 			if (ca.isKeyboardPressed(K.ESCAPE)) {
 				// Return to the previous scene without creating any
@@ -88,5 +89,7 @@ class Pause extends dn.Process {
 	override function onResize() {
 		super.onResize();
 		// Resize all elements to be centered on screen
+		win.x = (w() / Const.UI_SCALE * 0.5 - win.outerWidth * 4.5);
+		win.y = (h() / Const.UI_SCALE * 0.5 - win.outerHeight * 1.25);
 	}
 }

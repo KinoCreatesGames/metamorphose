@@ -31,3 +31,12 @@ inline function alignCalcX(text:h2d.Text) {
 inline function isAnyKeyPressed(ct:ControllerAccess, keys:Array<Int>) {
 	return keys.exists((key) -> ct.isKeyboardPressed(key));
 }
+
+/**
+ * Process multiple keys down rather than one for convenience.
+ * @param ct 
+ * @param keys 
+ */
+inline function isAnyKeyDown(ct:ControllerAccess, keys:Array<Int>) {
+	return keys.exists((key) -> ct.isKeyboardDown(key));
+}
