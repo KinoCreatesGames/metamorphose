@@ -1,5 +1,6 @@
 package en;
 
+import en.collectibles.WingBeat;
 import en.hazard.Exit;
 import dn.heaps.Controller.ControllerAccess;
 
@@ -14,6 +15,7 @@ class Hero extends Entity {
 	public var isOnFloor:Bool;
 	public var canJump:Bool;
 	public var jumpCount:Int = 0;
+	public var attackUnlock:Bool;
 	public var isDashing(get, never):Bool;
 	public var health:Int = 3;
 
@@ -182,6 +184,11 @@ class Hero extends Entity {
 				case en.collectibles.Heart:
 					// Restore player health by 1
 					health = M.iclamp(health + 1, 0, HEALTH_CAP);
+				case en.collectibles.WingBeat:
+					attackUnlock = true;
+
+				case en.collectibles.ViridescentWings:
+					dashUnlock = true;
 				case _:
 					// do nothing
 			}
@@ -207,6 +214,8 @@ class Hero extends Entity {
 
 		// Up
 		if (level.hasAnyCollision(cx, cy - 1) || level.hasAnyCollision(cx + M.round(xr), cy - 1)) {
+			// Set some squash for when you touch the ceiling
+			setSquashY(0.8);
 			dy = M.fabs(dy);
 		}
 
