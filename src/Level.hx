@@ -1,3 +1,6 @@
+import en.hazard.Exit;
+import en.hazard.BouncePad;
+import en.hazard.Hazard;
 import en.collectibles.Collectible;
 import en.collectibles.Heart;
 import en.Hero;
@@ -40,6 +43,7 @@ class Level extends dn.Process {
 	public var data:LDTkProj_Level;
 
 	public var collectibleGrp:Array<Collectible>;
+	public var hazardGrp:Array<Hazard>;
 
 	var invalidated = true;
 
@@ -51,22 +55,35 @@ class Level extends dn.Process {
 		}
 		createGroups();
 		createEntities();
+		Game.ME.camera.recenter();
 	}
 
 	public function createGroups() {
 		collectibleGrp = [];
+		hazardGrp = [];
 	}
 
 	public function createEntities() {
 		for (player in data.l_Entities.all_Player) {
-			trace('Created player, ${player.cx}, ${player.cy}');
+			// trace('Created player, ${player.cx}, ${player.cy}');
 			// TODO: Use cx, cy the grid coordinates for player spawning
+
 			var hero = new Hero(player.cx, player.cy);
 		}
 
 		for (heart in data.l_Entities.all_Heart) {
 			var heart = new Heart(heart.cx, heart.cy);
 			collectibleGrp.push(heart);
+		}
+
+		for (bPad in data.l_Entities.all_BouncePad) {
+			var bouncePad = new BouncePad(bPad.cx, bPad.cy);
+			hazardGrp.push(bouncePad);
+		}
+
+		for (lExit in data.l_Entities.all_Exit) {
+			var exit = new Exit(lExit);
+			hazardGrp.push(exit);
 		}
 	}
 
@@ -126,6 +143,20 @@ class Level extends dn.Process {
 
 	public function collidedCollectible(x:Int, y:Int) {
 		return collectibleGrp.filter((collectible) -> return collectible.cx == x && collectible.cy == y).first();
+	}
+
+	/**
+	 * Return true when the grid coordinate of another element
+	 * overlaps with the grid coordinate of a collectible.
+	 * @param x 
+	 * @param y 
+	 */
+	public function hasAnyHazardCollision(x:Int, y:Int) {
+		return hazardGrp.exists((collectible) -> return collectible.cx == x && collectible.cy == y);
+	}
+
+	public function collidedHazard(x:Int, y:Int) {
+		return hazardGrp.filter((collectible) -> return collectible.cx == x && collectible.cy == y).first();
 	}
 
 	override public function update() {

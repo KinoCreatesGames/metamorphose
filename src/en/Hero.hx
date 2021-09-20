@@ -1,8 +1,14 @@
 package en;
 
+import en.hazard.Exit;
 import dn.heaps.Controller.ControllerAccess;
 
 class Hero extends Entity {
+	public var camera(get, never):Camera;
+
+	inline function get_camera()
+		return game.camera;
+
 	var ct:ControllerAccess;
 
 	public var isOnFloor:Bool;
@@ -13,7 +19,7 @@ class Hero extends Entity {
 
 	public static inline var DASH_FORCE:Float = 1.2;
 	public static inline var DASH_TIME:Float = 1.5;
-	public static inline var MAX_SPEED:Float = 0.3;
+	public static inline var MAX_SPEED:Float = 0.1;
 	public static inline var HEALTH_CAP:Int = 3;
 
 	public var dashDir:Vec2 = new Vec2(0, 0);
@@ -38,9 +44,14 @@ class Hero extends Entity {
 
 	public function new(x:Int, y:Int) {
 		super(x, y);
+		// Debug drags entity location, therefore in the final build we'd shift sprite position up
+		// To offset the position in the game to make it more natural
+		// Assuming platformer 0.5 would be the halfway point for the feet so offset by half sprite size
 		var g = new h2d.Graphics(spr);
 		g.beginFill(0xffffff);
 		g.drawRect(0, 0, 16, 16);
+		g.y -= Const.GRID * 0.5;
+
 		isOnFloor = false;
 		canJump = false;
 		#if debug
@@ -51,6 +62,7 @@ class Hero extends Entity {
 		dashUnlock = false;
 		#end
 		ct = Main.ME.controller.createAccess('hero');
+		camera.trackEntity(this, true);
 	}
 
 	override function dispose() {
@@ -90,7 +102,7 @@ class Hero extends Entity {
 	public function jump() {
 		jumpCount++;
 		dy = 0;
-		dy = (-0.9 * tmod);
+		dy = (-0.7 * tmod);
 	}
 
 	/**
@@ -140,6 +152,29 @@ class Hero extends Entity {
 	}
 
 	public function entityCollisions() {
+		hazardCollisions();
+		collectibleCollisions();
+	}
+
+	public function hazardCollisions() {
+		if (level.hasAnyHazardCollision(cx, cy)) {
+			var hazard = level.collidedHazard(cx, cy);
+			var hazardType = Type.getClass(hazard);
+			switch (hazardType) {
+				case en.hazard.Exit:
+					// Start new level
+					var exit:Exit = cast hazard;
+					game.nextLevel(exit.lvlId);
+				case en.hazard.BouncePad:
+				// Do nothing
+
+				case _:
+					// Do nothing
+			}
+		}
+	}
+
+	public function collectibleCollisions() {
 		if (level.hasAnyCollectibleCollision(cx, cy)) {
 			var collectible = level.collidedCollectible(cx, cy);
 			var collectibleType = Type.getClass(collectible);
@@ -177,12 +212,14 @@ class Hero extends Entity {
 
 		// Down
 
-		if (level.hasAnyCollision(cx, cy + 1) && yr >= 0.1 || level.hasAnyCollision(cx + M.round(xr), cy + 1)) {
-			// Stop vector movement
-			// Slowly move out of the coordinate
+		if (level.hasAnyCollision(cx, cy + 1) && yr >= 0.5 || level.hasAnyCollision(cx + M.round(xr), cy + 1) && yr >= 0.5) {
+			// Handle squash and stretch for entities in the game
+			if (level.hasAnyCollision(cx, cy + M.round(yr + 0.3)) && !isOnFloor) {
+				setSquashY(0.6);
+			}
 			isOnFloor = true;
 			canJump = true;
-			// Allow dashing once again
+
 			dashCount = 1;
 			jumpCount = 0;
 			// dy = 0;
@@ -190,7 +227,7 @@ class Hero extends Entity {
 			// dy = (-1 * M.fabs(dy));
 			dy = 0;
 			// If cy is still in object (yr)
-			yr = 0.1;
+			yr = 0.5;
 		} else {
 			canJump = false;
 			isOnFloor = false;
@@ -198,6 +235,6 @@ class Hero extends Entity {
 	}
 
 	public function applyPhysics() {
-		dy += 0.1;
+		dy += 0.05;
 	}
 }

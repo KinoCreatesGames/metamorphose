@@ -46,14 +46,17 @@ class Game extends Process {
 		root.add(scroller, Const.DP_BG);
 		scroller.filter = new h2d.filter.ColorMatrix(); // force rendering for pixel perfect
 		camera = new Camera();
-		title = new Title();
+		// Turn this off to unclamp the camera and get camera working
+		camera.clampToLevelBounds = false;
+		startInitialGame();
+		// title = new Title();
 	}
 
 	public function startInitialGame() {
 		fx = new Fx();
+		hud = new ui.Hud();
 		// Render ldtk level
 		startLevel(proj.all_levels.Level_0);
-		hud = new ui.Hud();
 
 		Process.resizeAll();
 		trace(Lang.t._("Game is ready."));
@@ -61,6 +64,12 @@ class Game extends Process {
 
 	public static inline function exists() {
 		return ME != null && !ME.destroyed;
+	}
+
+	public function nextLevel(levelId:Int) {
+		level.destroy();
+		var level = proj.levels[levelId];
+		startLevel(level);
 	}
 
 	/** CDB file changed on disk**/

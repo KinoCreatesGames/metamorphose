@@ -91,6 +91,12 @@ class Entity {
 	public var sprScaleY = 1.0;
 	public var entityVisible = true;
 
+	/** Sprite X squash & stretch scaling, which automatically comes back to 1 after a few frames **/
+	var sprSquashX = 1.0;
+
+	/** Sprite Y squash & stretch scaling, which automatically comes back to 1 after a few frames **/
+	var sprSquashY = 1.0;
+
 	public var spr:HSprite;
 	public var colorAdd:h3d.Vector;
 
@@ -316,14 +322,30 @@ class Entity {
 	public function postUpdate() {
 		spr.x = (cx + xr) * Const.GRID;
 		spr.y = (cy + yr) * Const.GRID;
-		spr.scaleX = dir * sprScaleX;
-		spr.scaleY = sprScaleY;
+
+		spr.scaleX = dir * sprScaleX * sprSquashX;
+		spr.scaleY = sprScaleY * sprSquashY;
 		spr.visible = entityVisible;
+
+		sprSquashX += (1 - sprSquashX) * M.fmin(1, 0.2 * tmod);
+		sprSquashY += (1 - sprSquashY) * M.fmin(1, 0.2 * tmod);
 
 		if (debugLabel != null) {
 			debugLabel.x = Std.int(footX - debugLabel.textWidth * 0.5);
 			debugLabel.y = Std.int(footY + 1);
 		}
+	}
+
+	/** Briefly squash sprite on X (Y changes accordingly). "1.0" means no distorsion. **/
+	public function setSquashX(scaleX:Float) {
+		sprSquashX = scaleX;
+		sprSquashY = 2 - scaleX;
+	}
+
+	/** Briefly squash sprite on Y (X changes accordingly). "1.0" means no distorsion. **/
+	public function setSquashY(scaleY:Float) {
+		sprSquashX = 2 - scaleY;
+		sprSquashY = scaleY;
 	}
 
 	public function fixedUpdate() {} // runs at a "guaranteed" 30 fps
