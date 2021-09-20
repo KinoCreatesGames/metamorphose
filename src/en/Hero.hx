@@ -1,5 +1,6 @@
 package en;
 
+import dn.heaps.filter.PixelOutline;
 import en.collectibles.WingBeat;
 import en.hazard.Exit;
 import dn.heaps.Controller.ControllerAccess;
@@ -49,6 +50,7 @@ class Hero extends Entity {
 		// Debug drags entity location, therefore in the final build we'd shift sprite position up
 		// To offset the position in the game to make it more natural
 		// Assuming platformer 0.5 would be the halfway point for the feet so offset by half sprite size
+		spr.filter = new PixelOutline(0xff70af, 1);
 		var g = new h2d.Graphics(spr);
 		g.beginFill(0xffffff);
 		g.drawRect(0, 0, 16, 16);
@@ -63,6 +65,8 @@ class Hero extends Entity {
 		doubleJumpUnlock = false;
 		dashUnlock = false;
 		#end
+		// Add in pixel outline shader
+
 		ct = Main.ME.controller.createAccess('hero');
 		camera.trackEntity(this, true);
 	}
