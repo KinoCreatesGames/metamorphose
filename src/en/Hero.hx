@@ -91,6 +91,11 @@ class Hero extends Entity {
 			jump();
 		}
 
+		// Attack
+		if (ct.aPressed() || ct.isAnyKeyPressed([K.K, K.X])) {
+			attack();
+		}
+
 		if (ct.bPressed() || ct.isAnyKeyPressed([K.Z, K.J]) && dashUnlock && dashCount > 0) {
 			if (ct.upDown() || ct.isAnyKeyDown([K.UP, K.W])) {
 				dashDir.y = -1;
@@ -103,6 +108,19 @@ class Hero extends Entity {
 		dashDir.x = 0;
 		dashDir.y = 0;
 		super.update();
+	}
+
+	/**
+	 * Registers a collision in the next cell over based on enemies in the level
+	 */
+	public function attack() {
+		// Based off player direction and what not
+		// aka DashDir
+		if (level.hasAnyEnemyCollision(cx + M.round(dashDir.x), cy)) {
+			var enemy = level.enemyCollided(cx + M.round(dashDir.x), cy);
+			// Take enemy health
+			enemy.takeDamage();
+		}
 	}
 
 	public function jump() {

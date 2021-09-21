@@ -1,3 +1,4 @@
+import en.Enemy;
 import en.collectibles.Checkpoint;
 import en.hazard.Exit;
 import en.hazard.BouncePad;
@@ -46,6 +47,7 @@ class Level extends dn.Process {
 	public var collectibleGrp:Array<Collectible>;
 	public var hazardGrp:Array<Hazard>;
 	public var checkpointGrp:Array<Checkpoint>;
+	public var enemyGrp:Array<Enemy>;
 
 	var invalidated = true;
 
@@ -66,6 +68,7 @@ class Level extends dn.Process {
 		collectibleGrp = [];
 		hazardGrp = [];
 		checkpointGrp = [];
+		enemyGrp = [];
 	}
 
 	public function createEntities() {
@@ -153,6 +156,20 @@ class Level extends dn.Process {
 
 	public function collidedCollectible(x:Int, y:Int) {
 		return collectibleGrp.filter((collectible) -> return collectible.cx == x && collectible.cy == y).first();
+	}
+
+	/**
+	 * Return true when the grid coordinate of another element
+	 * overlaps with the grid coordinate of a collectible.
+	 * @param x 
+	 * @param y 
+	 */
+	public function hasAnyEnemyCollision(x:Int, y:Int) {
+		return enemyGrp.exists((collectible) -> return collectible.cx == x && collectible.cy == y);
+	}
+
+	public function enemyCollided(x:Int, y:Int) {
+		return enemyGrp.filter((collectible) -> return collectible.cx == x && collectible.cy == y).first();
 	}
 
 	/**
