@@ -18,6 +18,7 @@ class Hero extends Entity {
 	public var jumpCount:Int = 0;
 	public var attackUnlock:Bool;
 	public var isDashing(get, never):Bool;
+	public var keys:Int = 0;
 	public var health:Int = 3;
 
 	public static inline var DASH_FORCE:Float = 1.2;
@@ -224,6 +225,9 @@ class Hero extends Entity {
 
 				case en.collectibles.ViridescentWings:
 					dashUnlock = true;
+				case en.collectibles.Key:
+					keys += 1;
+
 				case _:
 					// do nothing
 			}
