@@ -169,6 +169,9 @@ class Hero extends Entity {
 			// var collectibleType = Type.getClass(collectible);
 			// Set the current active checkpoint
 			level.currentCheckpoint = checkpoint;
+			#if debug
+			trace('Touched checkpoint');
+			#end
 		}
 	}
 
