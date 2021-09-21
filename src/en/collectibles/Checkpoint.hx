@@ -12,8 +12,8 @@ class Checkpoint extends Entity {
 	 * @param x 
 	 * @param y 
 	 */
-	public function new(x:Int, y:Int) {
-		super(x, y);
+	public function new(checkpoint:Entity_Checkpoint) {
+		super(checkpoint.cx, checkpoint.cy);
 		var g = new h2d.Graphics(spr);
 		g.beginFill(0xa0a0ff);
 		g.drawRect(0, 0, 16, 16);

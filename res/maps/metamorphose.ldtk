@@ -9,7 +9,7 @@
 		"url": "https://ldtk.io"
 	},
 	"jsonVersion": "0.9.3",
-	"nextUid": 44,
+	"nextUid": 45,
 	"worldLayout": "GridVania",
 	"worldGridWidth": 128,
 	"worldGridHeight": 128,
@@ -675,6 +675,31 @@
 					"textLanguageMode": null
 				}
 			]
+		},
+		{
+			"identifier": "Checkpoint",
+			"uid": 44,
+			"tags": [],
+			"width": 16,
+			"height": 16,
+			"resizableX": false,
+			"resizableY": false,
+			"keepAspectRatio": false,
+			"fillOpacity": 1,
+			"lineOpacity": 1,
+			"hollow": false,
+			"color": "#82D2FF",
+			"renderMode": "Rectangle",
+			"showName": true,
+			"tilesetId": null,
+			"tileId": null,
+			"tileRenderMode": "FitInside",
+			"maxCount": 0,
+			"limitScope": "PerLevel",
+			"limitBehavior": "MoveLastOne",
+			"pivotX": 0,
+			"pivotY": 0,
+			"fieldDefs": []
 		}
 	], "tilesets": [
 		{
@@ -825,6 +850,17 @@
 								"defUid": 43,
 								"realEditorValues": [{ "id": "V_Int", "params": [1] }]
 							}]
+						},
+						{
+							"__identifier": "Checkpoint",
+							"__grid": [16,1],
+							"__pivot": [0,0],
+							"__tile": null,
+							"width": 16,
+							"height": 16,
+							"defUid": 44,
+							"px": [256,16],
+							"fieldInstances": []
 						}
 					]
 				},
@@ -1184,6 +1220,17 @@
 							"defUid": 10,
 							"px": [0,32],
 							"fieldInstances": []
+						},
+						{
+							"__identifier": "Exit",
+							"__grid": [0,5],
+							"__pivot": [0,0],
+							"__tile": null,
+							"width": 16,
+							"height": 24,
+							"defUid": 42,
+							"px": [0,80],
+							"fieldInstances": [{ "__identifier": "lvlId", "__value": 0, "__type": "Int", "defUid": 43, "realEditorValues": [] }]
 						}
 					]
 				},

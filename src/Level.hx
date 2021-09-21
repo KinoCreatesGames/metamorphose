@@ -1,3 +1,4 @@
+import en.collectibles.Checkpoint;
 import en.hazard.Exit;
 import en.hazard.BouncePad;
 import en.hazard.Hazard;
@@ -44,8 +45,11 @@ class Level extends dn.Process {
 
 	public var collectibleGrp:Array<Collectible>;
 	public var hazardGrp:Array<Hazard>;
+	public var checkpointGrp:Array<Checkpoint>;
 
 	var invalidated = true;
+
+	public var currentCheckpoint:Checkpoint;
 
 	public function new(?level:LDTkProj_Level) {
 		super(Game.ME);
@@ -61,6 +65,7 @@ class Level extends dn.Process {
 	public function createGroups() {
 		collectibleGrp = [];
 		hazardGrp = [];
+		checkpointGrp = [];
 	}
 
 	public function createEntities() {
@@ -84,6 +89,11 @@ class Level extends dn.Process {
 		for (lExit in data.l_Entities.all_Exit) {
 			var exit = new Exit(lExit);
 			hazardGrp.push(exit);
+		}
+
+		for (lCheckpoint in data.l_Entities.all_Checkpoint) {
+			var checkpoint = new Checkpoint(lCheckpoint);
+			checkpointGrp.push(checkpoint);
 		}
 	}
 
@@ -143,6 +153,20 @@ class Level extends dn.Process {
 
 	public function collidedCollectible(x:Int, y:Int) {
 		return collectibleGrp.filter((collectible) -> return collectible.cx == x && collectible.cy == y).first();
+	}
+
+	/**
+	 * Return true when the grid coordinate of another element
+	 * overlaps with the grid coordinate of a checkpoint.
+	 * @param x 
+	 * @param y 
+	 */
+	public function hasAnyCheckpointCollision(x:Int, y:Int) {
+		return checkpointGrp.exists((collectible) -> return collectible.cx == x && collectible.cy == y);
+	}
+
+	public function checkpointCollided(x:Int, y:Int) {
+		return checkpointGrp.filter((collectible) -> return collectible.cx == x && collectible.cy == y).first();
 	}
 
 	/**

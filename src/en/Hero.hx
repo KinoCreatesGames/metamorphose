@@ -158,8 +158,18 @@ class Hero extends Entity {
 	}
 
 	public function entityCollisions() {
-		hazardCollisions();
 		collectibleCollisions();
+		hazardCollisions();
+		checkpointCollisions();
+	}
+
+	public function checkpointCollisions() {
+		if (level.hasAnyCheckpointCollision(cx, cy)) {
+			var checkpoint = level.checkpointCollided(cx, cy);
+			// var collectibleType = Type.getClass(collectible);
+			// Set the current active checkpoint
+			level.currentCheckpoint = checkpoint;
+		}
 	}
 
 	public function hazardCollisions() {
