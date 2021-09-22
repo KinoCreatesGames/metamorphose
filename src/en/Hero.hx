@@ -279,9 +279,6 @@ class Hero extends Entity {
 			dy = 0;
 			// If cy is still in object (yr)
 			yr = 0.5;
-		} else {
-			canJump = false;
-			isOnFloor = false;
 		}
 	}
 
