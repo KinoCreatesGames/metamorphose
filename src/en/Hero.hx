@@ -210,6 +210,8 @@ class Hero extends Entity {
 					// Do nothing
 			}
 		}
+
+		movingPlatformCollision();
 	}
 
 	public function collectibleCollisions() {
@@ -232,6 +234,54 @@ class Hero extends Entity {
 					// do nothing
 			}
 			collectible.destroy();
+		}
+	}
+
+	public function movingPlatformCollision() {
+		// Left
+		if (level.hasAnyMPlatCollision(cx - 1, cy) && xr <= 0.3) {
+			xr = 0.3;
+			dx = 0;
+			// dx = M.fabs(dx);
+		}
+
+		// Right
+		if (level.hasAnyMPlatCollision(cx + 1, cy) && xr >= 0.1) {
+			// push back to previous cell
+			xr = 0.1;
+			dx = 0;
+			// dx = (-1 * M.fabs(dx));
+		}
+
+		// Up
+		if (level.hasAnyMPlatCollision(cx, cy - 1) || level.hasAnyMPlatCollision(cx + M.round(xr), cy - 1)) {
+			// Set some squash for when you touch the ceiling
+
+			// setSquashY(0.8);
+			dy = M.fabs(dy);
+		}
+
+		// Down
+		if (level.hasAnyMPlatCollision(cx, cy + 1) && yr >= 0.5 || level.hasAnyMPlatCollision(cx + M.round(xr), cy + 1) && yr >= 0.5) {
+			// Handle squash and stretch for entities in the game
+
+			if (level.hasAnyMPlatCollision(cx, cy + M.round(yr + 0.3)) && !isOnFloor) {
+				// setSquashY(0.6);
+			}
+			isOnFloor = true;
+			canJump = true;
+
+			dashCount = 1;
+			jumpCount = 0;
+			// dy = 0;
+
+			// dy = (-1 * M.fabs(dy));
+			dy = 0;
+			// If cy is still in object (yr)
+			yr = 0.5;
+		} else {
+			canJump = false;
+			isOnFloor = false;
 		}
 	}
 

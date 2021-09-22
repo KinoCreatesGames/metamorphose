@@ -11,10 +11,14 @@ class MovingPlatform extends Hazard {
 	 */
 	public var waitTime:Float;
 
+	public var waitTimer:Float;
+
 	public function new(movingPlat:Entity_MovingPlatform) {
 		super(movingPlat.cx, movingPlat.cy);
 		looping = true;
 		platformSpeed = 0.05;
+		waitTime = 3;
+		waitTimer = waitTime;
 		pathPoints = movingPlat.f_path.map((pathPoint) -> {
 			return new Vec2(pathPoint.cx, pathPoint.cy);
 		});
@@ -42,7 +46,11 @@ class MovingPlatform extends Hazard {
 
 			dy = dest.y * platformSpeed;
 		} else {
-			pointIndex++;
+			if (!Game.ME.delayer.hasId('platformStop')) {
+				Game.ME.delayer.addS('platformStop', () -> {
+					pointIndex++;
+				}, waitTime);
+			}
 		}
 	}
 }

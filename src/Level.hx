@@ -221,16 +221,20 @@ class Level extends dn.Process {
 
 	/**
 	 * Return true when the grid coordinate of another element
-	 * overlaps with the grid coordinate of a collectible.
+	 * overlaps with the grid coordinate of a hazard.
 	 * @param x 
 	 * @param y 
 	 */
 	public function hasAnyHazardCollision(x:Int, y:Int) {
-		return hazardGrp.exists((collectible) -> return collectible.cx == x && collectible.cy == y);
+		return hazardGrp.exists((hazard) -> return hazard.cx == x && hazard.cy == y);
+	}
+
+	public function hasAnyMPlatCollision(x:Int, y:Int) {
+		return hazardGrp.exists((hazard) -> return hazard.cx == x && hazard.cy == y && Std.isOfType(hazard, en.hazard.MovingPlatform));
 	}
 
 	public function collidedHazard(x:Int, y:Int) {
-		return hazardGrp.filter((collectible) -> return collectible.cx == x && collectible.cy == y).first();
+		return hazardGrp.filter((hazard) -> return hazard.cx == x && hazard.cy == y).first();
 	}
 
 	override public function update() {
