@@ -5,12 +5,22 @@ package en;
  */
 class Enemy extends Entity {
 	public var health:Int = 3;
+	public var isOnFloor:Bool;
+
+	/**
+	 * Whether to apply physics or not to the enemy.
+	 * This allows for variation between enemies that can fly or ones
+	 * that are stuck to the ground
+	 */
+	public var grounded:Bool;
 
 	public function new(x:Int, y:Int) {
 		super(x, y);
+		grounded = true;
 		var graphics = new h2d.Graphics(spr);
 		graphics.beginFill(0xff0000);
 		graphics.drawRect(0, 0, 16, 16);
+		graphics.y -= Const.GRID * 0.5;
 	}
 
 	public function takeDamage(value:Int = 1) {
@@ -19,5 +29,64 @@ class Enemy extends Entity {
 			// Die
 			this.destroy();
 		}
+	}
+
+	override public function fixedUpdate() {
+		if (!isOnFloor && grounded) {
+			applyPhysics();
+		}
+		handleCollision();
+		super.fixedUpdate();
+	}
+
+	public function handleCollision() {
+		levelCollision();
+	}
+
+	public function levelCollision() {
+		// Left
+		if (level.hasAnyCollision(cx - 1, cy) && xr <= 0.3) {
+			xr = 0.3;
+			dx = 0;
+			// dx = M.fabs(dx);
+		}
+
+		// Right
+		if (level.hasAnyCollision(cx + 1, cy) && xr >= 0.1) {
+			// push back to previous cell
+			xr = 0.1;
+			dx = 0;
+			// dx = (-1 * M.fabs(dx));
+		}
+
+		// Up
+		if (level.hasAnyCollision(cx, cy - 1) || level.hasAnyCollision(cx + M.round(xr), cy - 1)) {
+			// Set some squash for when you touch the ceiling
+			setSquashY(0.8);
+			dy = M.fabs(dy);
+		}
+
+		// Down
+
+		if (level.hasAnyCollision(cx, cy + 1) && yr >= 0.5 || level.hasAnyCollision(cx + M.round(xr), cy + 1) && yr >= 0.5) {
+			// Handle squash and stretch for entities in the game
+			if (level.hasAnyCollision(cx, cy + M.round(yr + 0.3)) && !isOnFloor) {
+				setSquashY(0.6);
+			}
+			isOnFloor = true;
+
+			// dy = 0;
+
+			// dy = (-1 * M.fabs(dy));
+			dy = 0;
+			// If cy is still in object (yr)
+			yr = 0.5;
+		} else {
+			isOnFloor = false;
+		}
+	}
+
+	public function applyPhysics() {
+		dy += 0.05;
 	}
 }

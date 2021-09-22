@@ -1,3 +1,4 @@
+import en.enemy.Ziggle;
 import en.hazard.MovingPlatform;
 import en.collectibles.Key;
 import en.Enemy;
@@ -81,6 +82,11 @@ class Level extends dn.Process {
 			var hero = new Hero(player.cx, player.cy);
 		}
 
+		// Enemies
+		for (lEnemy in data.l_Entities.all_Enemy) {
+			createEnemy(lEnemy);
+		}
+
 		// Collectibles
 		for (heart in data.l_Entities.all_Heart) {
 			var heart = new Heart(heart.cx, heart.cy);
@@ -103,6 +109,8 @@ class Level extends dn.Process {
 			hazardGrp.push(movingPlatform);
 		}
 
+		// Exits and Checkpoints
+
 		for (lExit in data.l_Entities.all_Exit) {
 			var exit = new Exit(lExit);
 			hazardGrp.push(exit);
@@ -111,6 +119,17 @@ class Level extends dn.Process {
 		for (lCheckpoint in data.l_Entities.all_Checkpoint) {
 			var checkpoint = new Checkpoint(lCheckpoint);
 			checkpointGrp.push(checkpoint);
+		}
+	}
+
+	public function createEnemy(enemy:Entity_Enemy) {
+		var enemyType = enemy.f_EnemyType;
+		switch (enemyType) {
+			case Ziggle:
+				var enemy = new Ziggle(enemy);
+				enemyGrp.push(enemy);
+			case _:
+				// Do nothing
 		}
 	}
 
