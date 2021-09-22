@@ -56,7 +56,7 @@ class Game extends Process {
 		fx = new Fx();
 		hud = new ui.Hud();
 		// Render ldtk level
-		startLevel(proj.all_levels.Level_0);
+		startLevel(proj.all_levels.Level_2);
 
 		Process.resizeAll();
 		trace(Lang.t._("Game is ready."));

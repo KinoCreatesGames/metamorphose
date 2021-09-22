@@ -1,3 +1,5 @@
+import en.hazard.MovingPlatform;
+import en.collectibles.Key;
 import en.Enemy;
 import en.collectibles.Checkpoint;
 import en.hazard.Exit;
@@ -79,14 +81,26 @@ class Level extends dn.Process {
 			var hero = new Hero(player.cx, player.cy);
 		}
 
+		// Collectibles
 		for (heart in data.l_Entities.all_Heart) {
 			var heart = new Heart(heart.cx, heart.cy);
 			collectibleGrp.push(heart);
 		}
 
+		for (gKey in data.l_Entities.all_GameKey) {
+			var key = new Key(gKey);
+			collectibleGrp.push(key);
+		}
+
+		// Hazards
 		for (bPad in data.l_Entities.all_BouncePad) {
 			var bouncePad = new BouncePad(bPad.cx, bPad.cy);
 			hazardGrp.push(bouncePad);
+		}
+
+		for (mPlat in data.l_Entities.all_MovingPlatform) {
+			var movingPlatform = new MovingPlatform(mPlat);
+			hazardGrp.push(movingPlatform);
 		}
 
 		for (lExit in data.l_Entities.all_Exit) {

@@ -1,4 +1,7 @@
-enum GameTypes {
+/**
+ * Game enemy types
+ */
+enum EnemyTypes {
 	Ziggle;
 	Sslug;
 	Spawner;

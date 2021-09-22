@@ -9,7 +9,7 @@
 		"url": "https://ldtk.io"
 	},
 	"jsonVersion": "0.9.3",
-	"nextUid": 52,
+	"nextUid": 53,
 	"worldLayout": "GridVania",
 	"worldGridWidth": 128,
 	"worldGridHeight": 128,
@@ -577,26 +577,6 @@
 					"acceptFileTypes": null,
 					"defaultOverride": { "id": "V_Int", "params": [1] },
 					"textLanguageMode": null
-				},
-				{
-					"identifier": "enemyType",
-					"__type": "ExternEnum.GameTypes",
-					"uid": 47,
-					"type": { "id": "F_Enum", "params": [46] },
-					"isArray": false,
-					"canBeNull": false,
-					"arrayMinLength": null,
-					"arrayMaxLength": null,
-					"editorDisplayMode": "ValueOnly",
-					"editorDisplayPos": "Above",
-					"editorAlwaysShow": true,
-					"editorCutLongValues": true,
-					"min": null,
-					"max": null,
-					"regex": null,
-					"acceptFileTypes": null,
-					"defaultOverride": null,
-					"textLanguageMode": null
 				}
 			]
 		},
@@ -743,7 +723,7 @@
 			]
 		},
 		{
-			"identifier": "Key",
+			"identifier": "GameKey",
 			"uid": 51,
 			"tags": [],
 			"width": 16,
@@ -845,11 +825,11 @@
 				"averageColors": "d446e446d4460000f446000064460000d336f335e335000055680000a435645700003678000000007447000000000000"
 			}
 		}
-	], "enums": [], "externalEnums": [{ "identifier": "GameTypes", "uid": 46, "values": [
+	], "enums": [], "externalEnums": [{ "identifier": "EnemyTypes", "uid": 52, "values": [
 		{ "id": "Spawner", "tileId": 20, "color": 4473975, "__tileSrcRect": [64,32,16,16] },
 		{ "id": "Sslug", "tileId": 12, "color": 5596808, "__tileSrcRect": [64,16,16,16] },
-		{ "id": "Ziggle", "tileId": 6, "color": 4473958, "__tileSrcRect": [96,0,16,16] }
-	], "iconTilesetUid": 34, "externalRelPath": "../../src/GameTypes.hx", "externalFileChecksum": "1d14b5da5d4a2f9f4fb1293440fb0d1a" }], "levelFields": [] },
+		{ "id": "Ziggle", "tileId": 17, "color": 6715272, "__tileSrcRect": [16,32,16,16] }
+	], "iconTilesetUid": 34, "externalRelPath": "../../src/GameTypes.hx", "externalFileChecksum": "abadcce5c7567a75d13641fa501bc6ab" }], "levelFields": [] },
 	"levels": [
 		{
 			"identifier": "Level_0",
@@ -3818,7 +3798,7 @@
 							}]
 						},
 						{
-							"__identifier": "Key",
+							"__identifier": "GameKey",
 							"__grid": [3,9],
 							"__pivot": [0,0],
 							"__tile": null,
@@ -3826,6 +3806,28 @@
 							"height": 16,
 							"defUid": 51,
 							"px": [48,144],
+							"fieldInstances": []
+						},
+						{
+							"__identifier": "Save",
+							"__grid": [4,4],
+							"__pivot": [0,0],
+							"__tile": null,
+							"width": 16,
+							"height": 16,
+							"defUid": 5,
+							"px": [64,64],
+							"fieldInstances": []
+						},
+						{
+							"__identifier": "Player",
+							"__grid": [9,39],
+							"__pivot": [0,0],
+							"__tile": null,
+							"width": 16,
+							"height": 16,
+							"defUid": 10,
+							"px": [144,624],
 							"fieldInstances": []
 						}
 					]
