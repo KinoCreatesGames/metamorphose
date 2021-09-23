@@ -11,6 +11,8 @@ import en.collectibles.Heart;
 import en.Hero;
 
 class Level extends dn.Process {
+	public static var ME:Level;
+
 	var game(get, never):Game;
 
 	inline function get_game()
@@ -47,6 +49,8 @@ class Level extends dn.Process {
 
 	public var data:LDTkProj_Level;
 
+	public var hero:Hero;
+
 	public var collectibleGrp:Array<Collectible>;
 	public var hazardGrp:Array<Hazard>;
 	public var checkpointGrp:Array<Checkpoint>;
@@ -58,6 +62,7 @@ class Level extends dn.Process {
 
 	public function new(?level:LDTkProj_Level) {
 		super(Game.ME);
+		ME = this;
 		createRootInLayers(Game.ME.scroller, Const.DP_BG);
 		if (level != null) {
 			data = level;
@@ -80,6 +85,7 @@ class Level extends dn.Process {
 			// TODO: Use cx, cy the grid coordinates for player spawning
 
 			var hero = new Hero(player.cx, player.cy);
+			this.hero = hero;
 		}
 
 		// Enemies
@@ -100,7 +106,7 @@ class Level extends dn.Process {
 
 		// Hazards
 		for (bPad in data.l_Entities.all_BouncePad) {
-			var bouncePad = new BouncePad(bPad.cx, bPad.cy);
+			var bouncePad = new BouncePad(bPad);
 			hazardGrp.push(bouncePad);
 		}
 
