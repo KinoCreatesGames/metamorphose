@@ -1,10 +1,15 @@
 package en;
 
+import en.hazard.MovingPlatform;
 import dn.heaps.filter.PixelOutline;
 import en.collectibles.WingBeat;
 import en.hazard.Exit;
 import dn.heaps.Controller.ControllerAccess;
 
+/**
+ * TODO: Add in dash time to prevent clamping dash when inputs
+ * are entered.
+ */
 class Hero extends Entity {
 	public var camera(get, never):Camera;
 
@@ -20,6 +25,7 @@ class Hero extends Entity {
 	public var isDashing(get, never):Bool;
 	public var keys:Int = 0;
 	public var health:Int = 3;
+	public var plat:MovingPlatform;
 
 	public static inline var DASH_FORCE:Float = 1.2;
 	public static inline var DASH_TIME:Float = 1.5;
@@ -125,6 +131,8 @@ class Hero extends Entity {
 	}
 
 	public function jump() {
+		detachPlat();
+		isOnFloor = false;
 		jumpCount++;
 		dy = 0;
 		dy = (-0.7 * tmod);
@@ -164,16 +172,13 @@ class Hero extends Entity {
 	}
 
 	override function fixedUpdate() {
-		if (!isOnFloor) {
-			applyPhysics();
-		}
 		handleCollisions();
 		super.fixedUpdate();
 	}
 
 	public function handleCollisions() {
-		entityCollisions();
 		levelCollisions();
+		entityCollisions();
 	}
 
 	public function entityCollisions() {
@@ -262,23 +267,30 @@ class Hero extends Entity {
 		}
 
 		// Down
-		if (level.hasAnyMPlatCollision(cx, cy + 1) && yr >= 0.5 || level.hasAnyMPlatCollision(cx + M.round(xr), cy + 1) && yr >= 0.5) {
+		if (level.hasAnyMPlatCollision(cx, cy + 1) && yr >= 0. || level.hasAnyMPlatCollision(cx + M.round(xr), cy + 1) && yr >= 0.5) {
 			// Handle squash and stretch for entities in the game
 
-			if (level.hasAnyMPlatCollision(cx, cy + M.round(yr + 0.3)) && !isOnFloor) {
-				// setSquashY(0.6);
-			}
+			var mPlat:MovingPlatform = cast level.collidedMPlat(cx, cy + 1);
 			isOnFloor = true;
 			canJump = true;
 
 			dashCount = 1;
 			jumpCount = 0;
-			// dy = 0;
 
-			// dy = (-1 * M.fabs(dy));
-			dy = 0;
-			// If cy is still in object (yr)
-			yr = 0.5;
+			if (mPlat != null) {
+				mPlat.player = this;
+				this.plat = mPlat;
+			} else {
+				detachPlat();
+			}
+		}
+	}
+
+	public function detachPlat() {
+		if (plat != null) {
+			plat.player = null;
+			plat.fixedUpdate();
+			plat = null;
 		}
 	}
 
@@ -312,6 +324,7 @@ class Hero extends Entity {
 			if (level.hasAnyCollision(cx, cy + M.round(yr + 0.3)) && !isOnFloor) {
 				setSquashY(0.6);
 			}
+
 			isOnFloor = true;
 			canJump = true;
 
@@ -320,12 +333,17 @@ class Hero extends Entity {
 			// dy = 0;
 
 			// dy = (-1 * M.fabs(dy));
+			// We should be moved up by the moving platform by taking in the
+			// mPlatform velocity
 			dy = 0;
 			// If cy is still in object (yr)
 			yr = 0.5;
 		} else {
 			canJump = false;
 			isOnFloor = false;
+			if (plat == null) {
+				applyPhysics();
+			}
 		}
 	}
 

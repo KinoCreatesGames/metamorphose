@@ -5,20 +5,21 @@ class MovingPlatform extends Hazard {
 	public var looping:Bool;
 	public var pointIndex = 0;
 	public var platformSpeed:Float;
+	public var id:String;
+	public var player:Hero;
 
 	/**
 	 * Wait time between destinations per point.
 	 */
 	public var waitTime:Float;
 
-	public var waitTimer:Float;
-
 	public function new(movingPlat:Entity_MovingPlatform) {
 		super(movingPlat.cx, movingPlat.cy);
+		id = '${movingPlat.cx}_${movingPlat.cy}';
 		looping = true;
 		platformSpeed = 0.05;
 		waitTime = 3;
-		waitTimer = waitTime;
+
 		pathPoints = movingPlat.f_path.map((pathPoint) -> {
 			return new Vec2(pathPoint.cx, pathPoint.cy);
 		});
@@ -30,10 +31,13 @@ class MovingPlatform extends Hazard {
 		g.beginFill(0x101010, 1);
 		g.drawRect(0, 0, 32, 16);
 		g.endFill();
+		g.y -= 16;
+		trace(cy);
 	}
 
-	override public function update() {
-		super.update();
+	override public function fixedUpdate() {
+		super.fixedUpdate();
+
 		followPath();
 	}
 
@@ -45,11 +49,23 @@ class MovingPlatform extends Hazard {
 			dx = dest.x * platformSpeed;
 
 			dy = dest.y * platformSpeed;
+			// Fixes issue with collision on platforms with this setup
 		} else {
-			if (!Game.ME.delayer.hasId('platformStop')) {
-				Game.ME.delayer.addS('platformStop', () -> {
+			if (!Game.ME.delayer.hasId('platformStop' + id)) {
+				Game.ME.delayer.addS('platformStop' + id, () -> {
 					pointIndex++;
 				}, waitTime);
+			}
+		}
+		if (player != null) {
+			// player.yr = 1;
+			if (player.plat != null) {
+				player.dx = dx;
+				player.dy = dy;
+			}
+			if (M.fabs(player.cy - cy) > 1 || M.fabs(player.cx - cx) > 1) {
+				player.plat = null;
+				player = null;
 			}
 		}
 	}

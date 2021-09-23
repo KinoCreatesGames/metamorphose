@@ -229,8 +229,31 @@ class Level extends dn.Process {
 		return hazardGrp.exists((hazard) -> return hazard.cx == x && hazard.cy == y);
 	}
 
+	/**
+	 * Checks platform collides.
+	 * Note that if you collide with m platform, we need to check two columns rather
+	 * than 1.
+	 * @param x 
+	 * @param y 
+	 */
 	public function hasAnyMPlatCollision(x:Int, y:Int) {
-		return hazardGrp.exists((hazard) -> return hazard.cx == x && hazard.cy == y && Std.isOfType(hazard, en.hazard.MovingPlatform));
+		return hazardGrp.exists((hazard) -> return (hazard.cx == x || hazard.cx + 1 == x)
+			&& hazard.cy == y
+			&& Std.isOfType(hazard, en.hazard.MovingPlatform));
+	}
+
+	/**
+	 * Checks platform collides.
+	 * Note that if you collide with m platform, we need to check two columns rather
+	 * than 1.
+	 * @param x 
+	 * @param y 
+	 */
+	public function collidedMPlat(x:Int, y:Int) {
+		return hazardGrp.filter((hazard) -> return (hazard.cx == x || hazard.cx + 1 == x)
+			&& hazard.cy == y
+			&& Std.isOfType(hazard, en.hazard.MovingPlatform))
+			.first();
 	}
 
 	public function collidedHazard(x:Int, y:Int) {

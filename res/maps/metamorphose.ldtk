@@ -717,8 +717,8 @@
 			"maxCount": 0,
 			"limitScope": "PerLevel",
 			"limitBehavior": "MoveLastOne",
-			"pivotX": 0.5,
-			"pivotY": 0.5,
+			"pivotX": 0,
+			"pivotY": 0,
 			"fieldDefs": [
 				{
 					"identifier": "path",
@@ -4314,29 +4314,6 @@
 					"gridTiles": [],
 					"entityInstances": [
 						{
-							"__identifier": "MovingPlatform",
-							"__grid": [6,48],
-							"__pivot": [0.5,0.5],
-							"__tile": null,
-							"width": 32,
-							"height": 16,
-							"defUid": 49,
-							"px": [104,776],
-							"fieldInstances": [{
-								"__identifier": "path",
-								"__value": [ { "cx": 6, "cy": 52 }, { "cx": 6, "cy": 41 } ],
-								"__type": "Array<Point>",
-								"defUid": 50,
-								"realEditorValues": [ {
-									"id": "V_String",
-									"params": ["6,52"]
-								}, {
-									"id": "V_String",
-									"params": ["6,41"]
-								} ]
-							}]
-						},
-						{
 							"__identifier": "GameKey",
 							"__grid": [3,9],
 							"__pivot": [0,0],
@@ -4360,13 +4337,13 @@
 						},
 						{
 							"__identifier": "Player",
-							"__grid": [9,39],
+							"__grid": [8,38],
 							"__pivot": [0,0],
 							"__tile": null,
 							"width": 16,
 							"height": 16,
 							"defUid": 10,
-							"px": [144,624],
+							"px": [128,608],
 							"fieldInstances": []
 						},
 						{
@@ -4404,6 +4381,49 @@
 									}]
 								}
 							]
+						},
+						{
+							"__identifier": "MovingPlatform",
+							"__grid": [12,51],
+							"__pivot": [0,0],
+							"__tile": null,
+							"width": 32,
+							"height": 16,
+							"defUid": 49,
+							"px": [192,816],
+							"fieldInstances": [{
+								"__identifier": "path",
+								"__value": [{ "cx": 12, "cy": 51 }],
+								"__type": "Array<Point>",
+								"defUid": 50,
+								"realEditorValues": [{
+									"id": "V_String",
+									"params": ["12,51"]
+								}]
+							}]
+						},
+						{
+							"__identifier": "MovingPlatform",
+							"__grid": [6,51],
+							"__pivot": [0,0],
+							"__tile": null,
+							"width": 32,
+							"height": 16,
+							"defUid": 49,
+							"px": [96,816],
+							"fieldInstances": [{
+								"__identifier": "path",
+								"__value": [ { "cx": 6, "cy": 40 }, { "cx": 6, "cy": 51 } ],
+								"__type": "Array<Point>",
+								"defUid": 50,
+								"realEditorValues": [ {
+									"id": "V_String",
+									"params": ["6,40"]
+								}, {
+									"id": "V_String",
+									"params": ["6,51"]
+								} ]
+							}]
 						}
 					]
 				},
