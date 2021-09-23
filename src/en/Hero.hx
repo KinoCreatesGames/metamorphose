@@ -85,12 +85,17 @@ class Hero extends Entity {
 
 	override function update() {
 		if (ct.leftDown() || ct.isKeyboardDown(K.LEFT)) {
-			dx = M.fclamp((dx - (0.1 * tmod)), -MAX_SPEED, MAX_SPEED);
+			if (!isDashing) {
+				dx = M.fclamp((dx - (0.1 * tmod)), -MAX_SPEED, MAX_SPEED);
+			}
+
 			dashDir.x = -1;
 		}
 
 		if (ct.rightDown() || ct.isKeyboardDown(K.RIGHT)) {
-			dx = M.fclamp((dx + (0.1 * tmod)), -MAX_SPEED, MAX_SPEED);
+			if (!isDashing) {
+				dx = M.fclamp((dx + (0.1 * tmod)), -MAX_SPEED, MAX_SPEED);
+			}
 			dashDir.x = 1;
 		}
 
@@ -136,6 +141,12 @@ class Hero extends Entity {
 		jumpCount++;
 		dy = 0;
 		dy = (-0.7 * tmod);
+	}
+
+	public function bounce() {
+		isOnFloor = false;
+		dy = 0;
+		dy = (-1.2 * tmod);
 	}
 
 	/**
@@ -209,14 +220,25 @@ class Hero extends Entity {
 					var exit:Exit = cast hazard;
 					game.nextLevel(exit.lvlId);
 				case en.hazard.BouncePad:
-				// Do nothing
-
+					// Apply speed in the y axis
+					bounce();
+				case en.hazard.Lantern:
+					// Reset dash on touch
+					dashReset();
 				case _:
 					// Do nothing
 			}
 		}
 
 		movingPlatformCollision();
+	}
+
+	/**
+	 * Resets the dash and pops the player up slightly
+	 */
+	public function dashReset() {
+		dashCount = 1;
+		dy += -(0.35 * tmod);
 	}
 
 	public function collectibleCollisions() {
