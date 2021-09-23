@@ -13,12 +13,29 @@ class Ziggle extends Enemy {
 
 	public function new(enemy:Entity_Enemy) {
 		super(enemy.cx, enemy.cy);
+		state = new State(idle);
 		looping = true;
 		speed = 0.05;
 		pathPoints = enemy.f_Path.map((pathPoint) -> {
 			return new Vec2(pathPoint.cx, pathPoint.cy);
 		});
 		// setSprite();
+	}
+
+	public function idle() {
+		followPath();
+		if (inLineOfSight()) {
+			state.currentState = attacking;
+		}
+	}
+
+	public function attacking() {
+		if (!inLineOfSight()) {
+			state.currentState = idle;
+		}
+		// Follow Player or move toward position
+		var dxNorm = M.fabs(Level.ME.hero.cx - cx);
+		dx = speed * (M.sign(dxNorm) * M.fabs(dxNorm / dxNorm));
 	}
 
 	public function setSprite() {
@@ -30,7 +47,7 @@ class Ziggle extends Enemy {
 
 	override public function update() {
 		super.update();
-		followPath();
+		state.update();
 	}
 
 	public function followPath() {

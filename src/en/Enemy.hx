@@ -7,6 +7,7 @@ class Enemy extends Entity {
 	public var health:Int = 3;
 	public var isOnFloor:Bool;
 	public var sightRange:Float;
+	public var state:State;
 
 	/**
 	 * Whether to apply physics or not to the enemy.
@@ -22,7 +23,7 @@ class Enemy extends Entity {
 		graphics.beginFill(0xff0000);
 		graphics.drawRect(0, 0, 16, 16);
 		graphics.y -= Const.GRID * 0.5;
-		sightRange = 2;
+		sightRange = 3;
 	}
 
 	public function takeDamage(value:Int = 1) {
@@ -45,7 +46,7 @@ class Enemy extends Entity {
 		if (Level.ME.hero != null || !Level.ME.hero.destroyed) {
 			var hero = Level.ME.hero;
 			var distance = M.dist(hero.cx, hero.cy, this.cx, this.cy);
-			return distance < sightRange;
+			return M.fabs(distance) < sightRange;
 		}
 		return false;
 	}

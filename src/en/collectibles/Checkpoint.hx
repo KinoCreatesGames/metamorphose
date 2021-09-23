@@ -5,7 +5,7 @@ package en.collectibles;
  * We use this to record the information and current position.
  */
 class Checkpoint extends Entity {
-	/**
+	/*
 	 * Takes in the grid cx, cy column information to be placed on the map.
 	 * Records a checkpoint when the player interacts with it and saves their
 	 * current location progres.
