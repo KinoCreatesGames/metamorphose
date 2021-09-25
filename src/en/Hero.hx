@@ -30,8 +30,8 @@ class Hero extends Entity {
   public var isInvincible:Bool;
 
   public static inline var DASH_FORCE:Float = 1.2;
-  public static inline var DASH_TIME:Float = 1;
-  public static inline var MAX_SPEED:Float = 0.1;
+  public static inline var DASH_TIME:Float = 0.25;
+  public static inline var MAX_SPEED:Float = 0.125;
   public static inline var HEALTH_CAP:Int = 3;
   public static inline var INVINCIBLE_TIME:Float = 1.5;
 
@@ -169,6 +169,7 @@ class Hero extends Entity {
     jumpCount++;
     dy = 0;
     dy = (-0.7 * tmod);
+    setSquashX(0.6);
     hxd.Res.sound.jump_wav.play();
   }
 
@@ -177,7 +178,8 @@ class Hero extends Entity {
     jumpCount = 0;
     isOnFloor = false;
     dy = 0;
-    dy = (-1.2 * tmod);
+    dy = (-1.4 * tmod);
+    setSquashX(0.4);
     hxd.Res.sound.bounce_pad_wav.play();
   }
 
@@ -226,10 +228,12 @@ class Hero extends Entity {
   override function fixedUpdate() {
     handleCollisions();
     super.fixedUpdate();
+    if (plat == null) {
+      applyPhysics();
+    }
   }
 
   public function handleCollisions() {
-    levelCollisions();
     entityCollisions();
   }
 
@@ -408,7 +412,8 @@ class Hero extends Entity {
     }
   }
 
-  public function levelCollisions() {
+  override function onPreStepX() {
+    super.onPreStepX();
     // Left
     if (level.hasAnyCollision(cx - 1, cy) && xr <= 0.3) {
       xr = 0.3;
@@ -423,7 +428,16 @@ class Hero extends Entity {
       dx = 0;
       // dx = (-1 * M.fabs(dx));
     }
+  }
 
+  public function lrLevelCollisions() {}
+
+  override function onPreStepY() {
+    super.onPreStepY();
+    udLevelCollisions();
+  }
+
+  public function udLevelCollisions() {
     // Up
     if (level.hasAnyCollision(cx, cy - 1)
       || level.hasAnyCollision(cx + M.round(xr), cy - 1)) {
@@ -459,9 +473,6 @@ class Hero extends Entity {
     } else {
       canJump = false;
       isOnFloor = false;
-      if (plat == null) {
-        applyPhysics();
-      }
     }
   }
 
