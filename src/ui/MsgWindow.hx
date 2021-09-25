@@ -6,111 +6,111 @@ import dn.Process;
  * Message window for displaying text within the game
  */
 class MsgWindow extends dn.Process {
-	public var win:h2d.Flow;
-	public var text:h2d.Text;
-	public var padding:Int;
-	public var textBuffer:String;
-	public var allText:Array<String>;
-	public var textIndex:Int;
+  public var win:h2d.Flow;
+  public var text:h2d.Text;
+  public var padding:Int;
+  public var textBuffer:String;
+  public var allText:Array<String>;
+  public var textIndex:Int;
 
-	public function new() {
-		super(Game.ME);
+  public function new() {
+    super(Game.ME);
 
-		createRootInLayers(Game.ME.root, Const.DP_UI);
-		// Pixel Perfect Rendering
-		root.filter = new h2d.filter.ColorMatrix();
-		setupWindow();
-		Process.resizeAll();
-	}
+    createRootInLayers(Game.ME.root, Const.DP_UI);
+    // Pixel Perfect Rendering
+    root.filter = new h2d.filter.ColorMatrix();
+    setupWindow();
+    Process.resizeAll();
+  }
 
-	public function setupWindow() {
-		win = new h2d.Flow(root);
-		win.backgroundTile = h2d.Tile.fromColor(0x0f0f0f, 200, 200, 0.5);
-		win.borderWidth = 7;
-		win.borderHeight = 7;
-		win.enableInteractive = true;
+  public function setupWindow() {
+    win = new h2d.Flow(root);
+    win.backgroundTile = h2d.Tile.fromColor(0x0f0f0f, 200, 200, 0.5);
+    win.borderWidth = 7;
+    win.borderHeight = 7;
+    win.enableInteractive = true;
 
-		win.layout = Vertical;
-		win.verticalSpacing = 2;
-		padding = 24;
+    win.layout = Vertical;
+    win.verticalSpacing = 2;
+    padding = 24;
 
-		// Setup window to be the size of the screen size
-		win.minHeight = Std.int((h() / 3));
-		win.minWidth = Std.int(w());
-		setupText();
-		win.interactive.onOver = (event) -> {
-			text.text = 'Interacted';
-		}
-		win.interactive.onOut = (event) -> {
-			text.text = 'Left interactive area';
-		};
+    // Setup window to be the size of the screen size
+    win.minHeight = Std.int((h() / 3));
+    win.minWidth = Std.int(w());
+    setupText();
+    win.interactive.onOver = (event) -> {
+      text.text = 'Interacted';
+    }
+    win.interactive.onOut = (event) -> {
+      text.text = 'Left interactive area';
+    };
 
-		win.padding = padding;
-		win.x = 0;
-		win.y = (h() - win.minHeight);
-	}
+    win.padding = padding;
+    win.x = 0;
+    win.y = (h() - win.minHeight);
+  }
 
-	public function setupText() {
-		// Add Text
-		text = new h2d.Text(Assets.fontMedium, win);
-		text.x = padding;
-		text.text = 'Hello world';
-		text.maxWidth = win.minWidth - (padding * 2);
-		text.textColor = 0xffffff;
-	}
+  public function setupText() {
+    // Add Text
+    text = new h2d.Text(Assets.fontMedium, win);
+    text.x = padding;
+    text.text = 'Hello world';
+    text.maxWidth = win.minWidth - (padding * 2);
+    text.textColor = 0xffffff;
+  }
 
-	public function sendMsg(text:String) {
-		this.text.text = text;
-	}
+  public function sendMsg(text:String) {
+    this.text.text = text;
+  }
 
-	public function sendMsgs(textData:Array<String>) {}
+  public function sendMsgs(textData:Array<String>) {}
 
-	public function advanceText() {
-		// Move to the next text String
-	}
+  public function advanceText() {
+    // Move to the next text String
+  }
 
-	public function clearWindow() {
-		win.removeChildren();
-	}
+  public function clearWindow() {
+    win.removeChildren();
+  }
 
-	public inline function add(e:h2d.Flow) {
-		win.addChild(e);
-		onResize();
-	}
+  public inline function add(e:h2d.Flow) {
+    win.addChild(e);
+    onResize();
+  }
 
-	override function onResize() {
-		super.onResize();
-		// Scales the root with the UI
-		// This would scale the entire components within as well
-		// if (root.scaleX != Const.UI_SCALE) {
-		// root.scale(Const.UI_SCALE);
-		// trace(Const.UI_SCALE);
+  override function onResize() {
+    super.onResize();
+    // Scales the root with the UI
+    // This would scale the entire components within as well
+    // if (root.scaleX != Const.UI_SCALE) {
+    // root.scale(Const.UI_SCALE);
+    // trace(Const.UI_SCALE);
 
-		// var w = M.ceil(w() / Const.UI_SCALE);
-		// var h = M.ceil(h() / Const.UI_SCALE);
-		// win.x = Std.int(w * 0.5 - win.outerWidth * 0.5);
-		// win.y = Std.int(h * 0.5 - win.outerHeight * 0.5);
-		win.minHeight = Std.int((h() / 3));
-		win.minWidth = Std.int(w());
-		win.x = 0;
-		win.y = (h() - win.minHeight);
-		win.reflow();
-	}
+    // var w = M.ceil(w() / Const.UI_SCALE);
+    // var h = M.ceil(h() / Const.UI_SCALE);
+    // win.x = Std.int(w * 0.5 - win.outerWidth * 0.5);
+    // win.y = Std.int(h * 0.5 - win.outerHeight * 0.5);
+    win.minHeight = Std.int((h() / 3));
+    win.minWidth = Std.int(w());
+    win.x = 0;
+    win.y = (h() - win.minHeight);
+    win.reflow();
+  }
 
-	public function hide() {
-		this.win.visible = false;
-	}
+  public function hide() {
+    this.win.visible = false;
+  }
 
-	public function show() {
-		this.win.visible = true;
-	}
+  public function show() {
+    this.win.visible = true;
+  }
 
-	function onClose() {}
+  function onClose() {}
 
-	public function close() {
-		if (!destroyed) {
-			destroy();
-			onClose();
-		}
-	}
+  public function close() {
+    if (!destroyed) {
+      destroy();
+      onClose();
+    }
+  }
 }

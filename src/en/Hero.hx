@@ -169,12 +169,16 @@ class Hero extends Entity {
     jumpCount++;
     dy = 0;
     dy = (-0.7 * tmod);
+    hxd.Res.sound.jump_wav.play();
   }
 
   public function bounce() {
+    // Reset jump count + pause
+    jumpCount = 0;
     isOnFloor = false;
     dy = 0;
     dy = (-1.2 * tmod);
+    hxd.Res.sound.bounce_pad_wav.play();
   }
 
   /**
@@ -284,7 +288,7 @@ class Hero extends Entity {
 
       var rightHazard = level.collidedHazard(cx + 1, cy);
 
-      if (lftHazard != null && Std.isOfType(lftHazard, Door)) {
+      if (lftHazard != null && Std.isOfType(lftHazard, en.hazard.Door)) {
         var door:Door = cast lftHazard;
         if (door.unlocked) {
           // Can pass through
@@ -294,7 +298,7 @@ class Hero extends Entity {
           // Reject and move backwards
         }
       }
-      if (rightHazard != null && Std.isOfType(rightHazard, Door)) {
+      if (rightHazard != null && Std.isOfType(rightHazard, en.hazard.Door)) {
         var door:Door = cast rightHazard;
         if (door.unlocked) {
           // Can pass through
