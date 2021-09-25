@@ -337,8 +337,8 @@ class Entity {
       if (a.t <= 0) {
         actions.splice(i, 1);
         if (isAlive()) {
-          a.cb()
-        };
+          a.cb();
+        }
       } else {
         i++;
       }

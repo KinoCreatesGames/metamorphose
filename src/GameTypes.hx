@@ -2,7 +2,7 @@
  * Game enemy types
  */
 enum EnemyTypes {
-	Ziggle;
-	Sslug;
-	Spawner;
+  Ziggle;
+  Sslug;
+  Spawner;
 }

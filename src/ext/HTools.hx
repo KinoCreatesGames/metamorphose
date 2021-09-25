@@ -4,15 +4,15 @@ import dn.heaps.Controller.ControllerAccess;
 import h2d.Text.Align;
 
 inline function center(text:h2d.Text) {
-	text.textAlign = Align.Center;
+  text.textAlign = Align.Center;
 }
 
 inline function left(text:h2d.Text) {
-	text.textAlign = Align.Left;
+  text.textAlign = Align.Left;
 }
 
 inline function right(text:h2d.Text) {
-	text.textAlign = Align.Right;
+  text.textAlign = Align.Right;
 }
 
 /**
@@ -20,7 +20,7 @@ inline function right(text:h2d.Text) {
  * @param text 
  */
 inline function alignCalcX(text:h2d.Text) {
-	return text.getSize().xMin;
+  return text.getSize().xMin;
 }
 
 /**
@@ -29,7 +29,7 @@ inline function alignCalcX(text:h2d.Text) {
  * @param keys 
  */
 inline function isAnyKeyPressed(ct:ControllerAccess, keys:Array<Int>) {
-	return keys.exists((key) -> ct.isKeyboardPressed(key));
+  return keys.exists((key) -> ct.isKeyboardPressed(key));
 }
 
 /**
@@ -38,5 +38,5 @@ inline function isAnyKeyPressed(ct:ControllerAccess, keys:Array<Int>) {
  * @param keys 
  */
 inline function isAnyKeyDown(ct:ControllerAccess, keys:Array<Int>) {
-	return keys.exists((key) -> ct.isKeyboardDown(key));
+  return keys.exists((key) -> ct.isKeyboardDown(key));
 }
