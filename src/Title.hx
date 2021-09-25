@@ -21,7 +21,7 @@ class Title extends dn.Process {
     setupTitleWindow();
 
     // Play music
-    bgm = hxd.Res.music.JDSherbert_A_Minor_Distraction.play(true);
+    bgm = hxd.Res.music.jkjkke___dream_wav.play(true);
     #if debug
     bgm.stop();
     #end

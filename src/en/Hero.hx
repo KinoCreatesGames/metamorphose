@@ -1,5 +1,6 @@
 package en;
 
+import en.hazard.Door;
 import en.hazard.MovingPlatform;
 import dn.heaps.filter.PixelOutline;
 import en.collectibles.WingBeat;
@@ -259,11 +260,12 @@ class Hero extends Entity {
         case en.hazard.Lantern:
           // Reset dash on touch
           dashReset();
+
         case _:
           // Do nothing
       }
     }
-
+    doorCollisions();
     movingPlatformCollision();
   }
 
@@ -273,6 +275,36 @@ class Hero extends Entity {
   public function dashReset() {
     dashCount = 1;
     dy += -(0.35 * tmod);
+  }
+
+  public function doorCollisions() {
+    if (level.hasAnyHazardCollision(cx - 1, cy)
+      || level.hasAnyHazardCollision(cx + 1, cy)) {
+      var lftHazard = level.collidedHazard(cx - 1, cy);
+
+      var rightHazard = level.collidedHazard(cx + 1, cy);
+
+      if (lftHazard != null && Std.isOfType(lftHazard, Door)) {
+        var door:Door = cast lftHazard;
+        if (door.unlocked) {
+          // Can pass through
+        } else {
+          xr = 0.3;
+          dx = 0;
+          // Reject and move backwards
+        }
+      }
+      if (rightHazard != null && Std.isOfType(rightHazard, Door)) {
+        var door:Door = cast rightHazard;
+        if (door.unlocked) {
+          // Can pass through
+        } else {
+          xr = 0.1;
+          dx = 0;
+          // Reject and move backwards
+        }
+      }
+    }
   }
 
   public function enemyCollisions() {

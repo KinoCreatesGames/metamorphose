@@ -51,6 +51,9 @@ class Credits extends dn.Process {
     var jd = new h2d.Text(Assets.fontMedium, win);
     jd.text = Lang.t._('JDSherbert - Music');
     jd.center();
+    var pixelS = new h2d.Text(Assets.fontMedium, win);
+    pixelS.text = Lang.t._('pixelsphere.org/ The Cynic Project');
+    pixelS.center();
   }
 
   override public function onResize() {
