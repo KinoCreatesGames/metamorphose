@@ -298,4 +298,9 @@ class Level extends dn.Process {
       render();
     }
   }
+
+  override function onDispose() {
+    super.onDispose();
+    bgm.stop();
+  }
 }

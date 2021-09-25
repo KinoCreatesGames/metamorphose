@@ -121,4 +121,9 @@ class Title extends dn.Process {
     win.x = (w() / Const.UI_SCALE * 0.5 - win.outerWidth * 1.5);
     win.y = (h() / Const.UI_SCALE * 0.5 - win.outerHeight * 0.5);
   }
+
+  override function onDispose() {
+    super.onDispose();
+    bgm.stop();
+  }
 }
