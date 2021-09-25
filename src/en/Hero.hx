@@ -237,15 +237,22 @@ class Hero extends Entity {
     enemyCollisions();
   }
 
+  /**
+   * Sets the current checkpoint once you touch
+   */
   public function checkpointCollisions() {
     if (level.hasAnyCheckpointCollision(cx, cy)) {
       var checkpoint = level.checkpointCollided(cx, cy);
       // var collectibleType = Type.getClass(collectible);
       // Set the current active checkpoint
-      level.currentCheckpoint = checkpoint;
-      #if debug
-      trace('Touched checkpoint');
-      #end
+      if (level.currentCheckpoint == null
+        || level.currentCheckpoint.id != checkpoint.id) {
+        level.currentCheckpoint = checkpoint;
+        hxd.Res.sound.checkpoint_two.play();
+        #if debug
+        trace('Touched checkpoint');
+        #end
+      }
     }
   }
 
