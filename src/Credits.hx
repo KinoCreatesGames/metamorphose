@@ -1,5 +1,4 @@
 import hxd.snd.Channel;
-import hxd.res.DynamicText.Key;
 import h2d.Flow.FlowAlign;
 
 class Credits extends dn.Process {

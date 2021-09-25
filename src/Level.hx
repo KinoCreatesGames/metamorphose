@@ -285,6 +285,7 @@ class Level extends dn.Process {
     super.update();
     // Pause
     if (Game.ME.ca.isKeyboardPressed(K.ESCAPE)) {
+      hxd.Res.sound.pause_in.play();
       pause();
       new Pause();
     }
