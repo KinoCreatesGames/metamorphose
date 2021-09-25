@@ -267,6 +267,8 @@ class Hero extends Entity {
           game.nextLevel(exit.lvlId);
         case en.hazard.BouncePad:
           // Apply speed in the y axis
+          var bouncePad:en.hazard.BouncePad = cast hazard;
+          bouncePad.bounce();
           bounce();
         case en.hazard.Lantern:
           // Reset dash on touch
