@@ -30,7 +30,7 @@ class Hero extends Entity {
   public var isInvincible:Bool;
 
   public static inline var DASH_FORCE:Float = 1.2;
-  public static inline var DASH_TIME:Float = 1.5;
+  public static inline var DASH_TIME:Float = 1;
   public static inline var MAX_SPEED:Float = 0.1;
   public static inline var HEALTH_CAP:Int = 3;
   public static inline var INVINCIBLE_TIME:Float = 1.5;
@@ -197,6 +197,9 @@ class Hero extends Entity {
     dy = ((dashDir.y * DASH_FORCE)) * tmod;
 
     dashCount = 0;
+    cd.setS('dashing', DASH_TIME, () -> {
+      dashTimer = 0;
+    });
   }
 
   public function takeDamage(value:Int) {
@@ -291,8 +294,8 @@ class Hero extends Entity {
   }
 
   public function doorCollisions() {
-    if (level.hasAnyHazardCollision(cx - 1, cy)
-      || level.hasAnyHazardCollision(cx + 1, cy)) {
+    if (level.collidedDoor(cx - 1, cy) != null
+      || level.collidedDoor(cx + 1, cy) != null) {
       var lftHazard = level.collidedHazard(cx - 1, cy);
 
       var rightHazard = level.collidedHazard(cx + 1, cy);
@@ -302,7 +305,7 @@ class Hero extends Entity {
         if (door.unlocked) {
           // Can pass through
         } else {
-          xr = 0.3;
+          xr = 0.5;
           dx = 0;
           // Reject and move backwards
         }

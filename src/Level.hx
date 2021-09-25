@@ -1,3 +1,4 @@
+import en.hazard.Door;
 import en.enemy.Ziggle;
 import en.hazard.MovingPlatform;
 import en.collectibles.Key;
@@ -110,6 +111,11 @@ class Level extends dn.Process {
     for (bPad in data.l_Entities.all_BouncePad) {
       var bouncePad = new BouncePad(bPad);
       hazardGrp.push(bouncePad);
+    }
+
+    for (lDoor in data.l_Entities.all_Door) {
+      var door = new Door(lDoor);
+      hazardGrp.push(door);
     }
 
     for (mPlat in data.l_Entities.all_MovingPlatform) {
@@ -273,6 +279,13 @@ class Level extends dn.Process {
       || hazard.cx + 1 == x)
       && hazard.cy == y
       && Std.isOfType(hazard, en.hazard.MovingPlatform))
+      .first();
+  }
+
+  public function collidedDoor(x:Int, y:Int):en.hazard.Door {
+    return cast hazardGrp.filter((hazard) -> return hazard.cx == x
+      && (hazard.cy == y || hazard.cy + 1 == y)
+      && Std.isOfType(hazard, en.hazard.Door))
       .first();
   }
 

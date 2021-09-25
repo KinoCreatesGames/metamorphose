@@ -10,5 +10,20 @@ class Door extends Hazard {
   public function new(door:Entity_Door) {
     super(door.cx, door.cy);
     this.unlocked = door.f_unlocked;
+    var doorAse = dn.heaps.assets.Aseprite.convertToSLib(Const.FPS,
+      hxd.Res.img.light_door_anim_aseprite.toAseprite());
+    spr.set(doorAse);
+
+    spr.anim.playAndLoop('closed');
+  }
+
+  override function update() {
+    super.update();
+
+    if (unlocked) {
+      spr.anim.play('open');
+    } else {
+      spr.anim.play('closed');
+    }
   }
 }
