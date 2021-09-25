@@ -203,6 +203,25 @@ class Entity {
     cd.unset('keepBlink');
   }
 
+  /** Return a distance (in grid cells) from this to something **/
+  public inline function distCase(?e:Entity, ?tcx:Int, ?tcy:Int, ?txr = 0.5,
+      ?tyr = 0.5) {
+    if (e != null) {
+      return M.dist(cx + xr, cy + yr, e.cx + e.xr, e.cy + e.yr);
+    } else {
+      return M.dist(cx + xr, cy + yr, tcx + txr, tcy + tyr);
+    }
+  }
+
+  /** Return a distance (in pixels) from this to something **/
+  public inline function distPx(?e:Entity, ?x:Float, ?y:Float) {
+    if (e != null) {
+      return M.dist(footX, footY, e.footX, e.footY);
+    } else {
+      return return M.dist(footX, footY, x, y);
+    }
+  }
+
   public function is<T:Entity>(c:Class<T>)
     return Std.isOfType(this, c);
 
@@ -227,14 +246,8 @@ class Entity {
   public inline function getMoveAng()
     return Math.atan2(dyTotal, dxTotal);
 
-  public inline function distCase(e:Entity)
-    return M.dist(cx + xr, cy + yr, e.cx + e.xr, e.cy + e.yr);
-
   public inline function distCaseFree(tcx:Int, tcy:Int, ?txr = 0.5, ?tyr = 0.5)
     return M.dist(cx + xr, cy + yr, tcx + txr, tcy + tyr);
-
-  public inline function distPx(e:Entity)
-    return M.dist(footX, footY, e.footX, e.footY);
 
   public inline function distPxFree(x:Float, y:Float)
     return M.dist(footX, footY, x, y);
@@ -255,7 +268,6 @@ class Entity {
     colorAdd = null;
     baseColor = null;
     blinkColor = null;
-
     spr.remove();
     spr = null;
 
@@ -303,11 +315,16 @@ class Entity {
   }
 
   public function cancelAction(?id:String) {
-    if (id == null) actions = []; else {
+    if (id == null) {
+      actions = [];
+    } else {
       var i = 0;
       while (i < actions.length) {
-        if (actions[i].id == id) actions.splice(i, 1); else
+        if (actions[i].id == id) {
+          actions.splice(i, 1);
+        } else {
           i++;
+        }
       }
     }
   }
@@ -319,9 +336,12 @@ class Entity {
       a.t -= tmod / Const.FPS;
       if (a.t <= 0) {
         actions.splice(i, 1);
-        if (isAlive()) a.cb();
-      } else
+        if (isAlive()) {
+          a.cb()
+        };
+      } else {
         i++;
+      }
     }
   }
 
