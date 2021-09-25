@@ -71,4 +71,9 @@ class Credits extends dn.Process {
       destroy();
     }
   }
+
+  override function onDispose() {
+    super.onDispose();
+    bgm.stop();
+  }
 }
