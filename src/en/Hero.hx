@@ -1,5 +1,6 @@
 package en;
 
+import dn.data.SavedData;
 import en.hazard.Door;
 import en.hazard.MovingPlatform;
 import dn.heaps.filter.PixelOutline;
@@ -256,6 +257,8 @@ class Hero extends Entity {
         || level.currentCheckpoint.id != checkpoint.id) {
         level.currentCheckpoint = checkpoint;
         hxd.Res.sound.checkpoint_two.play();
+        // Save Checkpoint information
+        SavedData.save(CHK_COORDS, {x: checkpoint.cx, y: checkpoint.cy});
         #if debug
         trace('Touched checkpoint');
         #end

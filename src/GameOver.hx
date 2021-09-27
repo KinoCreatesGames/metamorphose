@@ -18,6 +18,8 @@ class GameOver extends dn.Process {
     super(Game.ME);
     createRootInLayers(Game.ME.scroller, Const.DP_UI);
     complete = false;
+    // Resume Game Over Flag
+    Game.ME.resumeGameOver = true;
 
     setupGameOver();
     // Play Game Over Music

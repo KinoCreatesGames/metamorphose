@@ -1,3 +1,4 @@
+import dn.data.SavedData;
 import en.hazard.Spike;
 import en.hazard.Door;
 import en.enemy.Ziggle;
@@ -88,11 +89,16 @@ class Level extends dn.Process {
 
   public function createEntities() {
     for (player in data.l_Entities.all_Player) {
-      // trace('Created player, ${player.cx}, ${player.cy}');
-      // TODO: Use cx, cy the grid coordinates for player spawning
-
-      var hero = new Hero(player.cx, player.cy);
-      this.hero = hero;
+      // If checkpoint was reached restart at checkpoint position instead
+      // Or Game over set in main game
+      var plHero = null;
+      if (Game.ME.resumeGameOver && SavedData.exists(CHK_COORDS)) {
+        var result = SavedData.load(CHK_COORDS, {x: Int, y: Int});
+        plHero = new Hero(cast result.x, cast result.y);
+      } else {
+        plHero = new Hero(player.cx, player.cy);
+      }
+      this.hero = plHero;
     }
 
     // Enemies
@@ -102,29 +108,24 @@ class Level extends dn.Process {
 
     // Collectibles
     for (heart in data.l_Entities.all_Heart) {
-      var heart = new Heart(heart.cx, heart.cy);
-      collectibleGrp.push(heart);
+      collectibleGrp.push(new Heart(heart.cx, heart.cy));
     }
 
     for (gKey in data.l_Entities.all_GameKey) {
-      var key = new Key(gKey);
-      collectibleGrp.push(key);
+      collectibleGrp.push(new Key(gKey));
     }
 
     // Hazards
     for (bPad in data.l_Entities.all_BouncePad) {
-      var bouncePad = new BouncePad(bPad);
-      hazardGrp.push(bouncePad);
+      hazardGrp.push(new BouncePad(bPad));
     }
 
     for (lSpike in data.l_Entities.all_Spike) {
-      var spike = new Spike(lSpike);
-      hazardGrp.push(spike);
+      hazardGrp.push(new Spike(lSpike));
     }
 
     for (lDoor in data.l_Entities.all_Door) {
-      var door = new Door(lDoor);
-      hazardGrp.push(door);
+      hazardGrp.push(new Door(lDoor));
     }
 
     for (mPlat in data.l_Entities.all_MovingPlatform) {
@@ -133,7 +134,6 @@ class Level extends dn.Process {
     }
 
     // Exits and Checkpoints
-
     for (lExit in data.l_Entities.all_Exit) {
       var exit = new Exit(lExit);
       hazardGrp.push(exit);

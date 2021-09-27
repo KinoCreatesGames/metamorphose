@@ -13,6 +13,7 @@ import Assets.projData;
 import dn.Color as C;
 import hxd.Key as K;
 import tools.LPoint as P;
+import GameTypes;
 
 using Lambda;
 using ext.HTools;
