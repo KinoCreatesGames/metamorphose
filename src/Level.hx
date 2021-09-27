@@ -70,6 +70,9 @@ class Level extends dn.Process {
       data = level;
     }
     bgm = hxd.Res.music.pixel_sphere_wav.play(true);
+    #if debug
+    bgm.stop();
+    #end
     createGroups();
     createEntities();
     Game.ME.camera.recenter();

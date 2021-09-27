@@ -280,7 +280,9 @@ class Hero extends Entity {
         case en.hazard.Lantern:
           // Reset dash on touch
           dashReset();
-
+        case en.hazard.Spike:
+          // Take damage from spike
+          takeDamage(1);
         case _:
           // Do nothing
       }
