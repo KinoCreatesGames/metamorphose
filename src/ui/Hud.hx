@@ -41,7 +41,9 @@ class Hud extends dn.Process {
   public inline function invalidate()
     invalidated = true;
 
-  function render() {}
+  function render() {
+    drawHearts();
+  }
 
   /**
    * Draw hearts based on current hero HP
@@ -50,9 +52,15 @@ class Hud extends dn.Process {
     if (Game.ME.level != null) {
       health.clear();
       var plHealth = Game.ME.level.hero.health;
+
       var tile = hxd.Res.img.heart.toTile();
-      health.beginTileFill(0, 0, 1, 1, tile);
-      health.drawRect(0, 0, tile.width * plHealth, tile.height * plHealth);
+      for (i in 0...plHealth) {
+        var scale = 2;
+        health.beginTileFill(i * tile.width * scale, 0, scale, scale, tile);
+        health.drawRect(i * tile.width * scale, 0, tile.width * scale,
+          tile.height * scale);
+      }
+      health.endFill();
     }
   }
 
