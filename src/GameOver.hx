@@ -27,6 +27,7 @@ class GameOver extends dn.Process {
     #if debug
     bgm.stop();
     #end
+    dn.Process.resizeAll();
   }
 
   public function setupGameOver() {
