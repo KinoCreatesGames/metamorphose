@@ -305,6 +305,13 @@ class Level extends dn.Process {
       pause();
       new Pause();
     }
+
+    // Process Game over process
+    // TODO: Test this functionality next
+    if (!hero.isAlive()) {
+      pause();
+      new GameOver();
+    }
   }
 
   override function postUpdate() {
