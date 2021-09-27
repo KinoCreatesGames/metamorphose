@@ -4572,6 +4572,50 @@
 							"defUid": 35,
 							"px": [832,608],
 							"fieldInstances": []
+						},
+						{
+							"__identifier": "Spike",
+							"__grid": [37,15],
+							"__pivot": [0.5,1],
+							"__tile": null,
+							"width": 16,
+							"height": 16,
+							"defUid": 57,
+							"px": [600,256],
+							"fieldInstances": []
+						},
+						{
+							"__identifier": "Spike",
+							"__grid": [38,15],
+							"__pivot": [0.5,1],
+							"__tile": null,
+							"width": 16,
+							"height": 16,
+							"defUid": 57,
+							"px": [616,256],
+							"fieldInstances": []
+						},
+						{
+							"__identifier": "Spike",
+							"__grid": [39,15],
+							"__pivot": [0.5,1],
+							"__tile": null,
+							"width": 16,
+							"height": 16,
+							"defUid": 57,
+							"px": [632,256],
+							"fieldInstances": []
+						},
+						{
+							"__identifier": "Spike",
+							"__grid": [40,15],
+							"__pivot": [0.5,1],
+							"__tile": null,
+							"width": 16,
+							"height": 16,
+							"defUid": 57,
+							"px": [648,256],
+							"fieldInstances": []
 						}
 					]
 				},

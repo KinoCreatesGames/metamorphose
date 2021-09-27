@@ -1,3 +1,4 @@
+import en.hazard.Spike;
 import en.hazard.Door;
 import en.enemy.Ziggle;
 import en.hazard.MovingPlatform;
@@ -114,6 +115,11 @@ class Level extends dn.Process {
     for (bPad in data.l_Entities.all_BouncePad) {
       var bouncePad = new BouncePad(bPad);
       hazardGrp.push(bouncePad);
+    }
+
+    for (lSpike in data.l_Entities.all_Spike) {
+      var spike = new Spike(lSpike);
+      hazardGrp.push(spike);
     }
 
     for (lDoor in data.l_Entities.all_Door) {
