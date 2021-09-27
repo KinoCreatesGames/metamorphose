@@ -15,7 +15,9 @@ class Intro extends dn.Process {
 
   public function new(?msgText:Array<String>) {
     super(Game.ME);
+    createRootInLayers(Game.ME.scroller, Const.DP_UI);
     mask = new h2d.Bitmap(h2d.Tile.fromColor(0x0, 1, 1, 0.6), root);
+    root.filter = new h2d.filter.ColorMatrix(); // Pixel Perfect render
     root.under(mask);
     allMsgs = msgText == null ? [] : msgText;
     msgIdx = 0;
@@ -62,5 +64,6 @@ class Intro extends dn.Process {
 
   override function onResize() {
     super.onResize();
+    root.setScale(Const.UI_SCALE);
   }
 }
