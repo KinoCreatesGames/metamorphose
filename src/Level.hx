@@ -176,6 +176,11 @@ class Level extends dn.Process {
     // Render Auto Layer
     var tileGroup = data.l_AutoTiles.render();
 
+    /**
+     * Rendering of the decoration tiles within the scene.
+     */
+    data.l_Decoration.render(tileGroup);
+
     root.addChild(tileGroup);
     // for (cx in 0...cWid)
     // 	for (cy in 0...cHei) {
