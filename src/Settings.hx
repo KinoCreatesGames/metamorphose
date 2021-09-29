@@ -23,6 +23,7 @@ class Settings extends dn.Process {
 
   public function new() {
     super(Game.ME);
+    ct = Main.ME.controller.createAccess('settings');
     createRootInLayers(game.scroller, Const.DP_UI);
     loadSettings();
     setupSettingsWindow();
@@ -40,6 +41,10 @@ class Settings extends dn.Process {
   }
 
   public function addOptions() {
+    // Add Title Text
+    var title = new h2d.Text(Assets.fontLarge, win);
+    title.text = Lang.t._('Settings');
+    title.center();
     // Add Volume Setting
 
     var volText = new h2d.Text(Assets.fontMedium, win);
@@ -95,6 +100,14 @@ class Settings extends dn.Process {
     if (SavedData.exists(SETTINGS)) {
       var data = SavedData.load(SETTINGS, {volume: Float});
       manager.masterVolume = cast data.volume;
+    }
+  }
+
+  override function update() {
+    super.update();
+    // Handle the Settings Leave
+    if (ct.isAnyKeyPressed([K.ESCAPE])) {
+      this.destroy();
     }
   }
 
