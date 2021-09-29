@@ -1,6 +1,6 @@
 package en.enemy;
 
-class Ziggle extends Enemy {
+class Sslug extends Enemy {
   /**
    * Wait time between destinations per point.
    */
@@ -14,7 +14,6 @@ class Ziggle extends Enemy {
     pathPoints = enemy.f_Path.map((pathPoint) -> {
       return new Vec2(pathPoint.cx, pathPoint.cy);
     });
-    // setSprite();
   }
 
   public function idle() {
@@ -34,10 +33,11 @@ class Ziggle extends Enemy {
   }
 
   override function setSprite() {
-    var g = new h2d.Graphics(spr);
-    g.beginFill(0x101010, 1);
-    g.drawRect(0, 0, 16, 16);
-    g.endFill();
+    var sslugAse = dn.heaps.assets.Aseprite.convertToSLib(Const.FPS,
+      hxd.Res.img.sslug_aseprite.toAseprite());
+
+    spr.set(sslugAse);
+    spr.anim.playAndLoop('walk');
   }
 
   override public function update() {

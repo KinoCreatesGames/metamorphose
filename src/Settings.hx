@@ -46,7 +46,6 @@ class Settings extends dn.Process {
     title.text = Lang.t._('Settings');
     title.center();
     // Add Volume Setting
-
     var volText = new h2d.Text(Assets.fontMedium, win);
     volText.text = Lang.t._('Volume');
     // Add buttons
