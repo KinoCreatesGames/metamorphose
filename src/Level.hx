@@ -1,3 +1,4 @@
+import en.enemy.Sslug;
 import dn.data.SavedData;
 import en.hazard.Spike;
 import en.hazard.Door;
@@ -151,6 +152,9 @@ class Level extends dn.Process {
     switch (enemyType) {
       case Ziggle:
         var enemy = new Ziggle(enemy);
+        enemyGrp.push(enemy);
+      case Sslug:
+        var enemy = new Sslug(enemy);
         enemyGrp.push(enemy);
       case _:
         // Do nothing
