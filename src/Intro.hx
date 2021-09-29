@@ -1,3 +1,5 @@
+import hxd.snd.Channel;
+
 class Intro extends dn.Process {
   var ct:dn.heaps.Controller.ControllerAccess;
   var mask:h2d.Bitmap;
@@ -8,6 +10,8 @@ class Intro extends dn.Process {
   var msgIdx:Int;
 
   public var game(get, never):Game;
+
+  public var bgm:Channel;
 
   public inline function get_game() {
     return Game.ME;
@@ -21,6 +25,8 @@ class Intro extends dn.Process {
     root.under(mask);
     allMsgs = msgText == null ? [] : msgText;
     msgIdx = 0;
+    // Add in intro music
+    bgm = hxd.Res.music.intro_song.play(true);
     // Intro text show
     createMsgWindow();
     dn.Process.resizeAll();
@@ -60,7 +66,15 @@ class Intro extends dn.Process {
     this.text.text = text;
   }
 
-  public function advanceText() {}
+  /**
+   * Advances the text within the game for the intro cutscene.
+   */
+  public function advanceText() {
+    msgIdx++;
+    if (msgIdx < allMsgs.length) {
+      sendMsg(allMsgs[msgIdx]);
+    }
+  }
 
   override function onResize() {
     super.onResize();
