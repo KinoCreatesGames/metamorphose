@@ -10,6 +10,7 @@ class Title extends dn.Process {
   }
 
   public var complete:Bool;
+  public var title:h2d.Text;
   public var win:h2d.Flow;
   public var bgm:Channel;
 
@@ -18,14 +19,19 @@ class Title extends dn.Process {
     createRootInLayers(Game.ME.scroller, Const.DP_UI);
     complete = false;
 
-    setupTitleWindow();
-
     // Play music
     bgm = hxd.Res.music.jkjkke___dream_wav.play(true);
     #if debug
     bgm.stop();
     #end
     // Start of the title sequence
+  }
+
+  public function setupTitle() {
+    title = new h2d.Text(Assets.fontLarge, root);
+    title.text = Lang.t._('Metamorphose');
+    title.textColor = 0xffffff;
+    setupTitleWindow();
   }
 
   public function setupTitleWindow() {
@@ -56,11 +62,14 @@ class Title extends dn.Process {
     ngInt.x = newGame.getSize().xMin;
     ngInt.onClick = (event) -> {
       bgm.stop();
+      hxd.Res.sound.confirm.play();
       // this.destroy();
       complete = true;
     }
     ngInt.onOver = (event) -> {
       newGame.alpha = 0.5;
+      // Trigger sound
+      hxd.Res.sound.select.play();
     }
     ngInt.onOut = (event) -> {
       newGame.alpha = 1;
@@ -75,6 +84,7 @@ class Title extends dn.Process {
     crInt.x = credits.getSize().xMin;
     crInt.onOver = (event) -> {
       credits.alpha = 0.5;
+      hxd.Res.sound.select.play();
     }
     crInt.onOut = (event) -> {
       credits.alpha = 1;
@@ -83,6 +93,7 @@ class Title extends dn.Process {
       // Go to credits scene
       // Stop music on the start of the next scene
       bgm.stop();
+      hxd.Res.sound.confirm.play();
       this.destroy();
       new Credits();
     }
@@ -96,11 +107,13 @@ class Title extends dn.Process {
     exitInt.x = exit.getSize().xMin;
     exitInt.onClick = (event) -> {
       bgm.stop();
+      hxd.Res.sound.confirm.play();
       this.destroy();
       hxd.System.exit();
     }
     exitInt.onOver = (event) -> {
       exit.alpha = 0.5;
+      hxd.Res.sound.select.play();
     }
     exitInt.onOut = (event) -> {
       exit.alpha = 1;
