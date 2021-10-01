@@ -34,16 +34,22 @@ class Ziggle extends Enemy {
   }
 
   override function setSprite() {
-    var zigger = dn.heaps.Aseprite.convertToSLib(Const.FPS,
+    var zigger = dn.heaps.assets.Aseprite.convertToSLib(Const.FPS,
       hxd.Res.img.zigger2_aseprite.toAseprite());
 
     spr.set(zigger);
+    // Necessary for making sure that the sprite touches the floor when
+    // added to the game with new information
+    spr.setCenterRatio(0.5, 0.5);
     spr.anim.playAndLoop('walk');
   }
 
   override public function update() {
     super.update();
     state.update();
+    if (dx != 0) {
+      dir = M.sign(dx);
+    }
   }
 
   public function followPath() {

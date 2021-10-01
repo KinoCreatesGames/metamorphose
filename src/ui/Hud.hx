@@ -39,7 +39,7 @@ class Hud extends dn.Process {
     health = new h2d.Graphics(flow);
     keyText = new h2d.Text(Assets.fontSmall, flow);
     keyText.text = 'x${0}';
-    new h2d.Graphics(flow);
+    key = new h2d.Graphics(flow);
   }
 
   override function onResize() {

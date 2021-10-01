@@ -37,12 +37,16 @@ class Sslug extends Enemy {
       hxd.Res.img.sslug_aseprite.toAseprite());
 
     spr.set(sslugAse);
+    spr.setCenterRatio(0.5, 0.5);
     spr.anim.playAndLoop('walk');
   }
 
   override public function update() {
     super.update();
     state.update();
+    if (dx != 0) {
+      dir = (-1 * M.sign(dx));
+    }
   }
 
   public function followPath() {
@@ -50,6 +54,7 @@ class Sslug extends Enemy {
     if (point.x != cx || point.y != cy) {
       // Follow the path by checking the distance from point
       var dest = new Vec2(point.x - cx, point.y - cy).normalize();
+
       dx = dest.x * speed;
 
       dy = dest.y * speed;
