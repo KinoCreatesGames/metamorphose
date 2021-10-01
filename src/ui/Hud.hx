@@ -1,5 +1,6 @@
 package ui;
 
+import h2d.Flow.FlowAlign;
 import h2d.Graphics;
 
 class Hud extends dn.Process {
@@ -37,9 +38,14 @@ class Hud extends dn.Process {
 
   public function createUIElements() {
     health = new h2d.Graphics(flow);
-    keyText = new h2d.Text(Assets.fontSmall, flow);
+    flow.horizontalSpacing = 32;
+    // Move the elements over within the container
+    var subFlow = new h2d.Flow(flow);
+    subFlow.verticalAlign = FlowAlign.Middle;
+    subFlow.horizontalAlign = FlowAlign.Middle;
+    keyText = new h2d.Text(Assets.fontSmall, subFlow);
     keyText.text = 'x${0}';
-    key = new h2d.Graphics(flow);
+    key = new h2d.Graphics(subFlow);
   }
 
   override function onResize() {
@@ -61,11 +67,13 @@ class Hud extends dn.Process {
   public function drawKeys() {
     if (Game.ME.level != null) {
       key.clear();
+      var scale = 2;
       var tile = hxd.Res.img.game_key.toTile();
-      key.beginTileFill(0, 0, 1, 1, tile);
-      key.drawRect(0, 0, tile.width, tile.height);
+      key.beginTileFill(0, 8, 1.5, 1.5, tile);
+      key.drawRect(0, 0, (tile.width * 1.5), (tile.height * scale));
       key.endFill();
       keyText.text = 'x${Game.ME.level.hero.keys}';
+      keyText.y = -8;
     }
   }
 
