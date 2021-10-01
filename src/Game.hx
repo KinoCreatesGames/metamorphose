@@ -1,3 +1,4 @@
+import ui.Transition;
 import en.Hero;
 import depot.DepotData;
 import ui.Modal;
@@ -59,6 +60,7 @@ class Game extends Process {
     fx = new Fx();
     hud = new ui.Hud();
     // Render ldtk level
+    new Transition();
     startLevel(proj.all_levels.Level_2);
 
     Process.resizeAll();
