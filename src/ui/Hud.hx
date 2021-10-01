@@ -22,6 +22,8 @@ class Hud extends dn.Process {
   var invalidated = true;
 
   var health:Graphics;
+  var key:Graphics;
+  var keyText:h2d.Text;
 
   public function new() {
     super(Game.ME);
@@ -30,7 +32,14 @@ class Hud extends dn.Process {
     root.filter = new h2d.filter.ColorMatrix(); // force pixel perfect rendering
 
     flow = new h2d.Flow(root);
+    createUIElements();
+  }
+
+  public function createUIElements() {
     health = new h2d.Graphics(flow);
+    keyText = new h2d.Text(Assets.fontSmall, flow);
+    keyText.text = 'x${0}';
+    new h2d.Graphics(flow);
   }
 
   override function onResize() {
@@ -42,7 +51,22 @@ class Hud extends dn.Process {
     invalidated = true;
 
   function render() {
+    drawKeys();
     drawHearts();
+  }
+
+  /**
+   * Draw keys that you have obtained in the game.
+   */
+  public function drawKeys() {
+    if (Game.ME.level != null) {
+      key.clear();
+      var tile = hxd.Res.img.game_key.toTile();
+      key.beginTileFill(0, 0, 1, 1, tile);
+      key.drawRect(0, 0, tile.width, tile.height);
+      key.endFill();
+      keyText.text = 'x${Game.ME.level.hero.keys}';
+    }
   }
 
   /**
