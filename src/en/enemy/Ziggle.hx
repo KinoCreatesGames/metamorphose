@@ -34,10 +34,11 @@ class Ziggle extends Enemy {
   }
 
   override function setSprite() {
-    var g = new h2d.Graphics(spr);
-    g.beginFill(0x101010, 1);
-    g.drawRect(0, 0, 16, 16);
-    g.endFill();
+    var zigger = dn.heaps.Aseprite.convertToSLib(Const.FPS,
+      hxd.Res.img.zigger2_aseprite.toAseprite());
+
+    spr.set(zigger);
+    spr.anim.playAndLoop('walk');
   }
 
   override public function update() {
