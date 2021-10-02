@@ -41,6 +41,7 @@ class Enemy extends Entity {
   public function takeDamage(value:Int = 1) {
     health = M.iclamp(health - value, 0, M.T_INT32_MAX);
     knockBack();
+    blink(0xffffff);
     if (health == 0) {
       // Die
       this.destroy();

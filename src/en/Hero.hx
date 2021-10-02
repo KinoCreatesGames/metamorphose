@@ -99,8 +99,8 @@ class Hero extends Entity {
       hxd.Res.img.mc_first.toAseprite());
     spr.set(hero);
     spr.anim.registerStateAnim('hurt', 12, 1, () -> cd.has('knockback'));
-    spr.anim.registerStateAnim('attack', 10, 1, () -> cd.has('attacking'));
-    spr.anim.registerStateAnim('jump', 2, 1, () -> {
+    spr.anim.registerStateAnim('attack', 2, 1, () -> cd.has('attacking'));
+    spr.anim.registerStateAnim('jump', 3, 1, () -> {
       return !isOnFloor;
     });
     spr.anim.registerStateAnim('run', 1, 1, () -> {
@@ -159,7 +159,8 @@ class Hero extends Entity {
     }
 
     // Attack
-    if (ct.aPressed() || ct.isAnyKeyPressed([K.K, K.X])) {
+    // TODO:Use different button as W and Jump also map to A
+    if (ct.isAnyKeyPressed([K.K, K.X])) {
       attack();
     }
 
@@ -235,7 +236,8 @@ class Hero extends Entity {
     dx = ((dashDir.x * DASH_FORCE)) * tmod;
     dy = 0;
     dy = ((dashDir.y * DASH_FORCE)) * tmod;
-
+    hxd.Res.sound.dash_sound_one.play();
+    setSquashX(0.8);
     dashCount = 0;
     cd.setS('dashing', DASH_TIME, () -> {
       dashTimer = 0;
