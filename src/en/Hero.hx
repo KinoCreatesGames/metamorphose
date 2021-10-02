@@ -367,6 +367,7 @@ class Hero extends Entity {
         case en.collectibles.Heart:
           // Restore player health by 1
           health = M.iclamp(health + 1, 0, HEALTH_CAP);
+          Game.ME.invalidateHud();
         case en.collectibles.WingBeat:
           attackUnlock = true;
 

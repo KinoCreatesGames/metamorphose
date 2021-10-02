@@ -47,6 +47,13 @@ class Hud extends dn.Process {
     keyText = new h2d.Text(Assets.fontSmall, subFlow);
     keyText.text = 'x${0}';
     key = new h2d.Graphics(subFlow);
+    // Draw Key Icon
+    key.clear();
+    var scale = 2;
+    var tile = hxd.Res.img.game_key.toTile();
+    key.beginTileFill(0, 8, 1.5, 1.5, tile);
+    key.drawRect(0, 0, (tile.width * 1.5), (tile.height * scale));
+    key.endFill();
   }
 
   override function onResize() {
@@ -68,14 +75,7 @@ class Hud extends dn.Process {
    */
   public function drawKeys() {
     if (Game.ME.level != null) {
-      key.clear();
-      var scale = 2;
-      var tile = hxd.Res.img.game_key.toTile();
-      key.beginTileFill(0, 8, 1.5, 1.5, tile);
-      key.drawRect(0, 0, (tile.width * 1.5), (tile.height * scale));
-      key.endFill();
       keyText.text = 'x${Game.ME.level.hero.keys}';
-      keyText.y = -8;
     }
   }
 
