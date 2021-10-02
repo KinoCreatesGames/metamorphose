@@ -12,10 +12,14 @@ class Pause extends dn.Process {
   public function new() {
     super(Game.ME);
     ca = Main.ME.controller.createAccess('pause');
-    createRootInLayers(Game.ME.scroller, Const.DP_UI);
+    createRootInLayers(Game.ME.root, Const.DP_UI);
     complete = false;
+    var bg = new h2d.Bitmap(h2d.Tile.fromColor(0x000000, 1, 1, 1), root);
+    root.under(bg);
     win = new h2d.Flow(root);
-
+    #if debug
+    trace('Enter pause menu');
+    #end
     setupPause();
     dn.Process.resizeAll();
   }
@@ -42,14 +46,22 @@ class Pause extends dn.Process {
           // To Options
           optInt.onClick = (event) -> {
             Game.ME.resume();
+            hxd.Res.sound.confirm.play();
             destroy();
           }
         case 1:
-        // Settings
+          // Settings
+          optInt.onClick = (event) -> {
+            Game.ME.resume();
+            hxd.Res.sound.confirm.play();
+            destroy();
+            new Settings();
+          }
         case 2:
           // To title
           optInt.onClick = (event) -> {
             Game.ME.level.destroy();
+            hxd.Res.sound.confirm.play();
             destroy();
             new Title();
           }
@@ -70,6 +82,7 @@ class Pause extends dn.Process {
     }
     interactive.onOver = (event) -> {
       option.alpha = 0.5;
+      hxd.Res.sound.select.play();
     }
     interactive.x = option.alignCalcX();
     return interactive;
@@ -94,8 +107,8 @@ class Pause extends dn.Process {
   override function onResize() {
     super.onResize();
     // Resize all elements to be centered on screen
-    win.x = (w() / Const.UI_SCALE * 0.5 - win.outerWidth * 4.5);
-    win.y = (h() / Const.UI_SCALE * 0.5 - win.outerHeight * 1.25);
+    win.x = (w() * 0.5 - (win.outerWidth * 0.5));
+    win.y = (h() * 0.5 - (win.outerHeight * 0.5));
   }
 
   override function onDispose() {

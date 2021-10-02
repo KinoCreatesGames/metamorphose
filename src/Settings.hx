@@ -1,6 +1,5 @@
 import dn.data.SavedData;
 import hxd.snd.Manager;
-import h2d.Flow;
 
 class Settings extends dn.Process {
   var ct:dn.heaps.Controller.ControllerAccess;
@@ -24,7 +23,7 @@ class Settings extends dn.Process {
   public function new() {
     super(Game.ME);
     ct = Main.ME.controller.createAccess('settings');
-    createRootInLayers(game.scroller, Const.DP_UI);
+    createRootInLayers(game.root, Const.DP_UI);
     loadSettings();
     setupSettingsWindow();
     dn.Process.resizeAll();

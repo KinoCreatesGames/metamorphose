@@ -23,7 +23,7 @@ class Transition extends dn.Process {
     mask = new h2d.Bitmap(h2d.Tile.fromColor(0x0, 1, 1, 1), root);
 
     root.under(mask);
-    dn.Process.resizeAll();
+
     transitionTween = new Tweenie(Const.FPS);
     var tween = transitionTween.createS(mask.alpha, 0, TEase, TRANSITION_TIME);
     // var tween = new Tween(tweenie);
@@ -40,6 +40,7 @@ class Transition extends dn.Process {
       trace('Start transition');
       #end
     });
+    dn.Process.resizeAll();
   }
 
   public function startTransition() {}
@@ -52,8 +53,8 @@ class Transition extends dn.Process {
   override function onResize() {
     super.onResize();
     if (mask != null) {
-      var w = M.ceil(w() / Const.UI_SCALE);
-      var h = M.ceil(h() / Const.UI_SCALE);
+      var w = M.ceil(w());
+      var h = M.ceil(h());
       mask.scaleX = w;
       mask.scaleY = h;
     }

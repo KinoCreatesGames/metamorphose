@@ -1,76 +1,77 @@
 package ui;
 
 class Console extends h2d.Console {
-	public static var ME : Console;
-	#if debug
-	var flags : Map<String,Bool>;
-	#end
+  public static var ME:Console;
 
-	public function new(f:h2d.Font, p:h2d.Object) {
-		super(f, p);
+  #if debug
+  var flags:Map<String, Bool>;
+  #end
 
-		scale(2); // TODO smarter scaling for 4k screens
+  public function new(f:h2d.Font, p:h2d.Object) {
+    super(f, p);
 
-		// Settings
-		ME = this;
-		h2d.Console.HIDE_LOG_TIMEOUT = 30;
-		Lib.redirectTracesToH2dConsole(this);
+    scale(2); // TODO smarter scaling for 4k screens
 
-		// Debug flags
-		#if debug
-		flags = new Map();
-		this.addCommand("set", [{ name:"k", t:AString }], function(k:String) {
-			setFlag(k,true);
-			log("+ "+k.toLowerCase(), 0x80FF00);
-		});
-		this.addCommand("unset", [{ name:"k", t:AString, opt:true } ], function(?k:String) {
-			if( k==null ) {
-				log("Reset all.",0xFF0000);
-				for(k in flags.keys())
-					setFlag(k,false);
-			}
-			else {
-				log("- "+k,0xFF8000);
-				setFlag(k,false);
-			}
-		});
-		this.addCommand("list", [], function() {
-			for(k in flags.keys())
-				log(k, 0x80ff00);
-		});
-		this.addAlias("+","set");
-		this.addAlias("-","unset");
-		#end
-	}
+    // Settings
+    ME = this;
+    h2d.Console.HIDE_LOG_TIMEOUT = 30;
+    Lib.redirectTracesToH2dConsole(this);
 
-	override function handleCommand(command:String) {
-		var flagReg = ~/[\/ \t]*\+[ \t]*([\w]+)/g; // cleanup missing spaces
-		super.handleCommand( flagReg.replace(command, "/+ $1") );
-	}
+    // Debug flags
+    #if debug
+    flags = new Map();
+    this.addCommand("set", [{name: "k", t: AString}], function(k:String) {
+      setFlag(k, true);
+      log("+ " + k.toLowerCase(), 0x80FF00);
+    });
+    this.addCommand("unset", [{name: "k", t: AString, opt: true}],
+      function(?k:String) {
+        if (k == null) {
+          log("Reset all.", 0xFF0000);
+          for (k in flags.keys())
+            setFlag(k, false);
+        } else {
+          log("- " + k, 0xFF8000);
+          setFlag(k, false);
+        }
+      });
+    this.addCommand("list", [], function() {
+      for (k in flags.keys())
+        log(k, 0x80ff00);
+    });
+    this.addAlias("+", "set");
+    this.addAlias("-", "unset");
+    #end
+  }
 
-	public function error(msg:Dynamic) {
-		log("[ERROR] "+Std.string(msg), 0xff0000);
-		h2d.Console.HIDE_LOG_TIMEOUT = Const.INFINITE;
-	}
+  override function handleCommand(command:String) {
+    var flagReg = ~/[\/ \t]*\+[ \t]*([\w]+)/g; // cleanup missing spaces
+    super.handleCommand(flagReg.replace(command, "/+ $1"));
+  }
 
-	#if debug
-	public function setFlag(k:String,v) {
-		k = k.toLowerCase();
-		var hadBefore = hasFlag(k);
+  public function error(msg:Dynamic) {
+    log("[ERROR] " + Std.string(msg), 0xff0000);
+    h2d.Console.HIDE_LOG_TIMEOUT = Const.INFINITE;
+  }
 
-		if( v )
-			flags.set(k,v);
-		else
-			flags.remove(k);
+  #if debug
+  public function setFlag(k:String, v) {
+    k = k.toLowerCase();
+    var hadBefore = hasFlag(k);
 
-		if( v && !hadBefore || !v && hadBefore )
-			onFlagChange(k,v);
-		return v;
-	}
-	public function hasFlag(k:String) return flags.get( k.toLowerCase() )==true;
-	#else
-	public function hasFlag(k:String) return false;
-	#end
+    if (v) flags.set(k, v); else
+      flags.remove(k);
 
-	public function onFlagChange(k:String, v:Bool) {}
+    if (v && !hadBefore || !v && hadBefore) onFlagChange(k, v);
+    return v;
+  }
+
+  public function hasFlag(k:String)
+    return flags.get(k.toLowerCase()) == true;
+  #else
+  public function hasFlag(k:String)
+    return false;
+  #end
+
+  public function onFlagChange(k:String, v:Bool) {}
 }

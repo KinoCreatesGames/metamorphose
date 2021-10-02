@@ -16,7 +16,7 @@ class GameOver extends dn.Process {
 
   public function new() {
     super(Game.ME);
-    createRootInLayers(Game.ME.scroller, Const.DP_UI);
+    createRootInLayers(Game.ME.root, Const.DP_UI);
     complete = false;
     // Resume Game Over Flag
     Game.ME.resumeGameOver = true;
@@ -68,6 +68,7 @@ class GameOver extends dn.Process {
             var level = Game.ME.level;
             if (level != null) {
               Game.ME.startLevel(Assets.projData.getLevel(level.data.uid));
+              hxd.Res.sound.confirm.play();
               destroy();
             }
           }
@@ -75,6 +76,7 @@ class GameOver extends dn.Process {
           // To title
           optInt.onClick = (event) -> {
             Game.ME.level.destroy();
+            hxd.Res.sound.confirm.play();
             destroy();
             new Title();
           }
@@ -95,6 +97,7 @@ class GameOver extends dn.Process {
     }
     interactive.onOver = (event) -> {
       option.alpha = 0.5;
+      hxd.Res.sound.select.play();
     }
     interactive.x = option.alignCalcX();
     return interactive;
@@ -107,9 +110,8 @@ class GameOver extends dn.Process {
 
   override function onResize() {
     super.onResize();
-    win.x = (w() / Const.UI_SCALE * 0.5 - win.outerWidth * 2.5);
-    titleText.x = (w() / Const.UI_SCALE * 0.5
-      - titleText.getSize().width * 2.5);
-    win.y = (h() / Const.UI_SCALE * 0.5 - win.outerHeight * 0.5);
+    win.x = (w() * 0.5 - (win.outerWidth * 0.5));
+    titleText.x = (w() * 0.5 - (titleText.getSize().width * 0.5));
+    win.y = (h() * 0.5 - (win.outerHeight * 0.5));
   }
 }

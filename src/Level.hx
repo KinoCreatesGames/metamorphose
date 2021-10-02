@@ -340,6 +340,26 @@ class Level extends dn.Process {
   }
 
   override function onDispose() {
+    // Dispose of all entities at the end of the level
+    // Anything not in the root will not be disposed
+    for (enemy in enemyGrp) {
+      enemy.dispose();
+    }
+
+    for (hazard in hazardGrp) {
+      hazard.dispose();
+    }
+
+    for (checkpoint in checkpointGrp) {
+      checkpoint.dispose();
+    }
+
+    for (collectible in collectibleGrp) {
+      collectible.dispose();
+    }
+
+    hero.dispose();
+
     super.onDispose();
     bgm.stop();
   }

@@ -16,7 +16,7 @@ class Title extends dn.Process {
 
   public function new() {
     super(Game.ME);
-    createRootInLayers(Game.ME.scroller, Const.DP_UI);
+    createRootInLayers(Game.ME.root, Const.DP_UI);
     complete = false;
 
     // Play music
@@ -25,6 +25,7 @@ class Title extends dn.Process {
     bgm.stop();
     #end
     // Start of the title sequence
+    setupTitle();
   }
 
   public function setupTitle() {
@@ -131,8 +132,8 @@ class Title extends dn.Process {
 
   override public function onResize() {
     super.onResize();
-    win.x = (w() / Const.UI_SCALE * 0.5 - win.outerWidth * 1.5);
-    win.y = (h() / Const.UI_SCALE * 0.5 - win.outerHeight * 0.5);
+    win.x = (w() * 0.5 - (win.outerWidth * 0.5));
+    win.y = (h() * 0.5 - (win.outerHeight * 0.5));
   }
 
   override function onDispose() {
