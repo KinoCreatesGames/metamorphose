@@ -1,5 +1,6 @@
 package en;
 
+import dn.heaps.assets.Aseprite;
 import dn.data.SavedData;
 import en.hazard.Door;
 import en.hazard.MovingPlatform;
@@ -14,6 +15,10 @@ import dn.heaps.Controller.ControllerAccess;
  */
 class Hero extends Entity {
   public var camera(get, never):Camera;
+
+  #if macro
+  var anims = Aseprite.getDict(hxd.Res.img.mc_first);
+  #end
 
   inline function get_camera()
     return game.camera;
@@ -36,6 +41,7 @@ class Hero extends Entity {
   public static inline var HEALTH_CAP:Int = 3;
   public static inline var INVINCIBLE_TIME:Float = 1.5;
   public static inline var KNOCKBACK_FORCE:Float = 0.5;
+  public static inline var ATTACK_TIME:Float = 0.5;
 
   /**
    * Knockback cool down period before setting direction back
@@ -68,10 +74,10 @@ class Hero extends Entity {
     // To offset the position in the game to make it more natural
     // Assuming platformer 0.5 would be the halfway point for the feet so offset by half sprite size
     spr.filter = new PixelOutline(0xff70af, 1);
-    var g = new h2d.Graphics(spr);
-    g.beginFill(0xffffff);
-    g.drawRect(0, 0, 16, 16);
-    g.y -= Const.GRID * 0.5;
+    // var g = new h2d.Graphics(spr);
+    // g.beginFill(0xffffff);
+    // g.drawRect(0, 0, 16, 16);
+    // g.y -= Const.GRID * 0.5;
 
     isOnFloor = false;
     canJump = false;
@@ -83,9 +89,25 @@ class Hero extends Entity {
     dashUnlock = false;
     #end
     // Add in pixel outline shader
-
+    setupAnimations();
     ct = Main.ME.controller.createAccess('hero');
     camera.trackEntity(this, true);
+  }
+
+  public function setupAnimations() {
+    var hero = Aseprite.convertToSLib(Const.FPS,
+      hxd.Res.img.mc_first.toAseprite());
+    spr.set(hero);
+    spr.anim.registerStateAnim('hurt', 12, 1, () -> cd.has('knockback'));
+    spr.anim.registerStateAnim('attack', 10, 1, () -> cd.has('attacking'));
+    spr.anim.registerStateAnim('jump', 2, 1, () -> {
+      return !isOnFloor;
+    });
+    spr.anim.registerStateAnim('run', 1, 1, () -> {
+      return dx != 0;
+    });
+    spr.anim.registerStateAnim('idle', 0);
+    spr.setCenterRatio();
   }
 
   override function dispose() {
@@ -166,10 +188,16 @@ class Hero extends Entity {
   public function attack() {
     // Based off player direction and what not
     // aka DashDir
-    if (level.hasAnyEnemyCollision(cx + M.round(dashDir.x), cy)) {
-      var enemy = level.enemyCollided(cx + M.round(dashDir.x), cy);
-      // Take enemy health
-      enemy.takeDamage();
+    if (!cd.has('attacking')) {
+      cd.setS('attacking', ATTACK_TIME);
+      hxd.Res.sound.attack_hit.play();
+      if (level.hasAnyEnemyCollision(cx + M.round(dir), cy)) {
+        var enemy = level.enemyCollided(cx + M.round(dir), cy);
+        // Take enemy health
+        enemy.takeDamage();
+        hxd.Res.sound.attack_hit_enemy.play();
+        // Add attacking sound
+      }
     }
   }
 

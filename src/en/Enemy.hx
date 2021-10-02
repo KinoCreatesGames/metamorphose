@@ -14,6 +14,9 @@ class Enemy extends Entity {
   public var pointIndex = 0;
   public var speed:Float;
 
+  public static inline var KNOCKBACK_FORCE:Float = 0.5;
+  public static inline var KB_CD:Float = 0.3;
+
   /**
    * Whether to apply physics or not to the enemy.
    * This allows for variation between enemies that can fly or ones
@@ -37,10 +40,20 @@ class Enemy extends Entity {
 
   public function takeDamage(value:Int = 1) {
     health = M.iclamp(health - value, 0, M.T_INT32_MAX);
+    knockBack();
     if (health == 0) {
       // Die
       this.destroy();
     }
+  }
+
+  public function knockBack() {
+    // Apply force in the opposite direction of the current direction
+    dx = 0;
+    dy = 0;
+    dx += (-1 * dir * KNOCKBACK_FORCE);
+    dy = (-1 * (KNOCKBACK_FORCE));
+    cd.setS('knockback', KB_CD);
   }
 
   override public function fixedUpdate() {

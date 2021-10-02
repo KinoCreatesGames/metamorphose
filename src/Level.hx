@@ -234,8 +234,8 @@ class Level extends dn.Process {
    * @param y 
    */
   public function hasAnyEnemyCollision(x:Int, y:Int) {
-    return enemyGrp.exists((collectible) -> return collectible.cx == x
-      && collectible.cy == y);
+    return enemyGrp.exists((enemy) -> return enemy.cx == x && enemy.cy == y
+      && enemy.isAlive());
   }
 
   public function enemyCollided(x:Int, y:Int) {
