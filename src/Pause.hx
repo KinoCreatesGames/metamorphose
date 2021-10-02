@@ -8,14 +8,18 @@ class Pause extends dn.Process {
   public var titleText:h2d.Text;
   public var elapsed:Float = 0.;
   public var se:Channel;
+  public var mask:h2d.Bitmap;
 
   public function new() {
     super(Game.ME);
     ca = Main.ME.controller.createAccess('pause');
     createRootInLayers(Game.ME.root, Const.DP_UI);
+    root.filter = new h2d.filter.ColorMatrix();
     complete = false;
-    var bg = new h2d.Bitmap(h2d.Tile.fromColor(0x000000, 1, 1, 1), root);
-    root.under(bg);
+    mask = new h2d.Bitmap(h2d.Tile.fromColor(0x0, 1, 1, 1), root);
+    trace(mask);
+    trace(mask.alpha);
+    root.under(mask);
     win = new h2d.Flow(root);
     #if debug
     trace('Enter pause menu');
@@ -107,6 +111,13 @@ class Pause extends dn.Process {
   override function onResize() {
     super.onResize();
     // Resize all elements to be centered on screen
+
+    if (mask != null) {
+      var w = M.ceil(w());
+      var h = M.ceil(h());
+      mask.scaleX = w;
+      mask.scaleY = h;
+    }
     win.x = (w() * 0.5 - (win.outerWidth * 0.5));
     win.y = (h() * 0.5 - (win.outerHeight * 0.5));
   }

@@ -5,6 +5,7 @@ class Credits extends dn.Process {
   var game(get, never):Game;
 
   public var bgm:Channel;
+  public var mask:h2d.Bitmap;
 
   inline function get_game() {
     return Game.ME;
@@ -19,7 +20,10 @@ class Credits extends dn.Process {
     super(Game.ME);
     createRootInLayers(Game.ME.root, Const.DP_UI);
     complete = false;
-    ca = Main.ME.controller.createAccess('title');
+    mask = new h2d.Bitmap(h2d.Tile.fromColor(0x0, 1, 1, 1), root);
+
+    root.under(mask);
+    ca = Main.ME.controller.createAccess('credits');
     // Play music
     bgm = hxd.Res.music.happy_end.play(true);
 
@@ -51,20 +55,27 @@ class Credits extends dn.Process {
     jd.text = Lang.t._('JDSherbert - Music');
     jd.center();
     var pixelS = new h2d.Text(Assets.fontMedium, win);
-    pixelS.text = Lang.t._('pixelsphere.org/ The Cynic Project');
+    pixelS.text = Lang.t._('pixelsphere.org/The Cynic Project');
     pixelS.center();
   }
 
   override public function onResize() {
     super.onResize();
-    win.x = (w() * 0.5 - (win.outerWidth * 0.5));
+    if (mask != null) {
+      var w = M.ceil(w());
+      var h = M.ceil(h());
+      mask.scaleX = w;
+      mask.scaleY = h;
+    }
+    win.x = (w() * 0.5 - (win.outerWidth * 0.1));
     win.y = (h() * 0.5 - (win.outerHeight * 0.5));
   }
 
   override public function update() {
     super.update();
     // Hit Escape to exit the credits screen
-    var exitCredits = ca.isKeyboardPressed(K.ESCAPE);
+    var exitCredits = ca.isKeyboardPressed(K.ESCAPE)
+      || ca.isAnyKeyPressed([K.C, K.X]);
     if (exitCredits) {
       new Title();
       destroy();

@@ -318,14 +318,14 @@ class Level extends dn.Process {
     // Pause
     if (Game.ME.ca.isKeyboardPressed(K.ESCAPE)) {
       hxd.Res.sound.pause_in.play();
-      pause();
+      Game.ME.pause();
       new Pause();
     }
 
     // Process Game over process
     // TODO: Test this functionality next
     if (!hero.isAlive()) {
-      pause();
+      Game.ME.pause();
       new GameOver();
     }
   }

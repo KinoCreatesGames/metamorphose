@@ -112,8 +112,8 @@ class Settings extends dn.Process {
   override function onResize() {
     super.onResize();
     // Resize all elements to be centered on screen
-    win.x = (w() / Const.UI_SCALE * 0.5 - win.outerWidth * 4.5);
-    win.y = (h() / Const.UI_SCALE * 0.5 - win.outerHeight * 1.25);
+    win.x = (w() * 0.5 - (win.outerWidth * 0.5));
+    win.y = (h() * 0.5 - (win.outerHeight * 0.5));
   }
 
   override function onDispose() {

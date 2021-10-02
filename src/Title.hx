@@ -132,6 +132,7 @@ class Title extends dn.Process {
 
   override public function onResize() {
     super.onResize();
+    title.x = (w() * 0.5 - (title.getSize().width * 0.5));
     win.x = (w() * 0.5 - (win.outerWidth * 0.5));
     win.y = (h() * 0.5 - (win.outerHeight * 0.5));
   }
