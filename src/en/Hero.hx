@@ -35,6 +35,12 @@ class Hero extends Entity {
   public static inline var MAX_SPEED:Float = 0.125;
   public static inline var HEALTH_CAP:Int = 3;
   public static inline var INVINCIBLE_TIME:Float = 1.5;
+  public static inline var KNOCKBACK_FORCE:Float = 0.75;
+
+  /**
+   * Knockback cool down period before setting direction back
+   */
+  public static inline var KB_CD:Float = 0.2;
 
   public var dashDir:Vec2 = new Vec2(0, 0);
 
@@ -149,6 +155,9 @@ class Hero extends Entity {
     }
     dashDir.x = 0;
     dashDir.y = 0;
+    if (!cd.has('knockback')) {
+      dir = M.sign(dx);
+    }
   }
 
   /**
@@ -219,7 +228,15 @@ class Hero extends Entity {
       cd.setS('invincibleTime', INVINCIBLE_TIME, () -> {
         isInvincible = false;
       });
+      knockBack();
     }
+  }
+
+  public function knockBack() {
+    // Apply force in the opposite direction of the current direction
+    dx = 0;
+    dx += (-1 * dir * KNOCKBACK_FORCE);
+    cd.setS('knockback', KB_CD);
   }
 
   public function die() {

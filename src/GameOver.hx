@@ -42,6 +42,7 @@ class GameOver extends dn.Process {
     win.verticalSpacing = 16;
     win.layout = Vertical;
     win.verticalAlign = FlowAlign.Middle;
+    setupText();
   }
 
   public function setupText() {
