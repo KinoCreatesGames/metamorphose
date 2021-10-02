@@ -219,6 +219,7 @@ class Hero extends Entity {
       health = M.iclamp(health - value, 0, M.T_INT32_MAX);
       // Screen Shake
       Game.ME.camera.shakeS(0.5, 0.5);
+      Game.ME.invalidateHud();
       hxd.Res.sound.hit_sfx.play();
       if (health == 0) {
         // Destroy / Kill the Object
@@ -373,6 +374,7 @@ class Hero extends Entity {
           dashUnlock = true;
         case en.collectibles.Key:
           keys += 1;
+          Game.ME.invalidateHud();
 
         case _:
           // do nothing

@@ -43,6 +43,7 @@ class Hud extends dn.Process {
     var subFlow = new h2d.Flow(flow);
     subFlow.verticalAlign = FlowAlign.Middle;
     subFlow.horizontalAlign = FlowAlign.Middle;
+    subFlow.horizontalSpacing = 8;
     keyText = new h2d.Text(Assets.fontSmall, subFlow);
     keyText.text = 'x${0}';
     key = new h2d.Graphics(subFlow);
@@ -53,8 +54,9 @@ class Hud extends dn.Process {
     root.setScale(Const.UI_SCALE);
   }
 
-  public inline function invalidate()
+  public inline function invalidate() {
     invalidated = true;
+  }
 
   function render() {
     drawKeys();

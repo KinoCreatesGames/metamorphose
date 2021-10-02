@@ -71,6 +71,12 @@ class Game extends Process {
     return ME != null && !ME.destroyed;
   }
 
+  public inline function invalidateHud() {
+    if (!hud.destroyed) {
+      hud.invalidate();
+    }
+  }
+
   public function nextLevel(levelId:Int) {
     level.destroy();
     var level = proj.levels[levelId];
