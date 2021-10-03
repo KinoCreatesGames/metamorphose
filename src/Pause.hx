@@ -16,9 +16,8 @@ class Pause extends dn.Process {
     createRootInLayers(Game.ME.root, Const.DP_UI);
     root.filter = new h2d.filter.ColorMatrix();
     complete = false;
-    mask = new h2d.Bitmap(h2d.Tile.fromColor(0x0, 1, 1, 1), root);
-    trace(mask);
-    trace(mask.alpha);
+    mask = new h2d.Bitmap(h2d.Tile.fromColor(0x0, 1, 1, 0.6), root);
+
     root.under(mask);
     win = new h2d.Flow(root);
     #if debug

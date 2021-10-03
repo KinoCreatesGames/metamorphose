@@ -14,7 +14,7 @@ class Key extends Collectible {
     var tile = hxd.Res.img.game_key.toTile();
     // g.beginFill(0xff00ff, 0.8);
     g.beginTileFill(0, 0, tile.width, tile.height);
-    // g.drawRect(0, 0, 16, 16);
+    g.drawRect(0, 0, 16, 16);
     g.endFill();
   }
 }

@@ -218,12 +218,12 @@ class Level extends dn.Process {
    */
   public function hasAnyCollectibleCollision(x:Int, y:Int) {
     return collectibleGrp.exists((collectible) -> return collectible.cx == x
-      && collectible.cy == y);
+      && collectible.cy == y && collectible.isAlive());
   }
 
   public function collidedCollectible(x:Int, y:Int) {
     return collectibleGrp.filter((collectible) -> return collectible.cx == x
-      && collectible.cy == y)
+      && collectible.cy == y && collectible.isAlive())
       .first();
   }
 
@@ -239,8 +239,8 @@ class Level extends dn.Process {
   }
 
   public function enemyCollided(x:Int, y:Int) {
-    return enemyGrp.filter((collectible) -> return collectible.cx == x
-      && collectible.cy == y)
+    return enemyGrp.filter((enemy) -> return enemy.cx == x && enemy.cy == y
+      && enemy.isAlive())
       .first();
   }
 
