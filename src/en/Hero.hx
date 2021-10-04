@@ -104,7 +104,7 @@ class Hero extends Entity {
       return !isOnFloor;
     });
     spr.anim.registerStateAnim('run', 1, 1, () -> {
-      return dx != 0;
+      return dx != 0 && plat == null;
     });
     spr.anim.registerStateAnim('idle', 0);
     spr.setCenterRatio();

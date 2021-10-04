@@ -111,7 +111,7 @@ class GameOver extends dn.Process {
   override function onResize() {
     super.onResize();
     win.x = (w() * 0.5 - (win.outerWidth * 0.5));
-    titleText.x = (w() * 0.5 - (titleText.getSize().width * 0.5));
+    titleText.x = (w() * 0.5 - (titleText.getSize().width * 0.0));
     win.y = (h() * 0.5 - (win.outerHeight * 0.5));
   }
 }

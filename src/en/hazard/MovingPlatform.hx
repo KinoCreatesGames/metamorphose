@@ -27,10 +27,13 @@ class MovingPlatform extends Hazard {
   }
 
   public function setSprite() {
+    var assetTile = hxd.Res.maps.final_tileset_png.toTile();
+    assetTile.setPosition(176, 16);
     var g = new h2d.Graphics(spr);
-    g.beginFill(0x101010, 1);
+    g.beginTileFill(0, 0, 1, 1, assetTile);
     g.drawRect(0, 0, 32, 16);
     g.endFill();
+    g.x -= 8;
     g.y -= 16;
   }
 
