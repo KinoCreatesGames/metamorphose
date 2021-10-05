@@ -92,6 +92,7 @@ class Hero extends Entity {
     setupAnimations();
     ct = Main.ME.controller.createAccess('hero');
     camera.trackEntity(this, true);
+    loadPlayerInfo();
   }
 
   public function setupAnimations() {
@@ -400,17 +401,53 @@ class Hero extends Entity {
           Game.ME.invalidateHud();
         case en.collectibles.WingBeat:
           attackUnlock = true;
-
-        case en.collectibles.ViridescentWings:
-          dashUnlock = true;
+          savePlayerInfo();
         case en.collectibles.Key:
           keys += 1;
           Game.ME.invalidateHud();
-
+          savePlayerInfo();
+        case en.collectibles.SecondWind:
+          // Unlocks the double jump
+          doubleJumpUnlock = true;
+          savePlayerInfo();
+        case en.collectibles.ViridescentWings:
+          dashUnlock = true;
+          savePlayerInfo();
         case _:
           // do nothing
       }
       collectible.destroy();
+    }
+  }
+
+  /**
+   * Saves the player information to the game data.
+   * So that when the player is moving from scene to scene,
+   * we can provide the current state of the player 
+   * at any given point in time.
+   */
+  public function savePlayerInfo() {
+    SavedData.save(PLAYER_INFO, {
+      unlockedDash: dashUnlock,
+      unlockedDoubleJump: doubleJumpUnlock,
+      health: health,
+      keys: keys
+    });
+  }
+
+  public function loadPlayerInfo() {
+    if (SavedData.exists(PLAYER_INFO)) {
+      var data = SavedData.load(PLAYER_INFO, {
+        unlockedDash: Bool,
+        unlockedDoubleJump: Bool,
+        health: Int,
+        keys: Int
+      });
+
+      // Set the player flags
+      dashUnlock = cast data.unlockedDash;
+      doubleJumpUnlock = cast data.unlockedDoubleJump;
+      health = cast data.health;
     }
   }
 

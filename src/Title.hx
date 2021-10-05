@@ -13,11 +13,14 @@ class Title extends dn.Process {
   public var title:h2d.Text;
   public var win:h2d.Flow;
   public var bgm:Channel;
+  public var mask:h2d.Bitmap;
 
   public function new() {
     super(Game.ME);
     createRootInLayers(Game.ME.root, Const.DP_UI);
     complete = false;
+    mask = new h2d.Bitmap(h2d.Tile.fromColor(0x0, 1, 1, 0.6), root);
+    root.under(mask);
 
     // Play music
     bgm = hxd.Res.music.jkjkke___dream_wav.play(true);
@@ -132,6 +135,12 @@ class Title extends dn.Process {
 
   override public function onResize() {
     super.onResize();
+    if (mask != null) {
+      var w = M.ceil(w());
+      var h = M.ceil(h());
+      mask.scaleX = w;
+      mask.scaleY = h;
+    }
     title.x = (w() * 0.5 - (title.getSize().width * 0.5));
     win.x = (w() * 0.5 - (win.outerWidth * 0.5));
     win.y = (h() * 0.5 - (win.outerHeight * 0.5));

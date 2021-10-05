@@ -10,6 +10,7 @@ class GameOver extends dn.Process {
 
   public var complete:Bool;
   public var bgm:Channel;
+  public var mask:h2d.Bitmap;
 
   public var win:h2d.Flow;
   public var titleText:h2d.Text;
@@ -18,6 +19,8 @@ class GameOver extends dn.Process {
     super(Game.ME);
     createRootInLayers(Game.ME.root, Const.DP_UI);
     complete = false;
+    mask = new h2d.Bitmap(h2d.Tile.fromColor(0x0, 1, 1, 0.6), root);
+    root.under(mask);
     // Resume Game Over Flag
     Game.ME.resumeGameOver = true;
 
@@ -110,6 +113,12 @@ class GameOver extends dn.Process {
 
   override function onResize() {
     super.onResize();
+    if (mask != null) {
+      var w = M.ceil(w());
+      var h = M.ceil(h());
+      mask.scaleX = w;
+      mask.scaleY = h;
+    }
     win.x = (w() * 0.5 - (win.outerWidth * 0.5));
     titleText.x = (w() * 0.5 - (titleText.getSize().width * 0.0));
     win.y = (h() * 0.5 - (win.outerHeight * 0.5));

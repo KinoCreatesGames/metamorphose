@@ -185,6 +185,8 @@ class Level extends dn.Process {
      */
     data.l_Decoration.render(tileGroup);
 
+    data.l_Decoration2.render(tileGroup);
+
     root.addChild(tileGroup);
     // for (cx in 0...cWid)
     // 	for (cy in 0...cHei) {

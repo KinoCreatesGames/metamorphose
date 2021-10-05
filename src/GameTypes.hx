@@ -21,5 +21,6 @@ typedef Coords = {
 enum abstract LC(String) from String to String {
   var CHK_COORDS:String = 'CheckpointCoords';
   var SETTINGS:String = 'Settings';
+  var PLAYER_INFO:String = 'PlayerInfo';
   var KNOCKBACK:String = 'Knockback';
 }
