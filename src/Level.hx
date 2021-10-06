@@ -341,7 +341,7 @@ class Level extends dn.Process {
 
     // Process Game over process
     // TODO: Test this functionality next
-    if (!hero.isAlive()) {
+    if (hero != null && !hero.isAlive()) {
       Game.ME.pause();
       new GameOver();
     }

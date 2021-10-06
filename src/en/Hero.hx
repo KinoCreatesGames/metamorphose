@@ -363,6 +363,10 @@ class Hero extends Entity {
 
       if (lftHazard != null && Std.isOfType(lftHazard, en.hazard.Door)) {
         var door:Door = cast lftHazard;
+        if (!door.unlocked && this.keys > 0) {
+          door.unlocked = true;
+          this.keys -= 1;
+        }
         if (door.unlocked) {
           // Can pass through
         } else {
@@ -373,6 +377,10 @@ class Hero extends Entity {
       }
       if (rightHazard != null && Std.isOfType(rightHazard, en.hazard.Door)) {
         var door:Door = cast rightHazard;
+        if (!door.unlocked && this.keys > 0) {
+          door.unlocked = true;
+          this.keys -= 1;
+        }
         if (door.unlocked) {
           // Can pass through
         } else {
@@ -428,30 +436,35 @@ class Hero extends Entity {
    * at any given point in time.
    */
   public function savePlayerInfo() {
-    SavedData.save(PLAYER_INFO, {
+    // SavedData.save(PLAYER_INFO, {
+    Game.ME.playerState = {
       unlockedDash: dashUnlock,
       unlockedDoubleJump: doubleJumpUnlock,
       levelId: Game.ME.level.uniqId,
       health: health,
       keys: keys
-    });
+    }
+    // });
   }
 
   public function loadPlayerInfo() {
-    if (SavedData.exists(PLAYER_INFO)) {
-      var data = SavedData.load(PLAYER_INFO, {
-        unlockedDash: Bool,
-        unlockedDoubleJump: Bool,
-        levelId: Int,
-        health: Int,
-        keys: Int
-      });
-
-      // Set the player flags
-      dashUnlock = cast data.unlockedDash;
-      doubleJumpUnlock = cast data.unlockedDoubleJump;
-      health = cast data.health;
+    // if (SavedData.exists(PLAYER_INFO)) {
+    //   var data = SavedData.load(PLAYER_INFO, {
+    //     unlockedDash: Bool,
+    //     unlockedDoubleJump: Bool,
+    //     levelId: Int,
+    //     health: Int,
+    //     keys: Int
+    //   });
+    var data = Game.ME.playerState;
+    // Set the player flags
+    if (data != null) {
+      dashUnlock = data.unlockedDash;
+      doubleJumpUnlock = data.unlockedDoubleJump;
+      health = data.health;
     }
+
+    // }
   }
 
   public function movingPlatformCollision() {

@@ -13,8 +13,9 @@ class Key extends Collectible {
     var g = new h2d.Graphics(spr);
     var tile = hxd.Res.img.game_key.toTile();
     // g.beginFill(0xff00ff, 0.8);
-    g.beginTileFill(0, 0, tile.width, tile.height, tile);
+    g.beginTileFill(0, 0, 1, 1, tile);
     g.drawRect(0, 0, 16, 16);
     g.endFill();
+    g.y -= tile.height * 0.5;
   }
 }

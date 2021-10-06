@@ -15,6 +15,14 @@ typedef Coords = {
   var y:Int;
 }
 
+typedef PlayerState = {
+  unlockedDash:Bool,
+  unlockedDoubleJump:Bool,
+  levelId:Int,
+  health:Int,
+  keys:Int
+}
+
 /**
  * Label Constants
  */

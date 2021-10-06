@@ -35,6 +35,7 @@ class Game extends Process {
   public var title:Title;
 
   public var resumeGameOver:Bool;
+  public var playerState:PlayerState;
 
   public function new() {
     super(Main.ME);
