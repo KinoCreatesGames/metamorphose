@@ -44,6 +44,8 @@ class Game extends Process {
     ca.setLeftDeadZone(0.2);
     ca.setRightDeadZone(0.2);
     createRootInLayers(Main.ME.root, Const.DP_BG);
+    // Update Engine Background Color
+    engine.backgroundColor = 0x0;
 
     resumeGameOver = false;
     scroller = new h2d.Layers();

@@ -192,7 +192,8 @@ class Level extends dn.Process {
     // Placeholder level render
     root.removeChildren();
     // Render Auto Layer
-    var tileGroup = data.l_AutoTiles.render();
+    var tileGroup = data.l_Background.render();
+    data.l_AutoTiles.render(tileGroup);
 
     /**
      * Rendering of the decoration tiles within the scene.
