@@ -9,6 +9,7 @@ class IntroScene extends dn.Process {
   public var isTyping:Bool;
   public var frameCount:Int;
   public var complete:Bool;
+  public var completeScene:Bool;
   public var callBack:Void -> Void;
 
   public static inline var FRAME_DELAY:Int = 3;
@@ -43,6 +44,7 @@ class IntroScene extends dn.Process {
     win.minHeight = Std.int((h() / 3));
     textIndex = -1;
     isTyping = false;
+    completeScene = false;
 
     // Setup Text Element
     text = new h2d.Text(Assets.fontMedium, win);
@@ -61,6 +63,9 @@ class IntroScene extends dn.Process {
           showAllText();
         }
       }
+      if (complete) {
+        completeScene = true;
+      }
     };
     // Initial Text Advance
     advanceText();
@@ -75,7 +80,7 @@ class IntroScene extends dn.Process {
 
   override function update() {
     super.update();
-    if (complete) {
+    if (complete && completeScene) {
       callBack();
       this.destroy();
     }
