@@ -56,7 +56,11 @@ class Game extends Process {
     // Turn this off to unclamp the camera and get camera working
     camera.clampToLevelBounds = false;
     // startInitialGame();
+    #if debug
+    startInitialGame();
+    #else
     title = new Title();
+    #end
   }
 
   public function startInitialGame() {
