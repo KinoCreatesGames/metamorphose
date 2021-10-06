@@ -1616,29 +1616,20 @@
 									"defUid": 43,
 									"realEditorValues": [{ "id": "V_Int", "params": [3] }]
 								},
-								{ "__identifier": "startX", "__value": 0, "__type": "Int", "defUid": 86, "realEditorValues": [] },
-								{ "__identifier": "startY", "__value": 0, "__type": "Int", "defUid": 87, "realEditorValues": [] }
-							]
-						},
-						{
-							"__identifier": "Exit",
-							"__grid": [54,45],
-							"__pivot": [0,1],
-							"__tile": null,
-							"width": 16,
-							"height": 24,
-							"defUid": 42,
-							"px": [864,736],
-							"fieldInstances": [
 								{
-									"__identifier": "lvlId",
-									"__value": 3,
+									"__identifier": "startX",
+									"__value": 1,
 									"__type": "Int",
-									"defUid": 43,
-									"realEditorValues": [{ "id": "V_Int", "params": [3] }]
+									"defUid": 86,
+									"realEditorValues": [{ "id": "V_Int", "params": [1] }]
 								},
-								{ "__identifier": "startX", "__value": 0, "__type": "Int", "defUid": 86, "realEditorValues": [] },
-								{ "__identifier": "startY", "__value": 0, "__type": "Int", "defUid": 87, "realEditorValues": [] }
+								{
+									"__identifier": "startY",
+									"__value": 5,
+									"__type": "Int",
+									"defUid": 87,
+									"realEditorValues": [{ "id": "V_Int", "params": [5] }]
+								}
 							]
 						},
 						{
@@ -6799,8 +6790,20 @@
 									"defUid": 43,
 									"realEditorValues": [{ "id": "V_Int", "params": [2] }]
 								},
-								{ "__identifier": "startX", "__value": 0, "__type": "Int", "defUid": 86, "realEditorValues": [] },
-								{ "__identifier": "startY", "__value": 0, "__type": "Int", "defUid": 87, "realEditorValues": [] }
+								{
+									"__identifier": "startX",
+									"__value": 52,
+									"__type": "Int",
+									"defUid": 86,
+									"realEditorValues": [{ "id": "V_Int", "params": [52] }]
+								},
+								{
+									"__identifier": "startY",
+									"__value": 46,
+									"__type": "Int",
+									"defUid": 87,
+									"realEditorValues": [{ "id": "V_Int", "params": [46] }]
+								}
 							]
 						},
 						{
@@ -13084,8 +13087,20 @@
 									"defUid": 43,
 									"realEditorValues": [{ "id": "V_Int", "params": [5] }]
 								},
-								{ "__identifier": "startX", "__value": 0, "__type": "Int", "defUid": 86, "realEditorValues": [] },
-								{ "__identifier": "startY", "__value": 0, "__type": "Int", "defUid": 87, "realEditorValues": [] }
+								{
+									"__identifier": "startX",
+									"__value": 22,
+									"__type": "Int",
+									"defUid": 86,
+									"realEditorValues": [{ "id": "V_Int", "params": [22] }]
+								},
+								{
+									"__identifier": "startY",
+									"__value": 7,
+									"__type": "Int",
+									"defUid": 87,
+									"realEditorValues": [{ "id": "V_Int", "params": [7] }]
+								}
 							]
 						},
 						{
@@ -14720,8 +14735,20 @@
 									"defUid": 43,
 									"realEditorValues": [{ "id": "V_Int", "params": [4] }]
 								},
-								{ "__identifier": "startX", "__value": 0, "__type": "Int", "defUid": 86, "realEditorValues": [] },
-								{ "__identifier": "startY", "__value": 0, "__type": "Int", "defUid": 87, "realEditorValues": [] }
+								{
+									"__identifier": "startX",
+									"__value": 1,
+									"__type": "Int",
+									"defUid": 86,
+									"realEditorValues": [{ "id": "V_Int", "params": [1] }]
+								},
+								{
+									"__identifier": "startY",
+									"__value": 7,
+									"__type": "Int",
+									"defUid": 87,
+									"realEditorValues": [{ "id": "V_Int", "params": [7] }]
+								}
 							]
 						},
 						{
