@@ -68,6 +68,7 @@ class Title extends dn.Process {
       bgm.stop();
       hxd.Res.sound.confirm.play();
       // this.destroy();
+
       complete = true;
     }
     ngInt.onOver = (event) -> {
@@ -128,7 +129,10 @@ class Title extends dn.Process {
   override public function update() {
     super.update();
     if (complete) {
-      Game.ME.startInitialGame();
+      var allText = depot.DepotData.Dialogue_Intro.text.map((text) -> text.str);
+      new IntroScene(() -> {
+        Game.ME.startInitialGame();
+      }, allText);
       destroy();
     }
   }
@@ -142,8 +146,8 @@ class Title extends dn.Process {
       mask.scaleY = h;
     }
     title.x = (w() * 0.5 - (title.getSize().width * 0.5));
-    win.x = (w() * 0.5 - (win.outerWidth));
-    win.y = (h() * 0.5 - (win.outerHeight * 0.5));
+    win.x = (w() * 0.5 - (win.outerWidth * 0.2));
+    win.y = (h() * 0.5 - (win.outerHeight * 0.3));
   }
 
   override function onDispose() {

@@ -1339,7 +1339,7 @@
 		{ "id": "Spawner", "tileId": 20, "color": 4473975, "__tileSrcRect": [64,32,16,16] },
 		{ "id": "Sslug", "tileId": 12, "color": 5596808, "__tileSrcRect": [64,16,16,16] },
 		{ "id": "Ziggle", "tileId": 17, "color": 6715272, "__tileSrcRect": [16,32,16,16] }
-	], "iconTilesetUid": 34, "externalRelPath": "../../src/GameTypes.hx", "externalFileChecksum": "4d311b6e2b04edf49ccb893eab431b15" }], "levelFields": [] },
+	], "iconTilesetUid": 34, "externalRelPath": "../../src/GameTypes.hx", "externalFileChecksum": "359f2ea5c8032b3afce19ff7de99918c" }], "levelFields": [] },
 	"levels": [
 		{
 			"identifier": "Level_2",

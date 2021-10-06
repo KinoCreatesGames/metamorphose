@@ -462,6 +462,120 @@
                     ]
                 }
             }
+        },
+        {
+            "name": "dialogue",
+            "description": "Dialogue entries for the game",
+            "displayColumn": "id",
+            "guid": "69f2e8e0-81bc-49a5-817a-80a346c6369a",
+            "columns": [
+                {
+                    "typeStr": "text",
+                    "guid": "1aa8a958-20d2-4eb5-89ce-53ac0dc0fc03",
+                    "name": "name",
+                    "description": "The name of the dialogue scene within the game",
+                    "defaultValue": "Cutscene",
+                    "iconName": "newText",
+                    "configurable": {
+                        "name": "text",
+                        "description": "text",
+                        "defaultValue": "text"
+                    }
+                },
+                {
+                    "typeStr": "list",
+                    "guid": "96b82df4-a31f-4d81-9663-982b30e04725",
+                    "name": "text",
+                    "description": "The text for the dialogue",
+                    "sheet": "8a4b1e5d-b694-4337-b50f-83ca38f9d536",
+                    "defaultValue": [],
+                    "iconName": "newList",
+                    "configurable": {
+                        "name": "text",
+                        "description": "text"
+                    }
+                }
+            ],
+            "lines": [
+                {
+                    "guid": "ffd73f04-1597-4d67-add7-8e83f6967c3c",
+                    "id": "0",
+                    "name": "Intro",
+                    "text": [
+                        {
+                            "guid": "13666eea-bcdb-4d92-8c2f-c3cb532efe6c",
+                            "str": "For a long time Catepilla, the Elders have told us to always follow the old way.",
+                            "id": "0"
+                        },
+                        {
+                            "guid": "3fb2544e-6f12-4f2a-b775-2f64d915d156",
+                            "str": "The old way of doings things, the old way of working, the old way is the only way.",
+                            "id": "1"
+                        },
+                        {
+                            "guid": "a7e84250-88ba-4b35-9ccd-13b0c99ccd06",
+                            "str": "But, one day a story teller came to our village and told us legends about our people.",
+                            "id": "2"
+                        },
+                        {
+                            "guid": "98da4a59-5036-4f5c-a6fa-8a1d65becd41",
+                            "str": "Things used to be be different. People didn't just follow the old ways.",
+                            "id": "3"
+                        },
+                        {
+                            "guid": "8b7ea8e5-7aed-4cfd-a2fe-50325fad236f",
+                            "str": "I was tired of the old ways, I wanted to change.",
+                            "id": "4"
+                        },
+                        {
+                            "guid": "bcee8d46-12c5-4179-bce6-7657f6408683",
+                            "str": "So, I took my shot.",
+                            "id": "5"
+                        }
+                    ]
+                }
+            ],
+            "hidden": false,
+            "isProps": false,
+            "configurable": {
+                "name": "text",
+                "description": "text",
+                "displayColumn": "columnSelect@name",
+                "columnSelect@name@displayColumn": {
+                    "allowedTypes": [
+                        "int",
+                        "float",
+                        "text",
+                        "longtext"
+                    ]
+                }
+            }
+        },
+        {
+            "name": "text",
+            "description": "list@69f2e8e0-81bc-49a5-817a-80a346c6369a",
+            "displayColumn": "id",
+            "guid": "8a4b1e5d-b694-4337-b50f-83ca38f9d536",
+            "columns": [
+                {
+                    "typeStr": "longtext",
+                    "guid": "20212531-0d87-46b2-8497-b3aeb2c21edb",
+                    "name": "str",
+                    "description": "The dialogueText ",
+                    "defaultValue": "",
+                    "iconName": "newLongText",
+                    "configurable": {
+                        "name": "text",
+                        "description": "text",
+                        "defaultValue": "longtext"
+                    }
+                }
+            ],
+            "lines": [],
+            "hidden": true,
+            "isProps": false,
+            "parentSheetGUID": "69f2e8e0-81bc-49a5-817a-80a346c6369a",
+            "columnGUID": "96b82df4-a31f-4d81-9663-982b30e04725"
         }
     ]
 }
