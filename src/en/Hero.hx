@@ -325,7 +325,8 @@ class Hero extends Entity {
         case en.hazard.Exit:
           // Start new level
           var exit:Exit = cast hazard;
-          game.nextLevel(exit.lvlId);
+          game.nextLevel(exit.lvlId, Std.int(exit.startPoint.x),
+            Std.int(exit.startPoint.y));
         case en.hazard.BouncePad:
           // Apply speed in the y axis
           var bouncePad:en.hazard.BouncePad = cast hazard;
@@ -430,6 +431,7 @@ class Hero extends Entity {
     SavedData.save(PLAYER_INFO, {
       unlockedDash: dashUnlock,
       unlockedDoubleJump: doubleJumpUnlock,
+      levelId: Game.ME.level.uniqId,
       health: health,
       keys: keys
     });
@@ -440,6 +442,7 @@ class Hero extends Entity {
       var data = SavedData.load(PLAYER_INFO, {
         unlockedDash: Bool,
         unlockedDoubleJump: Bool,
+        levelId: Int,
         health: Int,
         keys: Int
       });

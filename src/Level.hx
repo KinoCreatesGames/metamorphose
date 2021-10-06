@@ -61,14 +61,18 @@ class Level extends dn.Process {
   public var enemyGrp:Array<Enemy>;
   public var lightGrp:Array<GameLight>;
   public var bgm:hxd.snd.Channel;
+  public var startX:Int;
+  public var startY:Int;
 
   var invalidated = true;
 
   public var currentCheckpoint:Checkpoint;
 
-  public function new(?level:LDTkProj_Level) {
+  public function new(?level:LDTkProj_Level, startX = -1, startY = -1) {
     super(Game.ME);
     ME = this;
+    this.startX = startX;
+    this.startY = startY;
     createRootInLayers(Game.ME.scroller, Const.DP_BG);
     if (level != null) {
       data = level;
@@ -100,7 +104,11 @@ class Level extends dn.Process {
         plHero = new Hero(cast result.x, cast result.y);
         Game.ME.resumeGameOver = false;
       } else {
-        plHero = new Hero(player.cx, player.cy);
+        if (startX != -1) {
+          plHero = new Hero(startX, startY);
+        } else {
+          plHero = new Hero(player.cx, player.cy);
+        }
       }
       this.hero = plHero;
     }

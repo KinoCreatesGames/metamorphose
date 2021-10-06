@@ -18,4 +18,5 @@ import GameTypes;
 using Lambda;
 using ext.HTools;
 using ext.ArrayExt;
+using StringTools;
 #end

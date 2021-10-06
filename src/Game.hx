@@ -61,7 +61,7 @@ class Game extends Process {
     hud = new ui.Hud();
     // Render ldtk level
     new Transition();
-    startLevel(proj.all_levels.Level_3);
+    startLevel(proj.all_levels.Level_0);
 
     Process.resizeAll();
     trace(Lang.t._("Game is ready."));
@@ -77,10 +77,19 @@ class Game extends Process {
     }
   }
 
-  public function nextLevel(levelId:Int) {
+  public function nextLevel(levelId:Int, startX = -1, startY = -1) {
     level.destroy();
-    var level = proj.levels[levelId];
-    startLevel(level);
+    // var level = proj.levels[levelId];
+    var level = proj.levels.filter((lLevel) ->
+      lLevel.identifier.contains('${levelId}'))
+      .first();
+    if (level != null) {
+      startLevel(level, startX, startY);
+    } else {
+      #if debug
+      trace('Cannot find level');
+      #end
+    }
   }
 
   /** CDB file changed on disk**/
@@ -99,7 +108,8 @@ class Game extends Process {
     }
   }
 
-  public function startLevel(ldtkLevel:LDTkProj_Level) {
+  public function startLevel(ldtkLevel:LDTkProj_Level, startX = -1,
+      startY = -1) {
     if (level != null) {
       level.destroy();
     }
@@ -109,7 +119,7 @@ class Game extends Process {
     }
     garbageCollectEntities();
     // Create new level
-    level = new Level(ldtkLevel);
+    level = new Level(ldtkLevel, startX, startY);
     // Will be using the looping mechanisms
   }
 
