@@ -142,7 +142,7 @@ class Title extends dn.Process {
       mask.scaleY = h;
     }
     title.x = (w() * 0.5 - (title.getSize().width * 0.5));
-    win.x = (w() * 0.5 - (win.outerWidth * 0.5));
+    win.x = (w() * 0.5 - (win.outerWidth));
     win.y = (h() * 0.5 - (win.outerHeight * 0.5));
   }
 

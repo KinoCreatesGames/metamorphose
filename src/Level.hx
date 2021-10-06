@@ -59,6 +59,7 @@ class Level extends dn.Process {
   public var hazardGrp:Array<Hazard>;
   public var checkpointGrp:Array<Checkpoint>;
   public var enemyGrp:Array<Enemy>;
+  public var lightGrp:Array<GameLight>;
   public var bgm:hxd.snd.Channel;
 
   var invalidated = true;
@@ -86,6 +87,7 @@ class Level extends dn.Process {
     hazardGrp = [];
     checkpointGrp = [];
     enemyGrp = [];
+    lightGrp = [];
   }
 
   public function createEntities() {
@@ -144,6 +146,10 @@ class Level extends dn.Process {
     for (lCheckpoint in data.l_Entities.all_Checkpoint) {
       var checkpoint = new Checkpoint(lCheckpoint);
       checkpointGrp.push(checkpoint);
+    }
+
+    for (lLight in data.l_Entities.all_Light) {
+      lightGrp.push(new GameLight(lLight));
     }
   }
 
@@ -358,6 +364,10 @@ class Level extends dn.Process {
 
     for (collectible in collectibleGrp) {
       collectible.dispose();
+    }
+
+    for (light in lightGrp) {
+      light.dispose();
     }
 
     hero.dispose();
