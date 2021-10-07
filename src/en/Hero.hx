@@ -246,7 +246,7 @@ class Hero extends Entity {
   }
 
   public function takeDamage(value:Int) {
-    if (!isInvincible) {
+    if (!isInvincible && !isDashing) {
       health = M.iclamp(health - value, 0, M.T_INT32_MAX);
       // Screen Shake
       Game.ME.camera.shakeS(0.5, 0.5);

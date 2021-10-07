@@ -63,6 +63,7 @@ class Level extends dn.Process {
   public var bgm:hxd.snd.Channel;
   public var startX:Int;
   public var startY:Int;
+  public var mask:h2d.Bitmap;
 
   var invalidated = true;
 
@@ -84,6 +85,10 @@ class Level extends dn.Process {
     createGroups();
     createEntities();
     Game.ME.camera.recenter();
+    // Delete checkpoint on level start
+    if (SavedData.exists(CHK_COORDS)) {
+      SavedData.delete(CHK_COORDS);
+    }
   }
 
   public function createGroups() {
@@ -100,7 +105,7 @@ class Level extends dn.Process {
       // Or Game over set in main game
       var plHero = null;
       if (Game.ME.resumeGameOver && SavedData.exists(CHK_COORDS)) {
-        var result = SavedData.load(CHK_COORDS, {x: Int, y: Int});
+        var result = SavedData.load(CHK_COORDS, {x: 0, y: 0});
         plHero = new Hero(cast result.x, cast result.y);
         Game.ME.resumeGameOver = false;
       } else {
@@ -203,6 +208,20 @@ class Level extends dn.Process {
     data.l_Decoration2.render(tileGroup);
 
     root.addChild(tileGroup);
+    // Add mask over scene
+    // mask = new h2d.Bitmap(h2d.Tile.fromColor(0x0, 1, 1, 1), root);
+    // mask.alpha = 0.6;
+    // var g = new h2d.Graphics(root);
+    // g.beginFill(0xffffff, 1);
+    // g.drawCircle(hero.cx, hero.cy + 30, h() / 3);
+    // g.endFill();
+    // g.blendMode = Add;
+    // g.alpha = 0.5;
+
+    // g.blendMode = Multiply;
+    // g.blendMode = Erase;
+    // mask.blendMode = ;
+    dn.Process.resizeAll();
     // for (cx in 0...cWid)
     // 	for (cy in 0...cHei) {
     // 		var g = new h2d.Graphics(root);
@@ -353,6 +372,14 @@ class Level extends dn.Process {
     if (invalidated) {
       invalidated = false;
       render();
+    }
+  }
+
+  override function onResize() {
+    super.onResize();
+    if (mask != null) {
+      mask.scaleX = M.ceil(w());
+      mask.scaleY = M.ceil(h());
     }
   }
 

@@ -70,6 +70,9 @@ class GameOver extends dn.Process {
             // Restart from previous Level and destroy this game over scene
             var level = Game.ME.level;
             if (level != null) {
+              Game.ME.resumeGameOver = true;
+              Game.ME.resume();
+              Game.ME.level.destroy();
               Game.ME.startLevel(Assets.projData.getLevel(level.data.uid));
               hxd.Res.sound.confirm.play();
               destroy();
@@ -79,6 +82,7 @@ class GameOver extends dn.Process {
           // To title
           optInt.onClick = (event) -> {
             Game.ME.level.destroy();
+            Game.ME.resume();
             hxd.Res.sound.confirm.play();
             destroy();
             new Title();
@@ -93,8 +97,8 @@ class GameOver extends dn.Process {
     var option = new h2d.Text(Assets.fontMedium, win);
     option.text = text;
     option.center();
-    var interactive = new h2d.Interactive(win.outerWidth, option.textHeight,
-      option);
+    var interactive = new h2d.Interactive(win.outerWidth * 2,
+      option.textHeight, option);
     interactive.onOut = (event) -> {
       option.alpha = 1;
     }
