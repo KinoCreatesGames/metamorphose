@@ -1,3 +1,4 @@
+import dn.data.SavedData;
 import ui.Transition;
 import en.Hero;
 import depot.DepotData;
@@ -197,6 +198,16 @@ class Game extends Process {
 
       // Restart
       if (ca.selectPressed()) Main.ME.startGame();
+    }
+  }
+
+  /**
+   * Clear temporary save data when you're playing a level or
+   * find a switch in the game.
+   */
+  public function clearTempSaveData() {
+    if (SavedData.exists(CHK_COORDS)) {
+      SavedData.delete(CHK_COORDS);
     }
   }
 }

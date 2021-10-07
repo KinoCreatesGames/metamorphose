@@ -68,7 +68,7 @@ class Title extends dn.Process {
       bgm.stop();
       hxd.Res.sound.confirm.play();
       // this.destroy();
-
+      Game.ME.clearTempSaveData();
       complete = true;
     }
     ngInt.onOver = (event) -> {

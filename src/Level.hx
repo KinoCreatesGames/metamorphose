@@ -106,7 +106,7 @@ class Level extends dn.Process {
       var plHero = null;
       if (Game.ME.resumeGameOver && SavedData.exists(CHK_COORDS)) {
         var result = SavedData.load(CHK_COORDS, {x: 0, y: 0});
-        plHero = new Hero(cast result.x, cast result.y);
+        plHero = new Hero(result.x, result.y);
         Game.ME.resumeGameOver = false;
       } else {
         if (startX != -1) {
