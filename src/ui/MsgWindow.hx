@@ -19,6 +19,7 @@ class MsgWindow extends dn.Process {
     createRootInLayers(Game.ME.root, Const.DP_UI);
     // Pixel Perfect Rendering
     root.filter = new h2d.filter.ColorMatrix();
+    textIndex = -1;
     setupWindow();
     Process.resizeAll();
   }
@@ -38,11 +39,8 @@ class MsgWindow extends dn.Process {
     win.minHeight = Std.int((h() / 3));
     win.minWidth = Std.int(w());
     setupText();
-    win.interactive.onOver = (event) -> {
-      text.text = 'Interacted';
-    }
-    win.interactive.onOut = (event) -> {
-      text.text = 'Left interactive area';
+    win.interactive.onClick = (event) -> {
+      advanceText();
     };
 
     win.padding = padding;
@@ -54,7 +52,7 @@ class MsgWindow extends dn.Process {
     // Add Text
     text = new h2d.Text(Assets.fontMedium, win);
     text.x = padding;
-    text.text = 'Hello world';
+    text.text = '';
     text.maxWidth = win.minWidth - (padding * 2);
     text.textColor = 0xffffff;
   }
@@ -63,10 +61,28 @@ class MsgWindow extends dn.Process {
     this.text.text = text;
   }
 
-  public function sendMsgs(textData:Array<String>) {}
+  public function sendMsgs(textData:Array<String>) {
+    allText = textData;
+    advanceText();
+  }
 
   public function advanceText() {
     // Move to the next text String
+    textIndex = M.iclamp(textIndex + 1, 0, allText.length - 1);
+    var currentText = allText[textIndex];
+    if (currentText != text.text) {
+      sendMsg(currentText);
+    } else {
+      // We should be finished processing all the available text
+      // Close the window
+      resetIndex();
+      hide();
+      Game.ME.resume();
+    }
+  }
+
+  public function resetIndex() {
+    textIndex = -1;
   }
 
   public function clearWindow() {

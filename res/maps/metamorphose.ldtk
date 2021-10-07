@@ -9,7 +9,7 @@
 		"url": "https://ldtk.io"
 	},
 	"jsonVersion": "0.9.3",
-	"nextUid": 88,
+	"nextUid": 93,
 	"worldLayout": "GridVania",
 	"worldGridWidth": 128,
 	"worldGridHeight": 128,
@@ -1213,6 +1213,31 @@
 			"fieldDefs": []
 		},
 		{
+			"identifier": "ViridescentWings",
+			"uid": 88,
+			"tags": [],
+			"width": 16,
+			"height": 16,
+			"resizableX": false,
+			"resizableY": false,
+			"keepAspectRatio": false,
+			"fillOpacity": 1,
+			"lineOpacity": 1,
+			"hollow": false,
+			"color": "#94D9B3",
+			"renderMode": "Tile",
+			"showName": true,
+			"tilesetId": 60,
+			"tileId": 107,
+			"tileRenderMode": "Stretch",
+			"maxCount": 0,
+			"limitScope": "PerLevel",
+			"limitBehavior": "MoveLastOne",
+			"pivotX": 0,
+			"pivotY": 0,
+			"fieldDefs": []
+		},
+		{
 			"identifier": "Light",
 			"uid": 82,
 			"tags": [],
@@ -1236,6 +1261,72 @@
 			"pivotX": 0,
 			"pivotY": 0,
 			"fieldDefs": []
+		},
+		{
+			"identifier": "Event",
+			"uid": 89,
+			"tags": [],
+			"width": 16,
+			"height": 16,
+			"resizableX": false,
+			"resizableY": false,
+			"keepAspectRatio": false,
+			"fillOpacity": 1,
+			"lineOpacity": 1,
+			"hollow": false,
+			"color": "#347092",
+			"renderMode": "Ellipse",
+			"showName": true,
+			"tilesetId": null,
+			"tileId": null,
+			"tileRenderMode": "Stretch",
+			"maxCount": 0,
+			"limitScope": "PerLevel",
+			"limitBehavior": "MoveLastOne",
+			"pivotX": 0.5,
+			"pivotY": 0.5,
+			"fieldDefs": [
+				{
+					"identifier": "eventName",
+					"__type": "String",
+					"uid": 90,
+					"type": "F_String",
+					"isArray": false,
+					"canBeNull": true,
+					"arrayMinLength": null,
+					"arrayMaxLength": null,
+					"editorDisplayMode": "ValueOnly",
+					"editorDisplayPos": "Above",
+					"editorAlwaysShow": false,
+					"editorCutLongValues": true,
+					"min": null,
+					"max": null,
+					"regex": null,
+					"acceptFileTypes": null,
+					"defaultOverride": null,
+					"textLanguageMode": null
+				},
+				{
+					"identifier": "radius",
+					"__type": "Int",
+					"uid": 92,
+					"type": "F_Int",
+					"isArray": false,
+					"canBeNull": false,
+					"arrayMinLength": null,
+					"arrayMaxLength": null,
+					"editorDisplayMode": "RadiusGrid",
+					"editorDisplayPos": "Above",
+					"editorAlwaysShow": true,
+					"editorCutLongValues": true,
+					"min": null,
+					"max": null,
+					"regex": null,
+					"acceptFileTypes": null,
+					"defaultOverride": { "id": "V_Int", "params": [4] },
+					"textLanguageMode": null
+				}
+			]
 		}
 	], "tilesets": [
 		{
@@ -9750,6 +9841,35 @@
 									"realEditorValues": [{ "id": "V_Int", "params": [11] }]
 								}
 							]
+						},
+						{
+							"__identifier": "Event",
+							"__grid": [7,12],
+							"__pivot": [0.5,0.5],
+							"__tile": null,
+							"width": 16,
+							"height": 16,
+							"defUid": 89,
+							"px": [120,200],
+							"fieldInstances": [
+								{
+									"__identifier": "eventName",
+									"__value": "FirstStep",
+									"__type": "String",
+									"defUid": 90,
+									"realEditorValues": [{
+										"id": "V_String",
+										"params": ["FirstStep"]
+									}]
+								},
+								{
+									"__identifier": "radius",
+									"__value": 4,
+									"__type": "Int",
+									"defUid": 92,
+									"realEditorValues": [{ "id": "V_Int", "params": [4] }]
+								}
+							]
 						}
 					]
 				},
@@ -10859,6 +10979,29 @@
 									"defUid": 87,
 									"realEditorValues": [{ "id": "V_Int", "params": [4] }]
 								}
+							]
+						},
+						{
+							"__identifier": "Event",
+							"__grid": [29,29],
+							"__pivot": [0.5,0.5],
+							"__tile": null,
+							"width": 16,
+							"height": 16,
+							"defUid": 89,
+							"px": [472,472],
+							"fieldInstances": [
+								{
+									"__identifier": "eventName",
+									"__value": "FirstStatue",
+									"__type": "String",
+									"defUid": 90,
+									"realEditorValues": [{
+										"id": "V_String",
+										"params": ["FirstStatue"]
+									}]
+								},
+								{ "__identifier": "radius", "__value": 4, "__type": "Int", "defUid": 92, "realEditorValues": [] }
 							]
 						}
 					]

@@ -93,6 +93,7 @@ class Hero extends Entity {
     ct = Main.ME.controller.createAccess('hero');
     camera.trackEntity(this, true);
     loadPlayerInfo();
+    Game.ME.invalidateHud();
   }
 
   public function setupAnimations() {
@@ -119,6 +120,7 @@ class Hero extends Entity {
   override function update() {
     updateInvincible();
     updateControls();
+    eventCollisions();
     super.update();
   }
 
@@ -296,6 +298,27 @@ class Hero extends Entity {
     enemyCollisions();
   }
 
+  public function eventCollisions() {
+    var event = level.eventCollided(cx, cy);
+    if (event != null && !Game.ME.eventExists(event.eventName)) {
+      // If button pressed
+      if (ct.bPressed() || ct.isAnyKeyPressed([K.Z, K.K, K.X])) {
+        // Run Event
+        var msgWin = Game.ME.msgWin;
+        if (msgWin != null && !msgWin.win.visible) {
+          // Run Event
+          var event = depot.DepotData.Dialogue.lines.getByFn((line) ->
+            line.name == event.eventName);
+          var allText = event.text.map((text) -> text.str);
+          // Send Event to the save data before finishing
+          msgWin.show();
+          msgWin.sendMsgs(allText);
+          Game.ME.pause();
+        }
+      }
+    }
+  }
+
   /**
    * Sets the current checkpoint once you touch
    */
@@ -366,6 +389,7 @@ class Hero extends Entity {
         if (!door.unlocked && this.keys > 0) {
           door.unlocked = true;
           this.keys -= 1;
+          Game.ME.invalidateHud();
         }
         if (door.unlocked) {
           // Can pass through

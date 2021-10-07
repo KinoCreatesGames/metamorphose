@@ -37,6 +37,7 @@ class Game extends Process {
 
   public var resumeGameOver:Bool;
   public var playerState:PlayerState;
+  public var msgWin:MsgWindow;
 
   public function new() {
     super(Main.ME);
@@ -56,6 +57,8 @@ class Game extends Process {
     camera = new Camera();
     // Turn this off to unclamp the camera and get camera working
     camera.clampToLevelBounds = false;
+    msgWin = new MsgWindow();
+    msgWin.hide();
     // startInitialGame();
     #if debug
     startInitialGame();
@@ -208,6 +211,33 @@ class Game extends Process {
   public function clearTempSaveData() {
     if (SavedData.exists(CHK_COORDS)) {
       SavedData.delete(CHK_COORDS);
+    }
+  }
+
+  public function saveEvent(eventName:String) {
+    if (SavedData.exists(EVENT_LIST)) {
+      var eventList = SavedData.load(EVENT_LIST, {
+        events: []
+      });
+      eventList.events.push(eventName);
+      SavedData.save(EVENT_LIST, {
+        events: eventList.events
+      });
+    } else {
+      SavedData.save(EVENT_LIST, {
+        events: [eventName]
+      });
+    }
+  }
+
+  public function eventExists(eventName:String) {
+    if (SavedData.exists(EVENT_LIST)) {
+      var eventList = SavedData.load(EVENT_LIST, {
+        events: []
+      });
+      return eventList.events.contains(eventName);
+    } else {
+      return false;
     }
   }
 }

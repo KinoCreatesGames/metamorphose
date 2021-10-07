@@ -1,3 +1,5 @@
+import en.collectibles.SecondWind;
+import en.collectibles.ViridescentWings;
 import en.enemy.Sslug;
 import dn.data.SavedData;
 import en.hazard.Spike;
@@ -60,6 +62,7 @@ class Level extends dn.Process {
   public var checkpointGrp:Array<Checkpoint>;
   public var enemyGrp:Array<Enemy>;
   public var lightGrp:Array<GameLight>;
+  public var eventGrp:Array<en.Event>;
   public var bgm:hxd.snd.Channel;
   public var startX:Int;
   public var startY:Int;
@@ -97,6 +100,7 @@ class Level extends dn.Process {
     checkpointGrp = [];
     enemyGrp = [];
     lightGrp = [];
+    eventGrp = [];
   }
 
   public function createEntities() {
@@ -118,6 +122,11 @@ class Level extends dn.Process {
       this.hero = plHero;
     }
 
+    // Events
+    for (lEvent in data.l_Entities.all_Event) {
+      eventGrp.push(new en.Event(lEvent));
+    }
+
     // Enemies
     for (lEnemy in data.l_Entities.all_Enemy) {
       createEnemy(lEnemy);
@@ -130,6 +139,14 @@ class Level extends dn.Process {
 
     for (gKey in data.l_Entities.all_GameKey) {
       collectibleGrp.push(new Key(gKey));
+    }
+
+    for (lVWing in data.l_Entities.all_ViridescentWings) {
+      collectibleGrp.push(new ViridescentWings(lVWing));
+    }
+
+    for (lSWind in data.l_Entities.all_SecondWind) {
+      collectibleGrp.push(new SecondWind(lSWind));
     }
 
     // Hazards
@@ -306,6 +323,17 @@ class Level extends dn.Process {
   public function hasAnyHazardCollision(x:Int, y:Int) {
     return hazardGrp.exists((hazard) ->
       return hazard.cx == x && hazard.cy == y);
+  }
+
+  /**
+   * Returns an event if you are within the radius of that event. 
+   * @param x 
+   * @param y 
+   */
+  public function eventCollided(x:Int, y:Int) {
+    return eventGrp.filter((event) -> {
+      return M.dist(event.cx, event.cy, x, y) < event.eventRadius;
+    }).first();
   }
 
   /**

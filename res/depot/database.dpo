@@ -533,6 +533,45 @@
                             "id": "5"
                         }
                     ]
+                },
+                {
+                    "guid": "a49069a8-b0d0-402f-b555-efb18013c434",
+                    "id": "1",
+                    "name": "FirstStatue",
+                    "text": [
+                        {
+                            "guid": "7243c32d-8f64-49f1-ac18-7d486a71997c",
+                            "str": "What's this? Let's read what it says...",
+                            "id": "0"
+                        },
+                        {
+                            "guid": "c58117e1-b4f2-4866-a53b-792368ca6a6e",
+                            "str": "For time immemorial, we believe in change, the future. Never forget this guiding principle of our people. The only way forward is ...",
+                            "id": "1"
+                        },
+                        {
+                            "guid": "eba4c89e-15a3-4b11-8373-2444ecc4523e",
+                            "str": "I wonder why they stopped believing in change? Why they chose to forget this place?",
+                            "id": "2"
+                        }
+                    ]
+                },
+                {
+                    "guid": "2ec8d813-ccb1-44f3-84b6-0d1fc774b6ea",
+                    "id": "2",
+                    "name": "FirstStep",
+                    "text": [
+                        {
+                            "guid": "2b6e16c7-cb5b-4408-89a5-c2355436affa",
+                            "str": "We finally made it to the ruins!!",
+                            "id": "0"
+                        },
+                        {
+                            "guid": "fa38174b-c2f0-470e-8980-cb6f897e47fa",
+                            "str": "The truth should be in here. I have to find out why we threw away change with my own eyes.",
+                            "id": "1"
+                        }
+                    ]
                 }
             ],
             "hidden": false,
