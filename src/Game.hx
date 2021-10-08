@@ -61,7 +61,8 @@ class Game extends Process {
     msgWin.hide();
     // startInitialGame();
     #if debug
-    startInitialGame();
+    new ThankYou();
+    // startInitialGame();
     #else
     title = new Title();
     #end

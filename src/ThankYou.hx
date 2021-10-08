@@ -1,3 +1,4 @@
+import ui.FadeToBlack;
 import hxd.res.DynamicText.Key;
 import h2d.Flow.FlowAlign;
 
@@ -12,10 +13,13 @@ class ThankYou extends dn.Process {
 
   public var complete:Bool;
   public var win:h2d.Flow;
+  public var backgroundArt:h2d.Bitmap;
+  public var background:h2d.Bitmap;
+  public var transition:FadeToBlack;
 
   public function new() {
     super(Game.ME);
-    createRootInLayers(Game.ME.scroller, Const.DP_UI);
+    createRootInLayers(Game.ME.root, Const.DP_UI);
     complete = false;
     ca = Main.ME.controller.createAccess("ThankYou");
 
@@ -24,6 +28,10 @@ class ThankYou extends dn.Process {
   }
 
   public function setupThankYou() {
+    // Add background  + Art
+    background = new h2d.Bitmap(h2d.Tile.fromColor(0xffffff, 1, 1, 1), root);
+    var tile = hxd.Res.img.thankyou.toTile();
+    backgroundArt = new h2d.Bitmap(tile, root);
     win = new h2d.Flow(root);
     var width = Std.int(w() / 3);
     win.backgroundTile = h2d.Tile.fromColor(0xff0000, width, 100, 0);
@@ -48,8 +56,16 @@ class ThankYou extends dn.Process {
 
   override public function onResize() {
     super.onResize();
-    win.x = (w() / Const.UI_SCALE * 0.5 - win.outerWidth * 1.1);
-    win.y = (h() / Const.UI_SCALE * 0.5 - win.outerHeight * 0.5);
+    background.scaleX = w();
+    background.scaleY = h();
+    if (backgroundArt != null) {
+      backgroundArt.x = (w() * 0.3);
+      backgroundArt.y = 0;
+      backgroundArt.scaleX = 0.5;
+      backgroundArt.scaleY = 0.5;
+    }
+    win.x = (w() * 0.6 - (win.outerWidth * 0.5));
+    win.y = (h() * 0.75 - (win.outerHeight * 0.15));
   }
 
   override public function update() {
@@ -59,9 +75,14 @@ class ThankYou extends dn.Process {
       win.alpha = M.lerp(win.alpha, 1.2, 0.05);
     }
     var exitCredits = ca.isKeyboardPressed(K.ESCAPE);
-    if (exitCredits) {
+    if (exitCredits && transition == null) {
+      // new Title();
+      transition = new FadeToBlack();
+    }
+    if (transition != null && transition.complete) {
+      this.destroy();
+      transition.destroy();
       new Title();
-      destroy();
     }
   }
 }

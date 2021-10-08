@@ -14,6 +14,7 @@ class FadeToBlack extends dn.Process {
   public static inline var TRANSITION_TIME:Float = 1.5;
 
   public var transitionTween:Tweenie;
+  public var complete:Bool;
 
   public function new() {
     super(Game.ME);
@@ -22,6 +23,7 @@ class FadeToBlack extends dn.Process {
     root.filter = new h2d.filter.ColorMatrix();
     mask = new h2d.Bitmap(h2d.Tile.fromColor(0x0, 1, 1, 1), root);
     mask.alpha = 0;
+    complete = false;
 
     root.under(mask);
 
@@ -34,7 +36,8 @@ class FadeToBlack extends dn.Process {
       #if debug
       trace('Transition complete');
       #end
-      this.destroy();
+      complete = true;
+      // this.destroy();
     });
     tween.start(() -> {
       #if debug
