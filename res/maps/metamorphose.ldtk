@@ -1430,7 +1430,7 @@
 		{ "id": "Spawner", "tileId": 20, "color": 4473975, "__tileSrcRect": [64,32,16,16] },
 		{ "id": "Sslug", "tileId": 12, "color": 5596808, "__tileSrcRect": [64,16,16,16] },
 		{ "id": "Ziggle", "tileId": 17, "color": 6715272, "__tileSrcRect": [16,32,16,16] }
-	], "iconTilesetUid": 34, "externalRelPath": "../../src/GameTypes.hx", "externalFileChecksum": "359f2ea5c8032b3afce19ff7de99918c" }], "levelFields": [] },
+	], "iconTilesetUid": 34, "externalRelPath": "../../src/GameTypes.hx", "externalFileChecksum": "35235fd035b25fb85cd4624a17e6a9ad" }], "levelFields": [] },
 	"levels": [
 		{
 			"identifier": "Level_2",
@@ -11003,6 +11003,50 @@
 								},
 								{ "__identifier": "radius", "__value": 4, "__type": "Int", "defUid": 92, "realEditorValues": [] }
 							]
+						},
+						{
+							"__identifier": "Light",
+							"__grid": [10,13],
+							"__pivot": [0,0],
+							"__tile": null,
+							"width": 16,
+							"height": 16,
+							"defUid": 82,
+							"px": [160,208],
+							"fieldInstances": []
+						},
+						{
+							"__identifier": "Light",
+							"__grid": [10,19],
+							"__pivot": [0,0],
+							"__tile": null,
+							"width": 16,
+							"height": 16,
+							"defUid": 82,
+							"px": [160,304],
+							"fieldInstances": []
+						},
+						{
+							"__identifier": "Light",
+							"__grid": [31,24],
+							"__pivot": [0,0],
+							"__tile": null,
+							"width": 16,
+							"height": 16,
+							"defUid": 82,
+							"px": [496,384],
+							"fieldInstances": []
+						},
+						{
+							"__identifier": "Light",
+							"__grid": [27,24],
+							"__pivot": [0,0],
+							"__tile": null,
+							"width": 16,
+							"height": 16,
+							"defUid": 82,
+							"px": [432,384],
+							"fieldInstances": []
 						}
 					]
 				},
@@ -11030,6 +11074,7 @@
 					"overrideTilesetUid": null,
 					"gridTiles": [
 						{ "px": [112,176], "src": [160,48], "f": 0, "t": 100, "d": [535] },
+						{ "px": [160,208], "src": [160,48], "f": 0, "t": 100, "d": [634] },
 						{ "px": [96,256], "src": [32,16], "f": 0, "t": 32, "d": [774] },
 						{ "px": [112,256], "src": [64,0], "f": 0, "t": 4, "d": [775] },
 						{ "px": [128,256], "src": [64,0], "f": 0, "t": 4, "d": [776] },
@@ -11037,6 +11082,7 @@
 						{ "px": [192,288], "src": [64,0], "f": 0, "t": 4, "d": [876] },
 						{ "px": [208,288], "src": [64,0], "f": 0, "t": 4, "d": [877] },
 						{ "px": [224,288], "src": [0,16], "f": 0, "t": 30, "d": [878] },
+						{ "px": [160,304], "src": [160,48], "f": 0, "t": 100, "d": [922] },
 						{ "px": [96,320], "src": [32,16], "f": 0, "t": 32, "d": [966] },
 						{ "px": [112,320], "src": [64,0], "f": 0, "t": 4, "d": [967] },
 						{ "px": [128,320], "src": [64,0], "f": 0, "t": 4, "d": [968] },
@@ -11045,6 +11091,8 @@
 						{ "px": [208,352], "src": [64,0], "f": 0, "t": 4, "d": [1069] },
 						{ "px": [224,352], "src": [0,16], "f": 0, "t": 30, "d": [1070] },
 						{ "px": [112,368], "src": [160,64], "f": 1, "t": 130, "d": [1111] },
+						{ "px": [432,384], "src": [160,48], "f": 0, "t": 100, "d": [1179] },
+						{ "px": [496,384], "src": [160,48], "f": 0, "t": 100, "d": [1183] },
 						{ "px": [464,400], "src": [368,0], "f": 0, "t": 23, "d": [1229] },
 						{ "px": [384,416], "src": [160,48], "f": 0, "t": 100, "d": [1272] },
 						{ "px": [464,416], "src": [368,16], "f": 0, "t": 53, "d": [1277] },
@@ -13426,6 +13474,50 @@
 								{ "__identifier": "startX", "__value": 0, "__type": "Int", "defUid": 86, "realEditorValues": [] },
 								{ "__identifier": "startY", "__value": 0, "__type": "Int", "defUid": 87, "realEditorValues": [] }
 							]
+						},
+						{
+							"__identifier": "Light",
+							"__grid": [18,20],
+							"__pivot": [0,0],
+							"__tile": null,
+							"width": 16,
+							"height": 16,
+							"defUid": 82,
+							"px": [288,320],
+							"fieldInstances": []
+						},
+						{
+							"__identifier": "Light",
+							"__grid": [27,20],
+							"__pivot": [0,0],
+							"__tile": null,
+							"width": 16,
+							"height": 16,
+							"defUid": 82,
+							"px": [432,320],
+							"fieldInstances": []
+						},
+						{
+							"__identifier": "Light",
+							"__grid": [34,20],
+							"__pivot": [0,0],
+							"__tile": null,
+							"width": 16,
+							"height": 16,
+							"defUid": 82,
+							"px": [544,320],
+							"fieldInstances": []
+						},
+						{
+							"__identifier": "Light",
+							"__grid": [43,20],
+							"__pivot": [0,0],
+							"__tile": null,
+							"width": 16,
+							"height": 16,
+							"defUid": 82,
+							"px": [688,320],
+							"fieldInstances": []
 						}
 					]
 				},
@@ -15305,6 +15397,50 @@
 							"height": 16,
 							"defUid": 81,
 							"px": [32,112],
+							"fieldInstances": []
+						},
+						{
+							"__identifier": "Light",
+							"__grid": [9,6],
+							"__pivot": [0,0],
+							"__tile": null,
+							"width": 16,
+							"height": 16,
+							"defUid": 82,
+							"px": [144,96],
+							"fieldInstances": []
+						},
+						{
+							"__identifier": "Light",
+							"__grid": [10,11],
+							"__pivot": [0,0],
+							"__tile": null,
+							"width": 16,
+							"height": 16,
+							"defUid": 82,
+							"px": [160,176],
+							"fieldInstances": []
+						},
+						{
+							"__identifier": "Light",
+							"__grid": [15,9],
+							"__pivot": [0,0],
+							"__tile": null,
+							"width": 16,
+							"height": 16,
+							"defUid": 82,
+							"px": [240,144],
+							"fieldInstances": []
+						},
+						{
+							"__identifier": "Light",
+							"__grid": [4,12],
+							"__pivot": [0,0],
+							"__tile": null,
+							"width": 16,
+							"height": 16,
+							"defUid": 82,
+							"px": [64,192],
 							"fieldInstances": []
 						}
 					]
