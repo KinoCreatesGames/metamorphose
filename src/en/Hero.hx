@@ -43,6 +43,8 @@ class Hero extends Entity {
   public static inline var KNOCKBACK_FORCE:Float = 0.5;
   public static inline var ATTACK_TIME:Float = 0.5;
 
+  public var indicator:h2d.Graphics;
+
   /**
    * Knockback cool down period before setting direction back
    */
@@ -89,11 +91,24 @@ class Hero extends Entity {
     dashUnlock = false;
     #end
     // Add in pixel outline shader
+    setupIndicator();
     setupAnimations();
     ct = Main.ME.controller.createAccess('hero');
     camera.trackEntity(this, true);
     loadPlayerInfo();
     Game.ME.invalidateHud();
+  }
+
+  public function setupIndicator() {
+    var tile = hxd.Res.img.indicator.toTile();
+    indicator = new h2d.Graphics(spr);
+    var scale = 2;
+    indicator.beginTileFill(0, 0, scale, scale, tile);
+    indicator.drawRect(0, 0, tile.width * scale, tile.height * scale);
+    indicator.endFill();
+    indicator.y -= tile.height * (scale + 1.2);
+    indicator.x -= (tile.width * 0.5);
+    indicator.visible = false;
   }
 
   public function setupAnimations() {
@@ -302,20 +317,24 @@ class Hero extends Entity {
     var event = level.eventCollided(cx, cy);
     if (event != null && !Game.ME.eventExists(event.eventName)) {
       // If button pressed
+      indicator.visible = true;
       if (ct.bPressed() || ct.isAnyKeyPressed([K.Z, K.K, K.X])) {
         // Run Event
         var msgWin = Game.ME.msgWin;
         if (msgWin != null && !msgWin.win.visible) {
           // Run Event
-          var event = depot.DepotData.Dialogue.lines.getByFn((line) ->
+          var depotEvent = depot.DepotData.Dialogue.lines.getByFn((line) ->
             line.name == event.eventName);
-          var allText = event.text.map((text) -> text.str);
+          var allText = depotEvent.text.map((text) -> text.str);
           // Send Event to the save data before finishing
+          Game.ME.saveEvent(event.eventName);
           msgWin.show();
           msgWin.sendMsgs(allText);
           Game.ME.pause();
         }
       }
+    } else {
+      indicator.visible = false;
     }
   }
 
