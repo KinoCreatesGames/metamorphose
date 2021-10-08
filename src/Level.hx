@@ -418,6 +418,10 @@ class Level extends dn.Process {
       enemy.dispose();
     }
 
+    for (event in eventGrp) {
+      event.dispose();
+    }
+
     for (hazard in hazardGrp) {
       hazard.dispose();
     }
