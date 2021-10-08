@@ -37,7 +37,7 @@ class MsgWindow extends dn.Process {
 
     // Setup window to be the size of the screen size
     win.minHeight = Std.int((h() / 3));
-    win.minWidth = Std.int(w());
+    win.minWidth = Std.int(w() * 0.75);
     setupText();
     win.interactive.onClick = (event) -> {
       advanceText();
@@ -100,15 +100,14 @@ class MsgWindow extends dn.Process {
     // This would scale the entire components within as well
     // if (root.scaleX != Const.UI_SCALE) {
     // root.scale(Const.UI_SCALE);
-    // trace(Const.UI_SCALE);
 
     // var w = M.ceil(w() / Const.UI_SCALE);
     // var h = M.ceil(h() / Const.UI_SCALE);
     // win.x = Std.int(w * 0.5 - win.outerWidth * 0.5);
     // win.y = Std.int(h * 0.5 - win.outerHeight * 0.5);
-    win.minHeight = Std.int((h() / 3));
-    win.minWidth = Std.int(w());
-    win.x = 0;
+    // win.minHeight = Std.int((h() / 3));
+    // win.minWidth = Std.int(w());
+    win.x = (w() * 0.5 - (win.outerWidth * 0.5));
     win.y = (h() - win.minHeight);
     win.reflow();
   }

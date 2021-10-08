@@ -449,6 +449,7 @@ class Hero extends Entity {
         case _:
           // do nothing
       }
+      hxd.Res.sound.collect_collectible.play();
       collectible.destroy();
     }
   }
