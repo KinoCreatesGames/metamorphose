@@ -1,3 +1,4 @@
+import ui.FadeToBlack;
 import hxd.snd.Channel;
 import h2d.Flow.FlowAlign;
 
@@ -15,6 +16,7 @@ class Credits extends dn.Process {
 
   public var complete:Bool;
   public var win:h2d.Flow;
+  public var transition:FadeToBlack;
 
   public function new() {
     super(Game.ME);
@@ -76,9 +78,14 @@ class Credits extends dn.Process {
     // Hit Escape to exit the credits screen
     var exitCredits = ca.isKeyboardPressed(K.ESCAPE)
       || ca.isAnyKeyPressed([K.C, K.X]);
-    if (exitCredits) {
+    if (exitCredits && transition == null) {
+      // new Title();
+      transition = new FadeToBlack();
+    }
+    if (transition != null && transition.complete) {
+      this.destroy();
+      transition.destroy();
       new Title();
-      destroy();
     }
   }
 
