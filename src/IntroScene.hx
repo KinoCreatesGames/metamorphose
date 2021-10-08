@@ -1,3 +1,5 @@
+import ui.FadeToBlack;
+
 class IntroScene extends dn.Process {
   public var win:h2d.Flow;
   public var text:h2d.Text;
@@ -11,6 +13,7 @@ class IntroScene extends dn.Process {
   public var complete:Bool;
   public var completeScene:Bool;
   public var callBack:Void -> Void;
+  public var transition:FadeToBlack;
 
   public static inline var FRAME_DELAY:Int = 3;
 
@@ -80,9 +83,15 @@ class IntroScene extends dn.Process {
 
   override function update() {
     super.update();
-    if (complete && completeScene) {
+
+    if (complete && completeScene && transition == null) {
+      transition = new FadeToBlack();
+    }
+
+    if (transition != null && transition.complete) {
       callBack();
       this.destroy();
+      transition.destroy();
     }
   }
 
