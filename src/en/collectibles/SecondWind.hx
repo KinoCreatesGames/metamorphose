@@ -14,8 +14,7 @@ class SecondWind extends Collectible {
     tile.setPosition(256, 48);
     var size = 16;
     var g = new h2d.Graphics(spr);
-    // g.beginTileFill(0, 0, 1, 1, tile);
-    g.beginFill(0xffA0ff, 1);
+    g.beginTileFill(0, 0, 1, 1, tile);
     g.drawRect(0, 0, size, size);
     g.endFill();
     g.y -= (size - size * 0.25);
