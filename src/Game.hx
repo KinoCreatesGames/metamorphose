@@ -29,6 +29,11 @@ class Game extends Process {
   public var hud:ui.Hud;
 
   /**
+   * In game notifications during item pick ups.
+   */
+  public var notify:ui.Notification;
+
+  /**
    * Project file for LDtk in here.
    */
   public var proj:LDTkProj;
