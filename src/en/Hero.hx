@@ -467,6 +467,8 @@ class Hero extends Entity {
         case en.collectibles.SecondWind:
           // Unlocks the double jump
           doubleJumpUnlock = true;
+          Game.ME.notification("You've unlocked the second wind.
+          You can now double jump.");
           savePlayerInfo();
         case en.collectibles.ViridescentWings:
           dashUnlock = true;

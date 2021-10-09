@@ -17,9 +17,9 @@ class Checkpoint extends Entity {
   public function new(checkpoint:Entity_Checkpoint) {
     super(checkpoint.cx, checkpoint.cy);
     id = '${checkpoint.cx}-${checkpoint.cy}';
-    var g = new h2d.Graphics(spr);
-    g.beginFill(0xa0a0ff);
-    g.drawRect(0, 0, 16, 16);
-    g.endFill();
+    var ase = hxd.Res.img.diamond_checkpoint.toAseprite();
+    var dia = dn.heaps.assets.Aseprite.convertToSLib(Const.FPS, ase);
+    spr.set(dia);
+    spr.anim.playAndLoop('idle');
   }
 }

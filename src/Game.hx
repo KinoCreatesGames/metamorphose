@@ -74,6 +74,8 @@ class Game extends Process {
 
   public function startInitialGame() {
     fx = new Fx();
+    notify = new ui.Notification();
+    notify.hide();
     hud = new ui.Hud();
     // Render ldtk level
     new Transition();
@@ -206,6 +208,12 @@ class Game extends Process {
 
       // Restart
       if (ca.selectPressed()) Main.ME.startGame();
+    }
+  }
+
+  public function notification(msg:String) {
+    if (notify != null) {
+      notify.sendMsg(msg);
     }
   }
 

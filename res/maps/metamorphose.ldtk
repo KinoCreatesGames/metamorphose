@@ -15467,6 +15467,17 @@
 							"defUid": 82,
 							"px": [64,192],
 							"fieldInstances": []
+						},
+						{
+							"__identifier": "Player",
+							"__grid": [22,7],
+							"__pivot": [0,0],
+							"__tile": null,
+							"width": 16,
+							"height": 16,
+							"defUid": 10,
+							"px": [352,112],
+							"fieldInstances": []
 						}
 					]
 				},
