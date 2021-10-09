@@ -456,6 +456,8 @@ class Hero extends Entity {
           // health
           HEALTH_CAP++;
           health = M.iclamp(HEALTH_CAP, 0, HEALTH_CAP);
+          Game.ME.notification("You've collected Golden Heart.
+          Your health has increased by one.");
           Game.ME.invalidateHud();
         case en.collectibles.WingBeat:
           attackUnlock = true;
@@ -467,10 +469,12 @@ class Hero extends Entity {
         case en.collectibles.SecondWind:
           // Unlocks the double jump
           doubleJumpUnlock = true;
-          Game.ME.notification("You've unlocked the second wind.
+          Game.ME.notification("You've unlocked the Second Wind.
           You can now double jump.");
           savePlayerInfo();
         case en.collectibles.ViridescentWings:
+          Game.ME.notification("You've unlocked the Viridescent Wings.
+          You can now dash.");
           dashUnlock = true;
           savePlayerInfo();
         case _:
