@@ -59,10 +59,9 @@ class Game extends Process {
     camera.clampToLevelBounds = false;
     msgWin = new MsgWindow();
     msgWin.hide();
-    // startInitialGame();
+
     #if debug
-    new Title();
-    // startInitialGame();
+    startInitialGame();
     #else
     title = new Title();
     #end

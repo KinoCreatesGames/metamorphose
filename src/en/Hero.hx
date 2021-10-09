@@ -38,7 +38,7 @@ class Hero extends Entity {
   public static inline var DASH_FORCE:Float = 1.2;
   public static inline var DASH_TIME:Float = 0.25;
   public static inline var MAX_SPEED:Float = 0.125;
-  public static inline var HEALTH_CAP:Int = 3;
+  public static var HEALTH_CAP:Int = 3;
   public static inline var INVINCIBLE_TIME:Float = 1.5;
   public static inline var KNOCKBACK_FORCE:Float = 0.5;
   public static inline var ATTACK_TIME:Float = 0.5;
@@ -450,6 +450,12 @@ class Hero extends Entity {
         case en.collectibles.Heart:
           // Restore player health by 1
           health = M.iclamp(health + 1, 0, HEALTH_CAP);
+          Game.ME.invalidateHud();
+        case en.collectibles.HealthUp:
+          // Increases Health and completely restores the player
+          // health
+          HEALTH_CAP++;
+          health = M.iclamp(HEALTH_CAP, 0, HEALTH_CAP);
           Game.ME.invalidateHud();
         case en.collectibles.WingBeat:
           attackUnlock = true;

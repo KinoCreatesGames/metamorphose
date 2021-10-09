@@ -1,3 +1,4 @@
+import en.collectibles.HealthUp;
 import en.collectibles.SecondWind;
 import en.collectibles.ViridescentWings;
 import en.enemy.Sslug;
@@ -135,6 +136,10 @@ class Level extends dn.Process {
     // Collectibles
     for (heart in data.l_Entities.all_Heart) {
       collectibleGrp.push(new Heart(heart.cx, heart.cy));
+    }
+
+    for (healthUp in data.l_Entities.all_HealthUp) {
+      collectibleGrp.push(new HealthUp(healthUp.cx, healthUp.cy));
     }
 
     for (gKey in data.l_Entities.all_GameKey) {
