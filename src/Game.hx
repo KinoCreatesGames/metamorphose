@@ -119,6 +119,10 @@ class Game extends Process {
   @:allow(Assets)
   function onLDtkReload() {
     trace('LDTk file reloaded');
+    reloadCurrentLevel();
+  }
+
+  public function reloadCurrentLevel() {
     if (level != null) {
       if (level.data != null) {
         startLevel(Assets.projData.getLevel(level.data.uid));
@@ -207,7 +211,11 @@ class Game extends Process {
       #end
 
       // Restart
-      if (ca.selectPressed()) Main.ME.startGame();
+      if (ca.selectPressed()) {
+        // Restart the level on select
+        // Main.ME.startGame();
+        reloadCurrentLevel();
+      }
     }
   }
 
