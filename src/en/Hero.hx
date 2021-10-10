@@ -447,6 +447,7 @@ class Hero extends Entity {
     if (level.hasAnyCollectibleCollision(cx, cy)) {
       var collectible = level.collidedCollectible(cx, cy);
       var collectibleType = Type.getClass(collectible);
+      var identifier = '${Game.ME.level.data.uid}-${collectible.cx}-${collectible.cy}';
       switch (collectibleType) {
         case en.collectibles.Heart:
           // Restore player health by 1
@@ -457,27 +458,31 @@ class Hero extends Entity {
           // health
           HEALTH_CAP++;
           health = M.iclamp(HEALTH_CAP, 0, HEALTH_CAP);
-          Game.ME.notification("You've collected Golden Heart.
-          Your health has increased by one.");
+          Game.ME.notification("You've collected Golden Heart. Your health has increased by one.");
           Game.ME.invalidateHud();
+          Game.ME.savePermItem(identifier);
         case en.collectibles.WingBeat:
           attackUnlock = true;
           savePlayerInfo();
+          Game.ME.savePermItem(identifier);
         case en.collectibles.Key:
           keys += 1;
           Game.ME.invalidateHud();
           savePlayerInfo();
+          Game.ME.savePermItem(identifier);
         case en.collectibles.SecondWind:
           // Unlocks the double jump
           doubleJumpUnlock = true;
           Game.ME.notification("You've unlocked the Second Wind.
           You can now double jump.");
           savePlayerInfo();
+          Game.ME.savePermItem(identifier);
         case en.collectibles.ViridescentWings:
           Game.ME.notification("You've unlocked the Viridescent Wings.
           You can now dash.");
           dashUnlock = true;
           savePlayerInfo();
+          Game.ME.savePermItem(identifier);
         case _:
           // do nothing
       }

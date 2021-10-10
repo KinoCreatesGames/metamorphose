@@ -32,4 +32,5 @@ enum abstract LC(String) from String to String {
   var PLAYER_INFO:String = 'PlayerInfo';
   var KNOCKBACK:String = 'Knockback';
   var EVENT_LIST:String = 'eventList';
+  var PERM_LIST:String = 'permList';
 }

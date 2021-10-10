@@ -4,6 +4,8 @@ package en.collectibles;
  * Adds a permanent health upgrade to the player when picked up
  */
 class HealthUp extends Collectible {
+  public var levelUID:String;
+
   override public function setSprite() {
     var tile = hxd.Res.img.heart_gold.toTile();
     var g = new h2d.Graphics(spr);

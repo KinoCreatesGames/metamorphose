@@ -105,6 +105,10 @@ class Level extends dn.Process {
   }
 
   public function createEntities() {
+    /**
+     * A player entity must be placed within the game 
+     * stage in order to spawn a player.
+     */
     for (player in data.l_Entities.all_Player) {
       // If checkpoint was reached restart at checkpoint position instead
       // Or Game over set in main game
@@ -113,10 +117,20 @@ class Level extends dn.Process {
         var result = SavedData.load(CHK_COORDS, {x: 0, y: 0});
         plHero = new Hero(result.x, result.y);
         Game.ME.resumeGameOver = false;
+        #if debug
+        trace('Start with checkpoint coordinates');
+        #end
       } else {
         if (startX != -1) {
+          trace(startX);
+          #if debug
+          trace('Start with exit coordinates ');
+          #end
           plHero = new Hero(startX, startY);
         } else {
+          #if debug
+          trace('Start with player entity coordinates.');
+          #end
           plHero = new Hero(player.cx, player.cy);
         }
       }
@@ -139,19 +153,32 @@ class Level extends dn.Process {
     }
 
     for (healthUp in data.l_Entities.all_HealthUp) {
-      collectibleGrp.push(new HealthUp(healthUp.cx, healthUp.cy));
+      var identifier = '${data.uid}-${healthUp.cx}-${healthUp.cy}';
+      if (!Game.ME.permExists(identifier)) {
+        var hUp = new HealthUp(healthUp.cx, healthUp.cy);
+        collectibleGrp.push(hUp);
+      }
     }
 
     for (gKey in data.l_Entities.all_GameKey) {
-      collectibleGrp.push(new Key(gKey));
+      var identifier = '${data.uid}-${gKey.cx}-${gKey.cy}';
+      if (!Game.ME.permExists(identifier)) {
+        collectibleGrp.push(new Key(gKey));
+      }
     }
 
     for (lVWing in data.l_Entities.all_ViridescentWings) {
-      collectibleGrp.push(new ViridescentWings(lVWing));
+      var identifier = '${data.uid}-${lVWing.cx}-${lVWing.cy}';
+      if (!Game.ME.permExists(identifier)) {
+        collectibleGrp.push(new ViridescentWings(lVWing));
+      }
     }
 
     for (lSWind in data.l_Entities.all_SecondWind) {
-      collectibleGrp.push(new SecondWind(lSWind));
+      var identifier = '${data.uid}-${lSWind.cx}-${lSWind.cy}';
+      if (!Game.ME.permExists(identifier)) {
+        collectibleGrp.push(new SecondWind(lSWind));
+      }
     }
 
     // Hazards
@@ -220,6 +247,7 @@ class Level extends dn.Process {
     root.removeChildren();
     // Render Auto Layer
     var tileGroup = data.l_Background.render();
+    data.l_Background2.render(tileGroup);
     data.l_AutoTiles.render(tileGroup);
 
     /**

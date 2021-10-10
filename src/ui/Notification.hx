@@ -39,6 +39,7 @@ class Notification extends dn.Process {
     text = new h2d.Text(Assets.fontMedium, win);
     text.text = '';
     text.maxWidth = win.minWidth - (padding * 2);
+    text.textAlign = Center;
     text.textColor = 0xffffff;
   }
 

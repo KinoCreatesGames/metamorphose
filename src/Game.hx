@@ -73,6 +73,7 @@ class Game extends Process {
   }
 
   public function startInitialGame() {
+    clearNewGameData();
     fx = new Fx();
     notify = new ui.Notification();
     notify.hide();
@@ -225,6 +226,12 @@ class Game extends Process {
     }
   }
 
+  public function clearNewGameData() {
+    SavedData.delete(CHK_COORDS);
+    SavedData.delete(PERM_LIST);
+    SavedData.delete(EVENT_LIST);
+  }
+
   /**
    * Clear temporary save data when you're playing a level or
    * find a switch in the game.
@@ -232,6 +239,34 @@ class Game extends Process {
   public function clearTempSaveData() {
     if (SavedData.exists(CHK_COORDS)) {
       SavedData.delete(CHK_COORDS);
+    }
+  }
+
+  public function savePermItem(identifier:String) {
+    trace(identifier);
+    if (SavedData.exists(PERM_LIST)) {
+      var permList = SavedData.load(PERM_LIST, {
+        perms: []
+      });
+      permList.perms.push(identifier);
+      SavedData.save(PERM_LIST, {
+        perms: permList.perms
+      });
+    } else {
+      SavedData.save(PERM_LIST, {
+        perms: [identifier]
+      });
+    }
+  }
+
+  public function permExists(identifier:String) {
+    if (SavedData.exists(PERM_LIST)) {
+      var permList = SavedData.load(PERM_LIST, {
+        perms: []
+      });
+      return permList.perms.contains(identifier);
+    } else {
+      return false;
     }
   }
 
