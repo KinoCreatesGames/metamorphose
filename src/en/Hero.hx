@@ -75,7 +75,8 @@ class Hero extends Entity {
     // Debug drags entity location, therefore in the final build we'd shift sprite position up
     // To offset the position in the game to make it more natural
     // Assuming platformer 0.5 would be the halfway point for the feet so offset by half sprite size
-    spr.filter = new PixelOutline(0xff70af, 1);
+    spr.filter = new PixelOutline(0x0, 1);
+    // spr.filter = new PixelOutline(0xff70af, 1);
     // var g = new h2d.Graphics(spr);
     // g.beginFill(0xffffff);
     // g.drawRect(0, 0, 16, 16);
@@ -113,7 +114,7 @@ class Hero extends Entity {
 
   public function setupAnimations() {
     var hero = Aseprite.convertToSLib(Const.FPS,
-      hxd.Res.img.mc_first.toAseprite());
+      hxd.Res.img.mc_second.toAseprite());
     spr.set(hero);
     spr.anim.registerStateAnim('hurt', 12, 1, () -> cd.has('knockback'));
     spr.anim.registerStateAnim('attack', 2, 1, () -> cd.has('attacking'));
