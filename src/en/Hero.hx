@@ -461,6 +461,7 @@ class Hero extends Entity {
           Game.ME.notification("You've collected Golden Heart. Your health has increased by one.");
           Game.ME.invalidateHud();
           Game.ME.savePermItem(identifier);
+          savePlayerInfo();
         case en.collectibles.WingBeat:
           attackUnlock = true;
           savePlayerInfo();

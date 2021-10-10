@@ -12,13 +12,15 @@ class MsgWindow extends dn.Process {
   public var textBuffer:String;
   public var allText:Array<String>;
   public var textIndex:Int;
+  public var ct:dn.heaps.Controller.ControllerAccess;
 
   public function new() {
-    super(Game.ME);
+    super(Main.ME);
 
     createRootInLayers(Game.ME.root, Const.DP_UI);
     // Pixel Perfect Rendering
     root.filter = new h2d.filter.ColorMatrix();
+    ct = Main.ME.controller.createAccess('msg');
     textIndex = -1;
     setupWindow();
     Process.resizeAll();
@@ -63,7 +65,6 @@ class MsgWindow extends dn.Process {
 
   public function sendMsgs(textData:Array<String>) {
     allText = textData;
-    advanceText();
   }
 
   public function advanceText() {
@@ -94,6 +95,13 @@ class MsgWindow extends dn.Process {
     onResize();
   }
 
+  override function update() {
+    if (ct.bPressed() || ct.isAnyKeyPressed([K.ESCAPE, K.X, K.Z])) {
+      advanceText();
+    }
+    super.update();
+  }
+
   override function onResize() {
     super.onResize();
     // Scales the root with the UI
@@ -114,16 +122,19 @@ class MsgWindow extends dn.Process {
 
   public function hide() {
     this.win.visible = false;
+    ct.releaseExclusivity();
   }
 
   public function show() {
     this.win.visible = true;
+    ct.takeExclusivity();
   }
 
   function onClose() {}
 
   public function close() {
     if (!destroyed) {
+      ct.releaseExclusivity();
       destroy();
       onClose();
     }

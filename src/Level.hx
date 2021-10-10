@@ -116,6 +116,7 @@ class Level extends dn.Process {
       if (Game.ME.resumeGameOver && SavedData.exists(CHK_COORDS)) {
         var result = SavedData.load(CHK_COORDS, {x: 0, y: 0});
         plHero = new Hero(result.x, result.y);
+        plHero.health = Hero.HEALTH_CAP;
         Game.ME.resumeGameOver = false;
         #if debug
         trace('Start with checkpoint coordinates');
