@@ -80,7 +80,7 @@ class Game extends Process {
     hud = new ui.Hud();
     // Render ldtk level
     new Transition();
-    startLevel(proj.all_levels.Level_0);
+    startLevel(proj.all_levels.Level_2);
 
     Process.resizeAll();
     trace(Lang.t._("Game is ready."));
@@ -243,7 +243,6 @@ class Game extends Process {
   }
 
   public function savePermItem(identifier:String) {
-    trace(identifier);
     if (SavedData.exists(PERM_LIST)) {
       var permList = SavedData.load(PERM_LIST, {
         perms: []

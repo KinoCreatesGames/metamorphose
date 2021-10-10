@@ -49,10 +49,10 @@ class Hud extends dn.Process {
     key = new h2d.Graphics(subFlow);
     // Draw Key Icon
     key.clear();
-    var scale = 2;
+    var scale = 1;
     var tile = hxd.Res.img.game_key.toTile();
-    key.beginTileFill(0, 8, 1.5, 1.5, tile);
-    key.drawRect(0, 0, (tile.width * 1.5), (tile.height * scale));
+    key.beginTileFill(0, 0, scale, scale, tile);
+    key.drawRect(0, 0, (tile.width * scale), (tile.height * scale));
     key.endFill();
   }
 
@@ -89,7 +89,7 @@ class Hud extends dn.Process {
 
       var tile = hxd.Res.img.heart.toTile();
       for (i in 0...plHealth) {
-        var scale = 2;
+        var scale = 1;
         health.beginTileFill(i * tile.width * scale, 0, scale, scale, tile);
         health.drawRect(i * tile.width * scale, 0, tile.width * scale,
           tile.height * scale);

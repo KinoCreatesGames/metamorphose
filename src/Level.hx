@@ -123,7 +123,6 @@ class Level extends dn.Process {
         #end
       } else {
         if (startX != -1) {
-          trace(startX);
           #if debug
           trace('Start with exit coordinates ');
           #end
@@ -393,7 +392,7 @@ class Level extends dn.Process {
    */
   public function collidedMPlat(x:Int, y:Int) {
     return hazardGrp.filter((hazard) -> return (hazard.cx == x
-      || hazard.cx + 1 == x)
+      || (hazard.cx + 1) == x)
       && hazard.cy == y
       && Std.isOfType(hazard, en.hazard.MovingPlatform))
       .first();
@@ -401,7 +400,7 @@ class Level extends dn.Process {
 
   public function collidedDoor(x:Int, y:Int):en.hazard.Door {
     return cast hazardGrp.filter((hazard) -> return hazard.cx == x
-      && (hazard.cy == y || hazard.cy + 1 == y)
+      && ((hazard.cy == y) || (hazard.cy + 1) == y || (hazard.cy - 1) == y)
       && Std.isOfType(hazard, en.hazard.Door))
       .first();
   }

@@ -400,12 +400,12 @@ class Hero extends Entity {
   public function doorCollisions() {
     if (level.collidedDoor(cx - 1, cy) != null
       || level.collidedDoor(cx + 1, cy) != null) {
-      var lftHazard = level.collidedHazard(cx - 1, cy);
+      var lftHazard = level.collidedDoor(cx - 1, cy);
 
-      var rightHazard = level.collidedHazard(cx + 1, cy);
+      var rightHazard = level.collidedDoor(cx + 1, cy);
 
-      if (lftHazard != null && Std.isOfType(lftHazard, en.hazard.Door)) {
-        var door:Door = cast lftHazard;
+      if (lftHazard != null) {
+        var door:Door = lftHazard;
         if (!door.unlocked && this.keys > 0) {
           door.unlocked = true;
           this.keys -= 1;
@@ -419,8 +419,8 @@ class Hero extends Entity {
           // Reject and move backwards
         }
       }
-      if (rightHazard != null && Std.isOfType(rightHazard, en.hazard.Door)) {
-        var door:Door = cast rightHazard;
+      if (rightHazard != null) {
+        var door:Door = rightHazard;
         if (!door.unlocked && this.keys > 0) {
           door.unlocked = true;
           this.keys -= 1;
@@ -648,6 +648,16 @@ class Hero extends Entity {
       canJump = false;
       isOnFloor = false;
     }
+  }
+
+  override function preUpdate() {
+    doorCollisions();
+    super.preUpdate();
+  }
+
+  override function postUpdate() {
+    doorCollisions();
+    super.postUpdate();
   }
 
   public function applyPhysics() {
