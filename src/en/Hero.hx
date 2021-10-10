@@ -424,6 +424,7 @@ class Hero extends Entity {
         if (!door.unlocked && this.keys > 0) {
           door.unlocked = true;
           this.keys -= 1;
+          Game.ME.invalidateHud();
         }
         if (door.unlocked) {
           // Can pass through
