@@ -1,3 +1,4 @@
+import en.hazard.Lantern;
 import en.collectibles.HealthUp;
 import en.collectibles.SecondWind;
 import en.collectibles.ViridescentWings;
@@ -184,6 +185,11 @@ class Level extends dn.Process {
     // Hazards
     for (bPad in data.l_Entities.all_BouncePad) {
       hazardGrp.push(new BouncePad(bPad));
+    }
+
+    // Lanterns
+    for (lLantern in data.l_Entities.all_Lantern) {
+      hazardGrp.push(new Lantern(lLantern));
     }
 
     for (lSpike in data.l_Entities.all_Spike) {

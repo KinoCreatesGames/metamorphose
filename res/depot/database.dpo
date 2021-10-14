@@ -572,6 +572,107 @@
                             "id": "1"
                         }
                     ]
+                },
+                {
+                    "guid": "9deb6527-c3c7-4ec5-bc55-dff41f8ff898",
+                    "id": "3",
+                    "name": "SameOldHawk",
+                    "text": [
+                        {
+                            "guid": "4f7ca2cd-f8be-4127-9d8e-2eee5ccceb6c",
+                            "str": "Hmm, what does this one say...",
+                            "id": "0"
+                        },
+                        {
+                            "guid": "9cd1fdf9-b47a-464e-b0a2-e37db9dca408",
+                            "str": "An interesting thing occurred once during an experiment. We spliced a green bird-like creature with a Welwitschia plant. ",
+                            "id": "1"
+                        },
+                        {
+                            "guid": "dfa9ef1d-11c3-44af-9b71-61a22fe9cd55",
+                            "str": "The resulting alternations to the genetic data resulted in a bird zombie, very much immortal. We would name this species, but we would rather avoid a lawsuit.",
+                            "id": "2"
+                        },
+                        {
+                            "guid": "3a653a3d-8a0f-4d3c-9114-159087c95e81",
+                            "str": "Huh, weird message. Very interesting though!",
+                            "id": "3"
+                        }
+                    ]
+                },
+                {
+                    "guid": "ac2fa3ca-a663-40d8-bb89-5728cc6c104a",
+                    "id": "4",
+                    "name": "FinalBossExposition",
+                    "text": [
+                        {
+                            "guid": "a192344c-ccac-4910-90e4-f1d71170e741",
+                            "str": "Hmm, what does this say...",
+                            "id": "0"
+                        },
+                        {
+                            "guid": "42cfbadb-81aa-411b-b6bf-8d2b7d80bc0d",
+                            "str": "Our wildest dreams have been answered. No one has to work Everything is handled by our Aculuma. ",
+                            "id": "1"
+                        },
+                        {
+                            "guid": "99ae69e1-f0c1-4421-803c-77bcc2dabcb9",
+                            "str": "They maintain the fields, cook our food, and keep us in perfect health. They have done much to make our society a better place. ",
+                            "id": "2"
+                        },
+                        {
+                            "guid": "d16031b7-9edd-4bd2-8e6e-995d6a28a009",
+                            "str": "Our people also seem to show sudden shifts in their appearance with all the changes taking place around them. Some of them have even grown wings.",
+                            "id": "3"
+                        },
+                        {
+                            "guid": "3d9525b4-08ef-467d-a196-1e8b9c744668",
+                            "str": "Huh, what are Aculuma?",
+                            "id": "4"
+                        },
+                        {
+                            "guid": "06d15136-d63c-49c3-826a-733b631946d5",
+                            "str": "Also our people can grow wings? Why has no one talked about this in our village?",
+                            "id": "5"
+                        }
+                    ]
+                },
+                {
+                    "guid": "c862f12b-8283-4952-85ce-9e365d2268f3",
+                    "id": "5",
+                    "name": "FinalScene",
+                    "text": [
+                        {
+                            "guid": "f1ebcf99-3e51-43ee-ab48-60933a28ed61",
+                            "str": "I found the truth;  a wealth of knowledge. Lost to my people.",
+                            "id": "0"
+                        },
+                        {
+                            "guid": "5834dd4b-ba6e-4a52-9ab2-6c5d8e12f460",
+                            "str": "Their history and accomplishments were tossed aside. Due to a couple of bad apples.",
+                            "id": "1"
+                        },
+                        {
+                            "guid": "2d0b2f80-2483-4de1-bd90-ad4487811caf",
+                            "str": "But, I thought to myself...",
+                            "id": "2"
+                        },
+                        {
+                            "guid": "3c93125d-cca1-479d-97bf-6e2bfe306b88",
+                            "str": "Not all innovation and change lead to ruin. We don't need to repeat the mistakes of our ancestors.",
+                            "id": "3"
+                        },
+                        {
+                            "guid": "c0d1ce66-a5e6-4460-a56c-4971863c3230",
+                            "str": "We can do better, we can make sure our history doesn't repeat itself. We can cast off the old ways of our current society and work together.",
+                            "id": "4"
+                        },
+                        {
+                            "guid": "4961ed06-fe1f-4862-976d-1b495a3cfc9d",
+                            "str": "Whether it happens or not is anyone's guess, but I'll do my best to make sure it happens in my lifetime.",
+                            "id": "5"
+                        }
+                    ]
                 }
             ],
             "hidden": false,
