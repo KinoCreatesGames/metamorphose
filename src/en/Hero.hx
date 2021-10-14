@@ -412,12 +412,16 @@ class Hero extends Entity {
 
       if (lftHazard != null) {
         var door:Door = lftHazard;
-        if (!door.unlocked && this.keys > 0) {
+        var identifier = '${Game.ME.level.data.uid}-${door.cx}-${door.cy}';
+        if (!door.unlocked && this.keys > 0 || Game.ME.permExists(identifier)) {
           door.unlocked = true;
           this.keys -= 1;
           Game.ME.invalidateHud();
         }
         if (door.unlocked) {
+          // Save door unlocked to the level data
+
+          Game.ME.savePermItem(identifier);
           // Can pass through
         } else {
           xr = 0.5;
@@ -427,13 +431,16 @@ class Hero extends Entity {
       }
       if (rightHazard != null) {
         var door:Door = rightHazard;
-        if (!door.unlocked && this.keys > 0) {
+        var identifier = '${Game.ME.level.data.uid}-${door.cx}-${door.cy}';
+        if (!door.unlocked && this.keys > 0 || Game.ME.permExists(identifier)) {
           door.unlocked = true;
           this.keys -= 1;
           Game.ME.invalidateHud();
         }
         if (door.unlocked) {
           // Can pass through
+
+          Game.ME.savePermItem(identifier);
         } else {
           xr = 0.1;
           dx = 0;
