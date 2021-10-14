@@ -9,7 +9,7 @@
 		"url": "https://ldtk.io"
 	},
 	"jsonVersion": "0.9.3",
-	"nextUid": 109,
+	"nextUid": 108,
 	"worldLayout": "GridVania",
 	"worldGridWidth": 128,
 	"worldGridHeight": 128,
@@ -1461,31 +1461,6 @@
 			"limitBehavior": "MoveLastOne",
 			"pivotX": 0.5,
 			"pivotY": 0.5,
-			"fieldDefs": []
-		},
-		{
-			"identifier": "Core",
-			"uid": 108,
-			"tags": [],
-			"width": 16,
-			"height": 16,
-			"resizableX": false,
-			"resizableY": false,
-			"keepAspectRatio": false,
-			"fillOpacity": 1,
-			"lineOpacity": 1,
-			"hollow": false,
-			"color": "#60B4D4",
-			"renderMode": "Ellipse",
-			"showName": true,
-			"tilesetId": null,
-			"tileId": null,
-			"tileRenderMode": "Stretch",
-			"maxCount": 0,
-			"limitScope": "PerLevel",
-			"limitBehavior": "MoveLastOne",
-			"pivotX": 0,
-			"pivotY": 0,
 			"fieldDefs": []
 		}
 	], "tilesets": [
@@ -28923,17 +28898,6 @@
 							"height": 16,
 							"defUid": 107,
 							"px": [184,136],
-							"fieldInstances": []
-						},
-						{
-							"__identifier": "Core",
-							"__grid": [14,9],
-							"__pivot": [0,0],
-							"__tile": null,
-							"width": 16,
-							"height": 16,
-							"defUid": 108,
-							"px": [224,144],
 							"fieldInstances": []
 						}
 					]

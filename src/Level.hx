@@ -1,3 +1,4 @@
+import en.hazard.DownSpike;
 import en.hazard.Lantern;
 import en.collectibles.HealthUp;
 import en.collectibles.SecondWind;
@@ -61,6 +62,7 @@ class Level extends dn.Process {
 
   public var collectibleGrp:Array<Collectible>;
   public var hazardGrp:Array<Hazard>;
+  public var entityGrp:Array<Entity>;
   public var checkpointGrp:Array<Checkpoint>;
   public var enemyGrp:Array<Enemy>;
   public var lightGrp:Array<GameLight>;
@@ -103,6 +105,7 @@ class Level extends dn.Process {
     enemyGrp = [];
     lightGrp = [];
     eventGrp = [];
+    entityGrp = [];
   }
 
   public function createEntities() {
@@ -146,6 +149,14 @@ class Level extends dn.Process {
     // Enemies
     for (lEnemy in data.l_Entities.all_Enemy) {
       createEnemy(lEnemy);
+    }
+
+    for (lTv in data.l_Entities.all_TV) {
+      entityGrp.push(new en.TV(lTv));
+    }
+
+    for (lCore in data.l_Entities.all_Core) {
+      entityGrp.push(new en.Core(lCore));
     }
 
     // Collectibles
@@ -194,6 +205,10 @@ class Level extends dn.Process {
 
     for (lSpike in data.l_Entities.all_Spike) {
       hazardGrp.push(new Spike(lSpike));
+    }
+
+    for (dSpike in data.l_Entities.all_DownSpike) {
+      hazardGrp.push(new DownSpike(dSpike));
     }
 
     for (lDoor in data.l_Entities.all_Door) {
@@ -317,6 +332,22 @@ class Level extends dn.Process {
     return collectibleGrp.filter((collectible) -> return collectible.cx == x
       && collectible.cy == y && collectible.isAlive())
       .first();
+  }
+
+  public function collidedLantern(x:Int, y:Int, sprx:Int, spry:Int) {
+    return hazardGrp.filter((hazard) -> {
+      if (Std.isOfType(hazard, en.hazard.Lantern)) {
+        var lan:en.hazard.Lantern = cast hazard;
+        if (M.dist(sprx, spry, lan.spr.x, lan.spr.y + 8) < 24) {
+          return true;
+        } else {
+          return (hazard.cx == x && hazard.cy == y);
+        }
+      } else {
+        return false;
+      }
+      return false;
+    });
   }
 
   /**
@@ -453,6 +484,10 @@ class Level extends dn.Process {
   override function onDispose() {
     // Dispose of all entities at the end of the level
     // Anything not in the root will not be disposed
+
+    for (entity in entityGrp) {
+      entity.dispose();
+    }
     for (enemy in enemyGrp) {
       enemy.dispose();
     }

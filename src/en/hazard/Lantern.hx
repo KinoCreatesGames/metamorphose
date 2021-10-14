@@ -6,15 +6,20 @@ package en.hazard;
  * refreshed again.
  */
 class Lantern extends Hazard {
+  public var range:Int;
+
   public function new(eLan:Entity_Lantern) {
     super(eLan.cx, eLan.cy);
+    range = eLan.f_hit_radius;
     var tile = hxd.Res.img.dash_lantern.toTile();
     var lightTile = hxd.Res.img.light_three.toTile();
     var g = new h2d.Graphics(spr);
     var lightG = new h2d.Graphics(spr);
-    g.beginTileFill(0, 0, tile.width, tile.height);
-    g.drawRect(0, 0, 16, 16);
+    g.beginTileFill(0, 0, 1, 1, tile);
+    g.drawRect(0, 0, tile.width, tile.height);
     g.endFill();
+    g.x -= tile.width * 0.5;
+    g.y -= tile.width * 0.5;
     lightG.beginTileFill(0, 0, 1, 1, lightTile);
     lightG.setColor(0xffff00, 1);
     lightG.drawRect(0, 0, lightTile.width, lightTile.height);

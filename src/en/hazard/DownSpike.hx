@@ -13,8 +13,8 @@ class DownSpike extends Hazard {
     graphic.drawRect(0, 0, tile.width, tile.height);
     graphic.endFill();
     graphic.scaleY = -1 * graphic.scaleY;
-    graphic.y -= (tile.height);
-    spr.y -= tile.height; // Doesn't seem to have an effect
+    // graphic.y -= (tile.height);
+    // spr.y = tile.height; // Doesn't seem to have an effect
     xr = 0;
   }
 }

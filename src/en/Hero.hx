@@ -35,7 +35,7 @@ class Hero extends Entity {
   public var plat:MovingPlatform;
   public var isInvincible:Bool;
 
-  public static inline var DASH_FORCE:Float = 1.2;
+  public static inline var DASH_FORCE:Float = 0.9;
   public static inline var DASH_TIME:Float = 0.25;
   public static inline var MAX_SPEED:Float = 0.125;
   public static var HEALTH_CAP:Int = 3;
@@ -377,9 +377,13 @@ class Hero extends Entity {
           bounce();
         case en.hazard.Lantern:
           // Reset dash on touch
-          dashReset();
+          if (isDashing) {
+            dashReset();
+          }
         case en.hazard.Spike:
           // Take damage from spike
+          takeDamage(1);
+        case en.hazard.DownSpike:
           takeDamage(1);
         case _:
           // Do nothing
@@ -394,6 +398,8 @@ class Hero extends Entity {
    */
   public function dashReset() {
     dashCount = 1;
+    jumpCount = 1;
+    dy = 0;
     dy += -(0.35 * tmod);
   }
 
