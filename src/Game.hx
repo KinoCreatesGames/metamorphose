@@ -80,7 +80,7 @@ class Game extends Process {
     hud = new ui.Hud();
     // Render ldtk level
     new Transition();
-    startLevel(proj.all_levels.Level_9);
+    startLevel(proj.all_levels.Level_15);
 
     Process.resizeAll();
     trace(Lang.t._("Game is ready."));
@@ -100,7 +100,7 @@ class Game extends Process {
     level.destroy();
     // var level = proj.levels[levelId];
     var level = proj.levels.filter((lLevel) ->
-      lLevel.identifier.contains('${levelId}'))
+      lLevel.identifier.contains('Level_${levelId}'))
       .first();
     if (level != null) {
       startLevel(level, startX, startY);

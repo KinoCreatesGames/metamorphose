@@ -109,38 +109,6 @@ class Level extends dn.Process {
   }
 
   public function createEntities() {
-    /**
-     * A player entity must be placed within the game 
-     * stage in order to spawn a player.
-     */
-    for (player in data.l_Entities.all_Player) {
-      // If checkpoint was reached restart at checkpoint position instead
-      // Or Game over set in main game
-      var plHero = null;
-      if (Game.ME.resumeGameOver && SavedData.exists(CHK_COORDS)) {
-        var result = SavedData.load(CHK_COORDS, {x: 0, y: 0});
-        plHero = new Hero(result.x, result.y);
-        plHero.health = Hero.HEALTH_CAP;
-        Game.ME.resumeGameOver = false;
-        #if debug
-        trace('Start with checkpoint coordinates');
-        #end
-      } else {
-        if (startX != -1) {
-          #if debug
-          trace('Start with exit coordinates ');
-          #end
-          plHero = new Hero(startX, startY);
-        } else {
-          #if debug
-          trace('Start with player entity coordinates.');
-          #end
-          plHero = new Hero(player.cx, player.cy);
-        }
-      }
-      this.hero = plHero;
-    }
-
     // Events
     for (lEvent in data.l_Entities.all_Event) {
       eventGrp.push(new en.Event(lEvent));
@@ -233,6 +201,38 @@ class Level extends dn.Process {
 
     for (lLight in data.l_Entities.all_Light) {
       lightGrp.push(new GameLight(lLight));
+    }
+
+    /**
+     * A player entity must be placed within the game 
+     * stage in order to spawn a player.
+     */
+    for (player in data.l_Entities.all_Player) {
+      // If checkpoint was reached restart at checkpoint position instead
+      // Or Game over set in main game
+      var plHero = null;
+      if (Game.ME.resumeGameOver && SavedData.exists(CHK_COORDS)) {
+        var result = SavedData.load(CHK_COORDS, {x: 0, y: 0});
+        plHero = new Hero(result.x, result.y);
+        plHero.health = Hero.HEALTH_CAP;
+        Game.ME.resumeGameOver = false;
+        #if debug
+        trace('Start with checkpoint coordinates');
+        #end
+      } else {
+        if (startX != -1) {
+          #if debug
+          trace('Start with exit coordinates ');
+          #end
+          plHero = new Hero(startX, startY);
+        } else {
+          #if debug
+          trace('Start with player entity coordinates.');
+          #end
+          plHero = new Hero(player.cx, player.cy);
+        }
+      }
+      this.hero = plHero;
     }
   }
 
