@@ -117,7 +117,7 @@ class Hero extends Entity {
       hxd.Res.img.mc_second.toAseprite());
     spr.set(hero);
     spr.anim.registerStateAnim('hurt', 12, 1, () -> cd.has('knockback'));
-    spr.anim.registerStateAnim('attack', 2, 1, () -> cd.has('attacking'));
+    // spr.anim.registerStateAnim('attack', 2, 1, () -> cd.has('attacking'));
     spr.anim.registerStateAnim('jump', 3, 1, () -> {
       return !isOnFloor;
     });
@@ -178,10 +178,10 @@ class Hero extends Entity {
     }
 
     // Attack
-    // TODO:Use different button as W and Jump also map to A
-    if (ct.isAnyKeyPressed([K.K, K.X])) {
-      attack();
-    }
+    // // TODO:Use different button as W and Jump also map to A
+    // if (ct.isAnyKeyPressed([K.K, K.X])) {
+    //   attack();
+    // }
 
     if (ct.bPressed()
       || ct.isAnyKeyPressed([K.Z, K.J])

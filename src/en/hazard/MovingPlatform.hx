@@ -13,12 +13,17 @@ class MovingPlatform extends Hazard {
    */
   public var waitTime:Float;
 
+  public var oneShot:Bool;
+  public var reachedFinalDestination:Bool;
+
   public function new(movingPlat:Entity_MovingPlatform) {
     super(movingPlat.cx, movingPlat.cy);
     id = '${movingPlat.cx}_${movingPlat.cy}';
     looping = true;
     platformSpeed = 0.05;
     waitTime = 3;
+    oneShot = movingPlat.f_oneShot;
+    reachedFinalDestination = false;
 
     pathPoints = movingPlat.f_path.map((pathPoint) -> {
       return new Vec2(pathPoint.cx, pathPoint.cy);
@@ -40,7 +45,9 @@ class MovingPlatform extends Hazard {
   override public function fixedUpdate() {
     super.fixedUpdate();
 
-    followPath();
+    if ((!oneShot && !reachedFinalDestination)) {
+      followPath();
+    }
   }
 
   public function followPath() {
@@ -53,6 +60,10 @@ class MovingPlatform extends Hazard {
       dy = dest.y * platformSpeed;
       // Fixes issue with collision on platforms with this setup
     } else {
+      // Hit the final point
+      if (pointIndex == (pathPoints.length - 1)) {
+        reachedFinalDestination = true;
+      }
       if (!Game.ME.delayer.hasId('platformStop' + id)) {
         Game.ME.delayer.addS('platformStop' + id, () -> {
           pointIndex++;
