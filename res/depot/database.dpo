@@ -673,6 +673,58 @@
                             "id": "5"
                         }
                     ]
+                },
+                {
+                    "guid": "73b81fc0-6095-4395-ba52-e3304367fa0e",
+                    "id": "6",
+                    "name": "FinalEvent",
+                    "text": [
+                        {
+                            "guid": "b84a4785-930c-4c65-adf2-b4e943a15f87",
+                            "str": "What's this strange contraption? It seems to be saying something...",
+                            "id": "0"
+                        },
+                        {
+                            "guid": "7148e0f7-52a3-4819-aeb4-e28bbb4f9de5",
+                            "str": "Hello! Welcome, we are -- accessing memory -- report.",
+                            "id": "1"
+                        },
+                        {
+                            "guid": "8fd4580c-5b78-4b71-b131-65598884d0d2",
+                            "str": "Data cor--upTeD.",
+                            "id": "2"
+                        },
+                        {
+                            "guid": "3d545d46-ad8b-4cac-abf7-62b0d2aef529",
+                            "str": "Many inVenTionS we-- maD he--re. ",
+                            "id": "3"
+                        },
+                        {
+                            "guid": "923041cd-b4a3-48a7-bcab-4697e2e0b384",
+                            "str": "The people were prosperous. Ways to make life easier, no one had want for anything. But, gon-e too -- far.",
+                            "id": "4"
+                        },
+                        {
+                            "guid": "db4bb11c-0cb0-4ad2-9416-b295327d12ad",
+                            "str": "Optimization of life, led to downfall. Thems the breaks, haha.",
+                            "id": "5"
+                        },
+                        {
+                            "guid": "6fa545d9-1116-4643-9515-432342ca2ab9",
+                            "str": "People not want for anything; all wisHes GrAnTed.",
+                            "id": "6"
+                        },
+                        {
+                            "guid": "7a0b5122-90ac-4710-ae39-8bea19541d32",
+                            "str": "Trust in algo-rithm took over; people no lonGGeeeR trust sEEElF. Aculuma, went TOo Faaar to satisfy desire.",
+                            "id": "7"
+                        },
+                        {
+                            "guid": "218fa68e-c2f6-4e00-9167-6c419df77c42",
+                            "str": "Shuu--t down... ABanDoned. Forgotten.",
+                            "id": "8"
+                        }
+                    ]
                 }
             ],
             "hidden": false,

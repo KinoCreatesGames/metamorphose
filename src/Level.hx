@@ -1,3 +1,4 @@
+import depot.DepotData;
 import en.hazard.DownSpike;
 import en.hazard.Lantern;
 import en.collectibles.HealthUp;
@@ -485,6 +486,15 @@ class Level extends dn.Process {
       bgm.pause = true;
       Game.ME.pause();
       new GameOver();
+    }
+    /**
+     * Finish the game completely at this point as final event seen.
+     */
+    if (Game.ME.eventExists('FinalEvent')) {
+      var eventText = DepotData.Dialogue_FinalScene.text.map((el) -> el.str);
+      new IntroScene(() -> {
+        new ThankYou();
+      }, eventText);
     }
   }
 
