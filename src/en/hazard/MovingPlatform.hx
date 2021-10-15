@@ -55,7 +55,7 @@ class MovingPlatform extends Hazard {
 
   public function followPath() {
     var point = pathPoints[pointIndex % pathPoints.length];
-    if (point.x != cx || point.y != cy && !reachedFinalDestination) {
+    if ((point.x != cx || point.y != cy) && !reachedFinalDestination) {
       // Follow the path by checking the distance from point
       var dest = new Vec2(point.x - cx, point.y - cy).normalize();
       dx = dest.x * platformSpeed;
