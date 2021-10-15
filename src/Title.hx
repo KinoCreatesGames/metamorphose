@@ -14,6 +14,7 @@ class Title extends dn.Process {
   public var win:h2d.Flow;
   public var bgm:Channel;
   public var mask:h2d.Bitmap;
+  public var bg:h2d.Bitmap;
 
   public function new() {
     super(Game.ME);
@@ -21,6 +22,8 @@ class Title extends dn.Process {
     complete = false;
     mask = new h2d.Bitmap(h2d.Tile.fromColor(0x0, 1, 1, 0.6), root);
     root.under(mask);
+    bg = new h2d.Bitmap(hxd.Res.img.key_art_wi_two_png.toTile(), root);
+    bg.alpha = 0.5;
 
     // Play music
     bgm = hxd.Res.music.jkjkke___dream_wav.play(true);
@@ -146,6 +149,7 @@ class Title extends dn.Process {
       mask.scaleY = h;
     }
     title.x = (w() * 0.5 - (title.getSize().width * 0.5));
+    title.y = (h() * 0.5 - (h() / 3));
     win.x = (w() * 0.5 - (win.outerWidth * 0.2));
     win.y = (h() * 0.5 - (win.outerHeight * 0.3));
   }

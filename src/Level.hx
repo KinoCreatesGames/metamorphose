@@ -86,6 +86,7 @@ class Level extends dn.Process {
     if (level != null) {
       data = level;
     }
+
     bgm = hxd.Res.music.pixel_sphere_wav.play(true);
     #if debug
     bgm.stop();
@@ -438,7 +439,7 @@ class Level extends dn.Process {
    */
   public function hasAnyMPlatCollision(x:Int, y:Int) {
     return hazardGrp.exists((hazard) -> return (hazard.cx == x
-      || hazard.cx + 1 == x)
+      || hazard.cx + 1 == x || (hazard.cx - 1 == x))
       && hazard.cy == y
       && Std.isOfType(hazard, en.hazard.MovingPlatform));
   }
@@ -452,7 +453,7 @@ class Level extends dn.Process {
    */
   public function collidedMPlat(x:Int, y:Int) {
     return hazardGrp.filter((hazard) -> return (hazard.cx == x
-      || (hazard.cx + 1) == x)
+      || (hazard.cx + 1) == x || (hazard.cx - 1 == x))
       && hazard.cy == y
       && Std.isOfType(hazard, en.hazard.MovingPlatform))
       .first();
@@ -493,9 +494,11 @@ class Level extends dn.Process {
     if (Game.ME.eventExists('FinalEvent')) {
       var eventText = DepotData.Dialogue_FinalScene.text.map((el) -> el.str);
       bgm.stop();
+      Game.ME.hud.hide();
       new IntroScene(() -> {
         new ThankYou();
       }, eventText);
+      this.destroy();
     }
   }
 

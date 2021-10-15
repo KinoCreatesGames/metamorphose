@@ -121,7 +121,7 @@ class Hero extends Entity {
     spr.anim.registerStateAnim('hurt', 12, 1, () -> cd.has('knockback'));
     // spr.anim.registerStateAnim('attack', 2, 1, () -> cd.has('attacking'));
     spr.anim.registerStateAnim('jump', 3, 1, () -> {
-      return !isOnFloor;
+      return !isOnFloor && plat == null;
     });
     spr.anim.registerStateAnim('run', 1, 1, () -> {
       return dx != 0 && plat == null;
@@ -436,7 +436,10 @@ class Hero extends Entity {
         var identifier = '${Game.ME.level.data.uid}-${door.cx}-${door.cy}';
         if (!door.unlocked && (this.keys > 0 || Game.ME.permExists(identifier))) {
           door.unlocked = true;
-          this.keys -= 1;
+          if (!Game.ME.permExists(identifier)) {
+            this.keys -= 1;
+          }
+
           Game.ME.invalidateHud();
           savePlayerInfo();
         }
@@ -456,7 +459,9 @@ class Hero extends Entity {
         var identifier = '${Game.ME.level.data.uid}-${door.cx}-${door.cy}';
         if (!door.unlocked && (this.keys > 0 || Game.ME.permExists(identifier))) {
           door.unlocked = true;
-          this.keys -= 1;
+          if (!Game.ME.permExists(identifier)) {
+            this.keys -= 1;
+          }
           Game.ME.invalidateHud();
           savePlayerInfo();
         }

@@ -5,6 +5,7 @@ class MovingPlatform extends Hazard {
   public var looping:Bool;
   public var pointIndex = 0;
   public var platformSpeed:Float;
+  public var initialWait = 3;
   public var id:String;
   public var player:Hero;
 
@@ -28,6 +29,9 @@ class MovingPlatform extends Hazard {
     pathPoints = movingPlat.f_path.map((pathPoint) -> {
       return new Vec2(pathPoint.cx, pathPoint.cy);
     });
+
+    cd.setS('initialWait', initialWait);
+
     setSprite();
   }
 
@@ -39,20 +43,19 @@ class MovingPlatform extends Hazard {
     g.drawRect(0, 0, 32, 16);
     g.endFill();
     g.x -= 8;
-    g.y -= 16;
+    g.y -= 18;
   }
 
   override public function fixedUpdate() {
     super.fixedUpdate();
-
-    if ((!oneShot && !reachedFinalDestination)) {
+    if (!cd.has('initialWait')) {
       followPath();
     }
   }
 
   public function followPath() {
     var point = pathPoints[pointIndex % pathPoints.length];
-    if (point.x != cx || point.y != cy) {
+    if (point.x != cx || point.y != cy && !reachedFinalDestination) {
       // Follow the path by checking the distance from point
       var dest = new Vec2(point.x - cx, point.y - cy).normalize();
       dx = dest.x * platformSpeed;
@@ -76,7 +79,33 @@ class MovingPlatform extends Hazard {
         player.dx = dx;
         player.dy = dy;
       }
-      if (M.fabs(player.cy - cy) > 1 || M.fabs(player.cx - cx) > 1) {
+      // if (M.dist(player.cx, player.cy, cx, cy) > 2.4) {
+      //   trace(M.dist(player.cx, player.cy, cx, cy));
+      //   player.plat = null;
+      //   player = null;
+      // }
+      // if (M.fabs(player.cy - cy) > 1 || M.fabs(player.cx - cx) > 1) {
+      //   player.plat = null;
+      //   player = null;
+      // }
+    }
+  }
+
+  override function preUpdate() {
+    super.preUpdate();
+
+    if (player != null) {
+      // player.yr = 1;
+
+      if (player != null && player.plat != null) {
+        player.dx = dx;
+        player.dy = dy;
+      }
+
+      if (M.fabs(player.cy - cy) > 2
+        || (M.fabs(player.cx - cx) > 1 && M.fabs(player.cx - (cx + 1)) > 1)) {
+        trace('release');
+        trace(M.fabs(player.cy - cy));
         player.plat = null;
         player = null;
       }
