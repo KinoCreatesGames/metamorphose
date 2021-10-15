@@ -80,10 +80,17 @@ class Game extends Process {
     hud = new ui.Hud();
     // Render ldtk level
     new Transition();
+    #if debug
     startLevel(proj.all_levels.Level_14);
+    #else
+    startLevel(proj.all_levels.Level_0);
+    #end
 
     Process.resizeAll();
+    #if debug
     trace(Lang.t._("Game is ready."));
+    #else
+    #end
   }
 
   public static inline function exists() {
@@ -119,7 +126,10 @@ class Game extends Process {
    */
   @:allow(Assets)
   function onLDtkReload() {
+    #if debug
     trace('LDTk file reloaded');
+    #else
+    #end
     reloadCurrentLevel();
   }
 

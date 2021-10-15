@@ -69,16 +69,18 @@ class MsgWindow extends dn.Process {
 
   public function advanceText() {
     // Move to the next text String
-    textIndex = M.iclamp(textIndex + 1, 0, allText.length - 1);
-    var currentText = allText[textIndex];
-    if (currentText != text.text) {
-      sendMsg(currentText);
-    } else {
-      // We should be finished processing all the available text
-      // Close the window
-      resetIndex();
-      hide();
-      Game.ME.resume();
+    if (allText != null && allText.length > 0) {
+      textIndex = M.iclamp(textIndex + 1, 0, allText.length - 1);
+      var currentText = allText[textIndex];
+      if (currentText != text.text) {
+        sendMsg(currentText);
+      } else {
+        // We should be finished processing all the available text
+        // Close the window
+        resetIndex();
+        hide();
+        Game.ME.resume();
+      }
     }
   }
 

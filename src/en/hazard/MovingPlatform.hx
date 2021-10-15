@@ -61,7 +61,7 @@ class MovingPlatform extends Hazard {
       // Fixes issue with collision on platforms with this setup
     } else {
       // Hit the final point
-      if (pointIndex == (pathPoints.length - 1)) {
+      if (pointIndex == (pathPoints.length - 1) && oneShot) {
         reachedFinalDestination = true;
       }
       if (!Game.ME.delayer.hasId('platformStop' + id)) {

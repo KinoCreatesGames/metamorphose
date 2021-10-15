@@ -30,13 +30,14 @@ class Hero extends Entity {
   public var jumpCount:Int = 0;
   public var attackUnlock:Bool;
   public var isDashing(get, never):Bool;
+  public var dashed:Bool;
   public var keys:Int = 0;
   public var health:Int = 3;
   public var plat:MovingPlatform;
   public var isInvincible:Bool;
 
   public static inline var DASH_FORCE:Float = 0.9;
-  public static inline var DASH_TIME:Float = 0.25;
+  public static inline var DASH_TIME:Float = 0.30;
   public static inline var MAX_SPEED:Float = 0.125;
   public static var HEALTH_CAP:Int = 3;
   public static inline var INVINCIBLE_TIME:Float = 1.5;
@@ -84,6 +85,7 @@ class Hero extends Entity {
 
     isOnFloor = false;
     canJump = false;
+    dashed = false;
     #if debug
     doubleJumpUnlock = true;
     dashUnlock = true;
@@ -246,6 +248,7 @@ class Hero extends Entity {
    */
   public function dash() {
     dashTimer = DASH_TIME;
+    dashed = true;
 
     if (dashDir.x == 0 && dashDir.y == 0) {
       dashDir.x = 1;
@@ -375,11 +378,13 @@ class Hero extends Entity {
           var bouncePad:en.hazard.BouncePad = cast hazard;
           bouncePad.bounce();
           bounce();
-        case en.hazard.Lantern:
-          // Reset dash on touch
-          if (isDashing) {
-            dashReset();
-          }
+        // case en.hazard.Lantern:
+        //   // Reset dash on touch
+        //   var lan:en.hazard.Lantern = cast hazard;
+        //   lan.touched();
+        //   if (isDashing) {
+        //     dashReset();
+        //   }
         case en.hazard.Spike:
           // Take damage from spike
           takeDamage(1);
@@ -389,8 +394,21 @@ class Hero extends Entity {
           // Do nothing
       }
     }
+    lanternCollision();
     doorCollisions();
     movingPlatformCollision();
+  }
+
+  public function lanternCollision() {
+    if (level.collidedLantern(cx, cy, spr.x, spr.y) != null) {
+      var lantern = level.collidedLantern(cx, cy, spr.x, spr.y);
+      if (lantern != null) {
+        if (dashed) {
+          lantern.touched();
+          dashReset();
+        }
+      }
+    }
   }
 
   /**
@@ -399,6 +417,7 @@ class Hero extends Entity {
   public function dashReset() {
     dashCount = 1;
     jumpCount = 1;
+    dashed = false;
     dy = 0;
     dy += -(0.35 * tmod);
   }
@@ -413,9 +432,10 @@ class Hero extends Entity {
       if (lftHazard != null) {
         var door:Door = lftHazard;
         var identifier = '${Game.ME.level.data.uid}-${door.cx}-${door.cy}';
-        if (!door.unlocked && this.keys > 0 || Game.ME.permExists(identifier)) {
+        if (!door.unlocked && (this.keys > 0 || Game.ME.permExists(identifier))) {
           door.unlocked = true;
           this.keys -= 1;
+
           Game.ME.invalidateHud();
         }
         if (door.unlocked) {
@@ -432,7 +452,7 @@ class Hero extends Entity {
       if (rightHazard != null) {
         var door:Door = rightHazard;
         var identifier = '${Game.ME.level.data.uid}-${door.cx}-${door.cy}';
-        if (!door.unlocked && this.keys > 0 || Game.ME.permExists(identifier)) {
+        if (!door.unlocked && (this.keys > 0 || Game.ME.permExists(identifier))) {
           door.unlocked = true;
           this.keys -= 1;
           Game.ME.invalidateHud();
@@ -630,7 +650,10 @@ class Hero extends Entity {
       || level.hasAnyCollision(cx + M.round(xr), cy - 1)) {
       // Set some squash for when you touch the ceiling
       setSquashY(0.8);
-      dy = M.fabs(dy);
+      dy = 0;
+      dy += 0.36;
+      // yr = 1;
+      // dy = M.fabs(dy);
     }
 
     // Down
@@ -646,6 +669,7 @@ class Hero extends Entity {
 
       isOnFloor = true;
       canJump = true;
+      dashed = false;
 
       dashCount = 1;
       jumpCount = 0;

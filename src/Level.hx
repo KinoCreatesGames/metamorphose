@@ -334,8 +334,10 @@ class Level extends dn.Process {
       .first();
   }
 
-  public function collidedLantern(x:Int, y:Int, sprx:Int, spry:Int) {
-    return hazardGrp.filter((hazard) -> {
+  public function collidedLantern(x:Int, y:Int, sprx:Float,
+      spry:Float):Lantern {
+    var result:en.hazard.Lantern = null;
+    var arrResult = hazardGrp.filter((hazard) -> {
       if (Std.isOfType(hazard, en.hazard.Lantern)) {
         var lan:en.hazard.Lantern = cast hazard;
         if (M.dist(sprx, spry, lan.spr.x, lan.spr.y + 8) < 24) {
@@ -348,6 +350,10 @@ class Level extends dn.Process {
       }
       return false;
     });
+    if (arrResult != null && arrResult.length > 0) {
+      result = cast arrResult.first();
+    }
+    return result;
   }
 
   /**

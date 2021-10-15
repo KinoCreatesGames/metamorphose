@@ -1,3 +1,3 @@
-# @install: lix --silent download "gh://github.com/deepnight/deepnightLibs#2af2e51815d410224a8e99dec7cb0be341e418f2" into deepnightLibs/1.0.61/github/2af2e51815d410224a8e99dec7cb0be341e418f2
--cp ${HAXE_LIBCACHE}/deepnightLibs/1.0.61/github/2af2e51815d410224a8e99dec7cb0be341e418f2/src/
--D deepnightLibs=1.0.61
+# @install: lix --silent download "haxelib:/deepnightLibs#1.0.63" into deepnightLibs/1.0.63/haxelib
+-cp ${HAXE_LIBCACHE}/deepnightLibs/1.0.63/haxelib/src/
+-D deepnightLibs=1.0.63

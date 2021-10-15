@@ -1,0 +1,4 @@
+# @install: lix --silent download "haxelib:/redistHelper#0.5.1" into redistHelper/0.5.1/haxelib
+-lib deepnightLibs
+-cp ${HAXE_LIBCACHE}/redistHelper/0.5.1/haxelib/src/
+-D redistHelper=0.5.1
