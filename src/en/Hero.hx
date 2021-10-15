@@ -437,8 +437,8 @@ class Hero extends Entity {
         if (!door.unlocked && (this.keys > 0 || Game.ME.permExists(identifier))) {
           door.unlocked = true;
           this.keys -= 1;
-
           Game.ME.invalidateHud();
+          savePlayerInfo();
         }
         if (door.unlocked) {
           // Save door unlocked to the level data
@@ -458,6 +458,7 @@ class Hero extends Entity {
           door.unlocked = true;
           this.keys -= 1;
           Game.ME.invalidateHud();
+          savePlayerInfo();
         }
         if (door.unlocked) {
           // Can pass through
