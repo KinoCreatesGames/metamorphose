@@ -183,11 +183,6 @@ class Level extends dn.Process {
       hazardGrp.push(new Door(lDoor));
     }
 
-    for (mPlat in data.l_Entities.all_MovingPlatform) {
-      var movingPlatform = new MovingPlatform(mPlat);
-      hazardGrp.push(movingPlatform);
-    }
-
     // Exits and Checkpoints
     for (lExit in data.l_Entities.all_Exit) {
       var exit = new Exit(lExit);
@@ -233,6 +228,11 @@ class Level extends dn.Process {
         }
       }
       this.hero = plHero;
+    }
+
+    for (mPlat in data.l_Entities.all_MovingPlatform) {
+      var movingPlatform = new MovingPlatform(mPlat);
+      hazardGrp.push(movingPlatform);
     }
   }
 
@@ -332,6 +332,22 @@ class Level extends dn.Process {
     return collectibleGrp.filter((collectible) -> return collectible.cx == x
       && collectible.cy == y && collectible.isAlive())
       .first();
+  }
+
+  public function hasAnycollidedLantern(x:Int, y:Int, sprx:Float, spry:Float) {
+    return hazardGrp.exists((hazard) -> {
+      if (Std.isOfType(hazard, en.hazard.Lantern)) {
+        var lan:en.hazard.Lantern = cast hazard;
+        if (M.dist(sprx, spry, lan.spr.x, lan.spr.y + 8) < 24) {
+          return true;
+        } else {
+          return (hazard.cx == x && hazard.cy == y);
+        }
+      } else {
+        return false;
+      }
+      return false;
+    });
   }
 
   public function collidedLantern(x:Int, y:Int, sprx:Float,

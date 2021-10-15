@@ -5,4 +5,4 @@ bin
 res/music/*
 res/music
 res/sound
-.backup.ldtk
+*.backup.ldtk

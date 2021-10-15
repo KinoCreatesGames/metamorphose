@@ -400,12 +400,14 @@ class Hero extends Entity {
   }
 
   public function lanternCollision() {
-    if (level.collidedLantern(cx, cy, spr.x, spr.y) != null) {
-      var lantern = level.collidedLantern(cx, cy, spr.x, spr.y);
-      if (lantern != null) {
-        if (dashed) {
-          lantern.touched();
-          dashReset();
+    if (spr != null) {
+      if (level.hasAnycollidedLantern(cx, cy, spr.x, spr.y)) {
+        var lantern = level.collidedLantern(cx, cy, spr.x, spr.y);
+        if (lantern != null) {
+          if (dashed) {
+            lantern.touched();
+            dashReset();
+          }
         }
       }
     }

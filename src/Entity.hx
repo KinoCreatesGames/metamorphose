@@ -149,11 +149,16 @@ class Entity {
     setPosCase(x, y);
 
     spr = new HSprite(Assets.tiles);
+    removeEmptyTexture();
     Game.ME.scroller.add(spr, Const.DP_MAIN);
     spr.colorAdd = colorAdd = new h3d.Vector();
     baseColor = new h3d.Vector();
     blinkColor = new h3d.Vector();
     spr.setCenterRatio(0.5, 1);
+  }
+
+  public function removeEmptyTexture() {
+    spr.tile.getTexture().clear(0x0, 1);
   }
 
   inline function set_dir(v) {
