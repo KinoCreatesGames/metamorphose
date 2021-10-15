@@ -117,8 +117,9 @@ class MsgWindow extends dn.Process {
     // win.y = Std.int(h * 0.5 - win.outerHeight * 0.5);
     // win.minHeight = Std.int((h() / 3));
     // win.minWidth = Std.int(w());
+    var padding = 60;
     win.x = (w() * 0.5 - (win.outerWidth * 0.5));
-    win.y = (h() - win.minHeight);
+    win.y = (h() - (win.minHeight + padding));
     win.reflow();
   }
 
