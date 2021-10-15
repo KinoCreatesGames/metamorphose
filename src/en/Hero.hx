@@ -507,6 +507,7 @@ class Hero extends Entity {
           Game.ME.invalidateHud();
           savePlayerInfo();
           Game.ME.savePermItem(identifier);
+          savePlayerInfo();
         case en.collectibles.SecondWind:
           // Unlocks the double jump
           doubleJumpUnlock = true;
