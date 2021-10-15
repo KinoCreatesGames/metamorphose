@@ -174,7 +174,7 @@ class Hero extends Entity {
       dashDir.x = 1;
     }
 
-    if (ct.upPressed() || ct.isAnyKeyPressed([K.UP, K.W])
+    if (ct.upPressed() || ct.isAnyKeyPressed([K.UP, K.W, K.SPACE])
       && (canJump || (canDoubleJump && doubleJumpUnlock))) {
       jump();
     }
@@ -251,10 +251,11 @@ class Hero extends Entity {
     dashed = true;
 
     if (dashDir.x == 0 && dashDir.y == 0) {
-      dashDir.x = 1;
+      dashDir.x = 0;
     }
 
     // trace('${dashDir.x}, ${dashDir.y}');
+    dy = 0;
     dx = ((dashDir.x * DASH_FORCE)) * tmod;
     dy = 0;
     dy = ((dashDir.y * DASH_FORCE)) * tmod;
@@ -420,7 +421,7 @@ class Hero extends Entity {
     dashCount = 1;
     jumpCount = 1;
     dashed = false;
-    dy = 0;
+    // dy = 0;
     dy += -(0.35 * tmod);
   }
 

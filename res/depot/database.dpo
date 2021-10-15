@@ -725,6 +725,18 @@
                             "id": "8"
                         }
                     ]
+                },
+                {
+                    "guid": "11415bcb-7a32-4620-9e7e-720d428ff44b",
+                    "id": "7",
+                    "name": "AntagonistLegend",
+                    "text": [
+                        {
+                            "guid": "3f241caf-9d0f-4eee-bd94-121eec526ff5",
+                            "str": "Many hopes and dreams were realized here. The advancement of our kind started here.",
+                            "id": "0"
+                        }
+                    ]
                 }
             ],
             "hidden": false,

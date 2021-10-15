@@ -81,7 +81,7 @@ class Game extends Process {
     // Render ldtk level
     new Transition();
     #if debug
-    startLevel(proj.all_levels.Level_10);
+    startLevel(proj.all_levels.Level_8);
     #else
     if (hud != null) {
       hud.show();

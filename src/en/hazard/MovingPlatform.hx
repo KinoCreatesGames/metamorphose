@@ -104,8 +104,6 @@ class MovingPlatform extends Hazard {
 
       if (M.fabs(player.cy - cy) > 2
         || (M.fabs(player.cx - cx) > 1 && M.fabs(player.cx - (cx + 1)) > 1)) {
-        trace('release');
-        trace(M.fabs(player.cy - cy));
         player.plat = null;
         player = null;
       }
