@@ -506,7 +506,7 @@ class Hero extends Entity {
         case en.collectibles.Key:
           keys += 1;
           Game.ME.invalidateHud();
-          savePlayerInfo();
+
           Game.ME.savePermItem(identifier);
           savePlayerInfo();
         case en.collectibles.SecondWind:
@@ -563,6 +563,7 @@ class Hero extends Entity {
       dashUnlock = data.unlockedDash;
       doubleJumpUnlock = data.unlockedDoubleJump;
       health = data.health;
+      keys = data.keys;
     }
 
     // }
