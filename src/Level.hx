@@ -492,6 +492,7 @@ class Level extends dn.Process {
      */
     if (Game.ME.eventExists('FinalEvent')) {
       var eventText = DepotData.Dialogue_FinalScene.text.map((el) -> el.str);
+      bgm.stop();
       new IntroScene(() -> {
         new ThankYou();
       }, eventText);
